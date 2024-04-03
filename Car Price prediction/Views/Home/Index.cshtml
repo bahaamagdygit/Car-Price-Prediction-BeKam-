@@ -1,0 +1,204 @@
+﻿@model Car_Price_prediction.view_model.CarListVM
+@{
+    ViewBag.Title = "Home";
+    ViewBag.icon = "Home.png";
+
+}
+
+
+<!-- Carousel Start -->
+<div class="container-fluid p-0" style="margin-bottom: 30px;">
+    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+
+            <div class="carousel-item active" id="w-100">
+                <img class="w-100" src="~/img/3.jpg" alt="Image" style="height:700px;">
+
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase mb-md-3">NEW Car Finder</h4>
+
+                        <h4 class="display-4 text-white mb-md-3">
+
+                            <span class="txt-rotate"
+                                  data-period="2000"
+                                  data-rotate='[ "Choose your car specifications and you will find them." ]'>
+
+                            </span>
+
+
+                        </h4>
+                        <a href="~/Car_finder/Cars_filter/" class="btn btn-outline-primary py-md-3 px-md-5 mt-2 rounded-pill">Find Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" id="w-100">
+                <img class="w-100" src="~/img/2.jpg" alt="Image" style="height:700px;">
+
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase mb-md-3">Used Car Finder</h4>
+                        <h4 class="display-4 text-white mb-md-3">
+
+                            <span class="txt-rotate"
+                                  data-period="2000"
+                                  data-rotate='[ "Choose your car specifications and you will find them." ]'>
+
+                            </span>
+                        </h4>
+                        <a href="~/Sells/Car_For_Sell" class="btn  btn-outline-primary py-md-3 px-md-5 mt-2 rounded-pill">Find Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-prev-icon mb-n2"></span>
+            </div>
+        </a>
+        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-next-icon mb-n2"></span>
+            </div>
+        </a>
+    </div>
+</div>
+<!-- Carousel End -->
+<!-- About Start <>= <> =<> -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+
+        <h1 class="display-4 text-uppercase text-center mb-5">Welcome To <span class="text-primary">Bekam</span></h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <img class="w-75 mb-4" src="~/img/index.png" alt="">
+                <p class="text-justify">
+                    With the rise of online car shopping, it has become even more important for buyers to make informed decisions. Websites that offer new and used cars have become increasingly popular as they provide users with the ability to compare prices, features, and other important criteria in order to find the best deal.
+                    These websites have made it easier for buyers to find their ideal car with just a few clicks. By providing detailed information about each vehicle along with user reviews, they give buyers an in-depth look at what they are buying before committing to a purchase. With this knowledge, users can make sure that they
+                    are getting a great deal on their next car purchase, and This is why websites that sell new and used cars are now using machine learning algorithms to predict the price of a used car. By leveraging data from thousands of users, these websites can accurately predict the price of a used car based on its make, model,
+                    year and condition. This allows users to get an accurate estimate of their vehicle's worth before they make a purchase or put it up for sale.
+                </p>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-lg-4 mb-2">
+                <div class="d-flex align-items-center bg-light p-4 mb-4" style="height: 150px;">
+                    <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
+                        <i class="fas fa-2x fa-headset text-secondary"></i>
+                    </div>
+                    <h4 class="text-uppercase m-0">24/7 Car Rental Support</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-2">
+                <div class="d-flex align-items-center bg-secondary p-4 mb-4" style="height: 150px;">
+                    <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
+                        <i class="fa fa-2x fa-car text-secondary"></i>
+                    </div>
+                    <h4 class="text-light text-uppercase m-0">Car Reservation Anytime</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-2">
+                <div class="d-flex align-items-center bg-light p-4 mb-4" style="height: 150px;">
+                    <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
+                        <i class="fas fa-2x fa-map-marker-alt text-secondary"></i>
+                    </div>
+                    <h4 class="text-uppercase m-0">Lots Of Pickup Locations</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+<!-- Related Car Start -->
+
+<div class="container-fluid pb-5">
+    <div class="container pb-5">
+        <h2 class="mb-4">Related Cars</h2>
+        <div class="owl-carousel related-carousel position-relative" style="padding: 0 30px;">
+            @foreach (var item in Model.Cars)
+            {
+                foreach (var item1 in Model.Dealars)
+                {
+
+                    if (item1.UserID.Contains(item.UserID))
+                    {
+                        <div class="rent-item">
+                            <img class="img-fluid mb-4" src="~/img/Car_Image/@item.image" alt="@item.image">
+                            <h4 class="text-uppercase mb-4">@Html.DisplayFor(modelItem => item.Brand)</h4>
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="px-2">
+                                    <i class="fa fa-car text-primary mr-1"></i>
+                                    <span>@Html.DisplayFor(modelItem => item.yearRange)</span>
+                                </div>
+                                <div class="px-2 border-left border-right">
+                                    <i class="fa fa-cogs text-primary mr-1"></i>
+                                    <span> @Html.DisplayFor(modelItem => item.Transmission)</span>
+                                </div>
+                                <div class="px-2">
+                                    <i class="fa fa-road text-primary mr-1"></i>
+                                    <span>  @Html.DisplayFor(modelItem => item.Color)</span>
+                                </div>
+                            </div>
+                            <a class="btn btn-outline-warning px-3" href="">@Html.DisplayFor(modelItem => item.PriceRange) EGP</a>
+                            <a class="btn btn-outline-info px-3" href="/Car_finder/Detalis/@item.ID">Detalis</a>
+                            @*<a href="/Car_finder/Detalis/@item.ID">Detalis</a>*@
+                        </div>
+                    }
+                }
+
+
+            }
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Related Car End -->
+
+@if(!User.IsInRole("Admin") && !User.IsInRole("Dealer"))
+{
+    {Html.RenderAction("Slider", "Home");}
+}
+    <script>
+        var TxtRotate = function (el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        }; TxtRotate.prototype.tick = function () {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i]; if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            } this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>'; var that = this;
+            var delta = 300 - Math.random() * 100; if (this.isDeleting) { delta /= 2; } if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            } setTimeout(function () {
+                that.tick();
+            }, delta);
+        }; window.onload = function () {
+            var elements = document.getElementsByClassName('txt-rotate');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-rotate');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtRotate(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+            document.body.appendChild(css);
+        };
+    </script>

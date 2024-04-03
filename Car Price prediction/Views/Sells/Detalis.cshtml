@@ -1,0 +1,395 @@
+﻿@model Car_Price_prediction.view_model.CarWithOner_vm
+
+@{ ViewBag.Title = "Detalis";
+    ViewBag.icon = "Detalis.png"; }
+
+
+<body>
+
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">
+            @Html.DisplayFor(model => model.Brand)
+
+        </h1>
+    </div>
+    <!-- Page Header Start -->
+    <!-- Contact Start -->
+
+
+
+
+
+
+                <div class="row m-lg-5 d-flex justify-content-center">
+                    <div class="col-md-6">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                @if (!string.IsNullOrEmpty(Model.Frontimage))
+                                {
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>}
+                                @if (!string.IsNullOrEmpty(Model.Backimage))
+                                {
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1" @(string.IsNullOrEmpty(Model.Frontimage) ? " class=active" : "")></li>}
+                                @if (!string.IsNullOrEmpty(Model.RightSideimage))
+                                {
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2" @(string.IsNullOrEmpty(Model.Frontimage) && string.IsNullOrEmpty(Model.Backimage) ? " class=active" : "")></li>}
+                                @if (!string.IsNullOrEmpty(Model.LeftSideimage))
+                                {
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3" @(string.IsNullOrEmpty(Model.Frontimage) && string.IsNullOrEmpty(Model.Backimage) && string.IsNullOrEmpty(Model.RightSideimage) ? " class=active" : "")></li>}
+                            </ol>
+                            <div class="carousel-inner">
+                                @if (!string.IsNullOrEmpty(Model.Frontimage))
+                                {
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="~/img/Car_Image/@Html.DisplayFor(model => model.Frontimage)" alt="@Html.DisplayFor(model => model.Frontimage)">
+                    </div>}
+                                @if (!string.IsNullOrEmpty(Model.Backimage))
+                                {
+                    <div class="carousel-item@(string.IsNullOrEmpty(Model.Frontimage) ? " active" : "")">
+                        <img class="d-block w-100" src="~/img/Car_Image/@Html.DisplayFor(model => model.Backimage)" alt="@Html.DisplayFor(model => model.Backimage)">
+                    </div>}
+                                @if (!string.IsNullOrEmpty(Model.RightSideimage))
+                                {
+                    <div class="carousel-item@(string.IsNullOrEmpty(Model.Frontimage) && string.IsNullOrEmpty(Model.Backimage) ? " active" : "")">
+                        <img class="d-block w-100" src="~/img/Car_Image/@Html.DisplayFor(model => model.RightSideimage)" alt="@Html.DisplayFor(model => model.RightSideimage)">
+                    </div>}
+                                @if (!string.IsNullOrEmpty(Model.LeftSideimage))
+                                {
+                    <div class="carousel-item@(string.IsNullOrEmpty(Model.Frontimage) && string.IsNullOrEmpty(Model.Backimage) && string.IsNullOrEmpty(Model.RightSideimage) ? " active" : "")">
+                        <img class="d-block w-100" src="~/img/Car_Image/@Html.DisplayFor(model => model.LeftSideimage)" alt="@Html.DisplayFor(model => model.LeftSideimage)">
+                    </div>}
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.Backimage) || !string.IsNullOrEmpty(Model.RightSideimage) || !string.IsNullOrEmpty(Model.LeftSideimage))
+                            {
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>}
+                        </div>
+                    </div>
+                </div>
+
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+
+
+
+
+
+            <div class="container-xxl service py-5">
+                <div class="container">
+                    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+
+                        <h1 class="mb-5">Detalis</h1>
+                    </div>
+                    <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="col-lg-4">
+                            <div class="nav w-100 nav-pills me-4">
+
+                                <button class="nav-link w-100 d-flex align-items-center text-start p-3 mb-4 active border-0 rounded " data-toggle="pill" href="#tab-pane-1" type="button" role="tab">
+                                    <i class="fa fa-car fa-2x me-3"></i>
+                                    <h4 class="ml-3 ">Main vehicle information</h4>
+                                </button>
+
+                                <button class="nav-link w-100 d-flex align-items-center text-start p-3 mb-4 border-0 rounded" data-toggle="pill" href="#tab-pane-2" type="button" role="tab">
+                                    <i class="fa fa-user fa-2x me-3"></i>
+                                    <h4 class="ml-3">User information</h4>
+                                </button>
+
+                                <button class="nav-link w-100 d-flex align-items-center text-start p-3 mb-4 border-0 rounded" data-toggle="pill" href="#tab-pane-3" type="button" role="tab">
+                                    <i class="fa fa-cog fa-2x me-3"></i>
+                                    <h4 class="ml-3">Technical information</h4>
+                                </button>
+
+                                <button class="nav-link w-100 d-flex align-items-center text-start p-3 mb-0 border-0 rounded" data-toggle="pill" href="#tab-pane-4" type="button" role="tab">
+                                    <i class="fas fa-oil-can fa-2x me-3"></i>
+                                    <h4 class="ml-3">fuel information</h4>
+                                </button>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="tab-content w-100">
+                                <div class="tab-pane fade show active" id="tab-pane-1">
+                                    <div class="row g-4">
+                                        <div class="col-md-6" style="min-height: 350px;">
+                                            <div class="position-relative h-100">
+
+
+                                                <div class="row">
+
+                                                    @if (Model.Frontimage == null)
+                                                    {
+                                                        <div class="col-md-12 text-center">
+                                                            <a target="_blank" href="~/img/addcar.png">
+                                                                <img class="img-fluid mb-1 " src="~/img/addcar.png" alt="Frontimage" style="width:350px; height:auto;">
+                                                            </a>
+                                                        </div> 
+                                                    }else
+                                                            {
+                                                <div class="col-md-12 text-center">
+                                                    <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.Frontimage)">
+                                                        <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.Frontimage)" alt="@Html.DisplayFor(model => model.Frontimage)" style="width:350px; height:auto;">
+                                                    </a>
+                                                </div>}
+
+                                                    @if (Model.Backimage == "" || Model.Backimage == null)
+                                                    {
+
+                                        <div class="col text-center">
+                                            <a target="_blank" href="~/img/addcar.png">
+                                                <img class="img-fluid mb-1 " src="~/img/addcar.png" alt="Backimage" style="width:100px; height:auto;">
+                                            </a>
+                                        </div> }
+                                                    else
+                                                    {
+                                        <div class="col text-center">
+                                            <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.Backimage)">
+                                                <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.Backimage)" alt="@Html.DisplayFor(model => model.Backimage)" style="width:100px; height:auto;">
+                                            </a>
+                                        </div>}
+
+
+
+                                                    @if (Model.RightSideimage == "" || Model.RightSideimage == null)
+                                                    {
+                                        <div class="col text-center">
+                                            <a target="_blank" href="~/img/addcar.png">
+                                                <img class="img-fluid mb-1 " src="~/img/addcar.png" alt="RightSideimage" style="width: 100px; height: auto;">
+                                            </a>
+                                        </div> }
+                                                    else
+                                                    {
+                                        <div class="col text-center">
+                                            <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.RightSideimage)">
+                                                <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.RightSideimage)" alt="@Html.DisplayFor(model => model.RightSideimage)" style="width: 100px; height: auto;">
+                                            </a>
+                                        </div>}
+
+
+                                                    @if (Model.LeftSideimage == null || Model.LeftSideimage == "")
+                                                    {
+                                        <div class="col text-center">
+                                            <a target="_blank" href="~/img/addcar.png">
+                                                <img class="img-fluid mb-1 " src="~/img/addcar.png" alt="LeftSideimage" style="width: 100px; height: auto;">
+                                            </a>
+                                        </div> }
+                                                    else
+                                                    {
+                                        <div class="col text-center">
+                                            <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.LeftSideimage)">
+                                                <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.LeftSideimage)" alt="@Html.DisplayFor(model => model.LeftSideimage)" style="width: 100px; height: auto;">
+                                            </a>
+                                        </div>}
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3 class="mb-3">@Html.DisplayFor(model => model.Brand) @Html.DisplayFor(model => model.Model) @Html.DisplayFor(model => model.Year)</h3>
+                                            <p class="mb-4">@Html.DisplayFor(model => model.Discription)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i> <b class="text-danger">Name:</b> @Html.DisplayFor(model => model.Brand) <b class="text-danger ml-1"> Model :</b> @Html.DisplayFor(model => model.Model)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Year:</b> @Html.DisplayFor(model => model.Year)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Price:</b> @Html.DisplayFor(model => model.Price) EGP</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Color:</b> @Html.DisplayFor(model => model.Color)</p>
+                                            <a href="" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ml-3"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab-pane-2">
+                                    <div class="row g-4">
+                                        <div class="col-md-6" style="min-height: 350px;">
+                                            <div class="position-relative h-100">
+
+
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center">
+                                                        <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.Backimage)">
+                                                            <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.Backimage)" alt="@Html.DisplayFor(model => model.Backimage)" style="width:350px; height:auto;">
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="col text-center">
+                                                        <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.Frontimage)">
+                                                            <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.Frontimage)" alt="@Html.DisplayFor(model => model.Frontimage)" style="width:100px; height:auto;">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.RightSideimage)">
+                                                            <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.RightSideimage)" alt="@Html.DisplayFor(model => model.RightSideimage)" style="width: 100px; height: auto;">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.LeftSideimage)">
+                                                            <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.LeftSideimage)" alt="@Html.DisplayFor(model => model.LeftSideimage)" style="width: 100px; height: auto;">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3 class="mb-3">@Html.DisplayFor(model => model.Brand) @Html.DisplayFor(model => model.Model) @Html.DisplayFor(model => model.Year)</h3>
+                                            <p class="mb-4">@Html.DisplayFor(model => model.Discription)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Oner Name:</b>@Html.DisplayFor(model => model.UserName)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Email:</b>@Html.DisplayFor(model => model.Email)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Phone:</b>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Governorate:</b>@Html.DisplayFor(model => model.Governorate)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">City:</b>@Html.DisplayFor(model => model.City)</p>
+                                            <a href="" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ml-3"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab-pane-3">
+                                    <div class="row g-4">
+                                        <div class="col-md-6" style="min-height: 350px;">
+                                            <div class="position-relative h-100">
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center">
+                                                        <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.RightSideimage)">
+                                                            <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.RightSideimage)" alt="@Html.DisplayFor(model => model.RightSideimage)" style="width:350px; height:auto;">
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="col text-center">
+                                                        <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.Frontimage)">
+                                                            <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.Frontimage)" alt="@Html.DisplayFor(model => model.Frontimage)" style="width:100px; height:auto;">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.Backimage)">
+                                                            <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.Backimage)" alt="@Html.DisplayFor(model => model.Backimage)" style="width: 100px; height: auto;">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.LeftSideimage)">
+                                                            <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.LeftSideimage)" alt="@Html.DisplayFor(model => model.LeftSideimage)" style="width: 100px; height: auto;">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3 class="mb-3">@Html.DisplayFor(model => model.Brand) @Html.DisplayFor(model => model.Model) @Html.DisplayFor(model => model.Year)</h3>
+                                            <p class="mb-4">@Html.DisplayFor(model => model.Discription)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Vehicle Style:</b>@Html.DisplayFor(model => model.Body)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Transmission Type:</b>@Html.DisplayFor(model => model.Transmission)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Kilometers Driven:</b>@Html.DisplayFor(model => model.Kilometers_Driven)</p>
+                                            @if (Model.Fabrica == true)
+                                            {
+                                             <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">car is  : </b> <span class="ml-3 "> Fabrica</span></p> }
+                                            else
+                                            {
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">car is : </b> <span class="ml-3 "> Not Fabrica</span></p>}
+
+
+
+                                            <a href="" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ml-3"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab-pane-4">
+                                    <div class="row g-4">
+                                        <div class="col-md-6" style="min-height: 350px;">
+                                            <div class="position-relative h-100">
+                                                <div class="row">
+
+                                                    @if (Model.Frontimage == null)
+                                                    {
+                                            <div class="col-md-12 text-center">
+                                                <a target="_blank" href="~/img/addcar.png">
+                                                    <img class="img-fluid mb-1 " src="~/img/addcar.png" alt="Frontimage" style="width:350px; height:auto;">
+                                                </a>
+                                            </div> }
+                                                        else
+                                                        {
+                                            <div class="col-md-12 text-center">
+                                                <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.Frontimage)">
+                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.Frontimage)" alt="@Html.DisplayFor(model => model.Frontimage)" style="width:350px; height:auto;">
+                                                </a>
+                                            </div>}
+
+                                                    @if (Model.Backimage == "" || Model.Backimage == null)
+                                                    {
+
+                                            <div class="col text-center">
+                                                <a target="_blank" href="~/img/addcar.png">
+                                                    <img class="img-fluid mb-1 " src="~/img/addcar.png" alt="Backimage" style="width:100px; height:auto;">
+                                                </a>
+                                            </div> }
+                                                else
+                                                {
+                                            <div class="col text-center">
+                                                <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.Backimage)">
+                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.Backimage)" alt="@Html.DisplayFor(model => model.Backimage)" style="width:100px; height:auto;">
+                                                </a>
+                                            </div>}
+
+
+
+                                                    @if (Model.RightSideimage == "" || Model.RightSideimage == null)
+                                                    {
+                                            <div class="col text-center">
+                                                <a target="_blank" href="~/img/addcar.png">
+                                                    <img class="img-fluid mb-1 " src="~/img/addcar.png" alt="RightSideimage" style="width: 100px; height: auto;">
+                                                </a>
+                                            </div> }
+                                                        else
+                                                        {
+                                            <div class="col text-center">
+                                                <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.RightSideimage)">
+                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.RightSideimage)" alt="@Html.DisplayFor(model => model.RightSideimage)" style="width: 100px; height: auto;">
+                                                </a>
+                                            </div>}
+                                                    @if (Model.LeftSideimage == null || Model.LeftSideimage == "")
+                                                    {
+                                            <div class="col text-center">
+                                                <a target="_blank" href="~/img/addcar.png">
+                                                    <img class="img-fluid mb-1 " src="~/img/addcar.png" alt="LeftSideimage" style="width: 100px; height: auto;">
+                                                </a>
+                                            </div> }else
+                                                        {
+                                                    <div class="col text-center">
+                                                        <a target="_blank" href="~/img/Car_Image/@Html.DisplayFor(model => model.LeftSideimage)">
+                                                            <img class="img-fluid mb-1 " src="~/img/Car_Image/@Html.DisplayFor(model => model.LeftSideimage)" alt="@Html.DisplayFor(model => model.LeftSideimage)" style="width: 100px; height: auto;">
+                                                        </a>
+                                                    </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3 class="mb-3">@Html.DisplayFor(model => model.Brand) @Html.DisplayFor(model => model.Model) @Html.DisplayFor(model => model.Year)</h3>
+                                            <p class="mb-4">@Html.DisplayFor(model => model.Discription)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Engine Cylinders:</b>@Html.DisplayFor(model => model.Engine_CC)</p>
+                                            <p><i class="fa fa-check text-success me-3"></i><b class="text-danger">Engine Fuel Type</b>@Html.DisplayFor(model => model.Fuel)</p>
+
+                                            <a href="" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ml-3"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+  
+
+</body>

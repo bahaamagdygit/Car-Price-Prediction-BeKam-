@@ -1,0 +1,348 @@
+﻿@model Car_Price_prediction.view_model.UserProfile
+@{
+    @*Layout = null;*@
+}
+
+
+@{
+    ViewBag.Title = "UserProfile";
+    ViewBag.icon = "USER_Accounts.png";
+}
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        height: 100vh;
+        width: 100%;
+    }
+
+    h1 {
+        font-family: sans-serif;
+        text-align: center;
+        font-size: 30px;
+        color: #222;
+    }
+
+    .profile-pic-div {
+        height: 120px;
+        width: 120px;
+        position: absolute;
+        top: 26%;
+        left: 55%;
+        transform: translate(-50%,-50%);
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid grey;
+    }
+
+    #photo {
+        height: 100%;
+        width: 100%;
+    }
+
+    #file {
+        display: none;
+    }
+
+    #uploadBtn {
+        height: 40px;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        background: rgba(0, 0, 0, 0.7);
+        color: wheat;
+        line-height: 30px;
+        font-family: sans-serif;
+        font-size: 15px;
+        cursor: pointer;
+        display: none;
+    }
+
+    .profile {
+        margin: 400px;
+    }
+
+    .userInfo {
+        padding: 20px;
+        height: 50px;
+      @*  float: right;*@
+        margin: 32px;
+        @*width: 150px;*@
+        /* margin-left: 125px; */
+    }
+    .original-border {
+        margin: 20px;
+        padding: 15px;
+        /* width: 1056px; */
+        height: 250px;
+        border-radius: 15px;
+        background-color: #eeeeee;
+        border: 3px solid #328BE9;
+    }
+    .submit {
+        float: right;
+        margin-top: 50px;
+        margin-right: 30px;
+        border-radius: 18px;
+        width: 130px;
+    }
+
+    .inputForm {
+        line-height: 1.2;
+        color: #2B2E4A;
+        display: block;
+        width: 98%;
+
+        padding: -0.625rem 0.75rem;
+        font-size: 93%;
+        margin: 0;
+        font-weight: 600 !important;
+
+        background-color: #eeeeee;
+        background-clip: padding-box;
+        border: 0px solid #ced4da;
+        border-radius: 0;
+        transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+    }
+</style>
+
+
+@using (Html.BeginForm("UserProfile", "Account", FormMethod.Post, new { @class = "form", id = "UserProfile", enctype = "multipart/form-data" }))
+{
+
+    <div class="container ">
+        <div class="original-border">
+
+
+            <div class="row">
+                <div class="col-2">
+                    <div class="profile">
+                        <div class="profile-pic-div">
+
+                            @* <img src="~/img/Logo/Logo1.png" id="photo" />*@
+                            <img src="~/img/User/@Model.UserImage" id="photo" />
+                            <input type="file" id="file" name="userimage" value="@Model.UserImage">
+                            <label for="file" id="uploadBtn">Choose Photo</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-10">
+                    <div class="userInfo">
+                        <h3>
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "inputForm no-border" } })
+
+                        </h3>
+                        <h4>  @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "inputForm no-border" } })</h4>
+                        <h4> @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "inputForm no-border" } })</h4>
+                    </div>
+                    <input type="submit" name="" value="change" class="submit btn btn-primary" />
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+}
+
+@using (Html.BeginForm("UserProfile", "Account", FormMethod.Post, new { @class = "form", id = "UserProfile" }))
+{
+    <input type="text" id="file" name="userimage" value="@Model.UserImage">
+    <input type="text" id="file" name="UserName" value="@Model.UserName">
+    <input type="text" id="file" name="PhoneNumber" value="@Model.PhoneNumber">
+    <input type="text" id="file" name="Email" value="@Model.Email">
+
+    <div class="row justify-content-center align-items-center m-0" id="cars">
+
+        <!-- Main content -->
+
+        @if (Model.ID == 0)
+        {
+            <div class="col-md-8 ">
+                <div class="row m-0" id="tdata">
+                    @foreach (var item in Model.Paginatedcar_data())
+                    {
+
+                        <div class="container h-150 ">
+                            <div class="row d-flex justify-content-center align-items-center ">
+                                <div class="col ">
+                                    <div class="card mb-4 rounded">
+                                        <div>
+                                            <div class="card-body p-4 border border-black">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-4 d-flex justify-content-center align-items-center ">
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <a target="_blank" href="~/img/Car_Image/@item.Frontimage">
+                                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@item.Frontimage" alt="@item.Frontimage" style="width:300px; height:auto;">
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="col text-center">
+                                                                <a target="_blank" href="~/img/Car_Image/@item.Backimage">
+                                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@item.Backimage" alt="@item.Backimage" style="width:70px; height:auto;">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <a target="_blank" href="~/img/Car_Image/@item.RightSideimage">
+                                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@item.RightSideimage" alt="@item.RightSideimage" style="width:70px; height:auto;">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <a target="_blank" href="~/img/Car_Image/@item.LeftSideimage">
+                                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@item.LeftSideimage" alt="@item.LeftSideimage" style="width:70px; height:auto;">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 text-center">
+
+                                                        <div class="row ">
+                                                            <div class="col-md-12 text-center">
+                                                                <h4 class="text-uppercase mb-4 d-flex justify-content-center">@Html.DisplayFor(modelItem => item.Brand) @Html.DisplayFor(modelItem => item.Model)  @Html.DisplayFor(modelItem => item.yearRange)  </h4>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <h6 class="text-uppercase mb-4 d-flex justify-content-center">@Html.DisplayFor(modelItem => item.UserName) <span class="text-warning">||</span> <span class="text-danger">@Html.DisplayFor(modelItem => item.Phone_Namber)  </span>  </h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <h6 class="text-uppercase mb-4 d-flex justify-content-center">@Html.DisplayFor(modelItem => item.Governorate) <span class="text-warning">||</span> <span class="text-danger">@Html.DisplayFor(modelItem => item.City)  </span>  </h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2 text-center ">
+
+
+                                                        <h4>
+                                                            <i class="far fa-calendar-alt " data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.yearRange)" style="font-size:25px"></i>
+
+                                                            <i class="fa fa-cogs  " data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.Transmission)" style="font-size:25px"></i>
+
+                                                            <i class="	far fa-address-card " data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.UserName)" style="font-size:25px"></i>
+
+
+                                                        </h4>
+
+                                                        <h6 class="mr-3 text-primary text-center " data-toggle="tooltip" title="Car Price is : @Html.DisplayFor(modelItem => item.PriceRange) EGP"> @Html.DisplayFor(modelItem => item.PriceRange) EGP </h6>
+                                                    </div>
+
+                                                    <div class="col-md-2 justify-content-center">
+                                                        <div class="row m-2 justify-content-center">
+                                                            <i class="fa fa-circle" aria-hidden="true" style="color: @(item.Active ? "#54ec0f" : "red") ; font-size:20px;"></i>
+
+                                                            <span style="color: @(item.Active ? "#54ec0f" : "red")">@Html.Raw(item.Active ? " Active" : " Disabled")</span>
+                                                        </div>
+                                                        <div class="row m-2 justify-content-center w-100">
+
+                                                            <a class="btn btn-outline-secondary px-3 rounded animate-down-2 " href="/Sells/Detalis/@item.ID">Detalis</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+
+                </div>
+                <ul class="pagination" style="justify-content:center">
+                    @*<a class="page-link" href="@Url.Action("Cars_filter", new { page = Model.Previous()})"> << Previous </a>*@
+                    <li style="margin-right: 10px;">
+
+                        <button type="submit" name="" style=" border-radius: 25px; width:50px; height:50px" value="" formaction=@Url.Action("UserProfile", new { page = Model.Previous() }) formmethod="post" class="fas fa-fast-backward page-link" />
+                    </li>
+
+                    @if (Model.pagestart() > 2)
+                    {
+                        <li class="@(1 == Model.CurrentPage ? "page-item active" : "page-item")">
+                            <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="1" formaction=@Url.Action("UserProfile", new { page = 1
+                                                                                                                                 }) formmethod="post" class="page-link" />
+                        </li>
+                        <li>
+                            <div class="btn btn-dark rounded-circle page-link font-weight-bold" style=" border-radius: 25px; width: 50px; height: 50px;">
+                                . . .
+                            </div>
+                        </li>
+                    }
+                    @{ int ii;}
+                    @for (ii = Model.pagestart(); ii <= Model.PageCount(); ii++)
+                    {
+                        if (ii < 9)
+                        {
+
+                            <li class="@(ii == Model.CurrentPage ? "page-item active" : "page-item")">
+                                <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@ii" formaction=@Url.Action("UserProfile", new
+                                                                                                                                       { page = ii }) formmethod="post" class="page-link" />
+                            </li>
+                        }
+                        else
+                        {
+                            if (ii == Model.CurrentPage && ii > 8)
+                            {
+                                for (int u = Model.pagestart1(); u <= Model.CurrentPage; u++)
+                                {
+                                    <li class="@(u == Model.CurrentPage ? "page-item active" : "page-item")">
+                                        <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@u" formaction=@Url.Action("UserProfile", new
+                                                                                                                                              { page = u }) formmethod="post" class="page-link" />
+                                    </li>
+
+                                }
+
+                            }
+                        }
+                    }
+
+                    @if (ii > Model.PageCount() && ii > 9 && Model.PageCount() != Model.CurrentPage)
+                    {
+                        ii--;
+                        <li>
+                            <div class="btn btn-dark rounded-circle page-link font-weight-bold" style=" border-radius: 25px; width: 50px; height: 50px;">
+                                . . .
+                            </div>
+                        </li>
+                        <li class="@(ii == Model.CurrentPage ? "page-item active" : "page-item")">
+                            <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@ii" formaction=@Url.Action("UserProfile", new { page = ii
+                                                                                                                                   }) formmethod="post" class="page-link" />
+                        </li>
+                    }
+
+                    @*<a class="page-link" href="@Url.Action("Cars_filter", new { page =Model.Next()})"> >> Next </a>*@
+                    <li style="margin-left: 10px;">
+                        <button type="submit" name="" style=" border-radius: 25px; width: 50px; height: 50px" value="" formaction=@Url.Action("UserProfile", new { page = Model.Next() }) formmethod="post" class="fas fa-fast-forward page-link" />
+                    </li>
+                </ul>
+
+            </div>
+
+
+
+
+        }
+
+    </div>
+
+
+}
+
+
+<script src="~/Scripts/app.js"></script>

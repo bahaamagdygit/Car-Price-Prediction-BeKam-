@@ -1,0 +1,163 @@
+﻿@model Tuple<Car_Price_prediction.Models.ShowroomReviews, List<Car_Price_prediction.Models.ShowroomReviews>, int>
+@*@model List<Car_Price_prediction.Models.ShowroomReviews>*@
+@using Microsoft.AspNet.Identity;
+
+<style type="text/css">
+    .container {
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .comment-box {
+        max-height: 500px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .be-comment-block {
+        margin-bottom: 50px !important;
+        border: 1px solid #edeff2;
+        border-radius: 2px;
+        padding: 50px 70px;
+    }
+
+    .comments-title {
+        font-size: 16px;
+        color: #262626;
+        margin-bottom: 15px;
+        font-family: 'Conv_helveticaneuecyr-bold';
+    }
+
+    .be-img-comment {
+        width: 60px;
+        height: 60px;
+        float: left;
+        margin-bottom: 15px;
+    }
+
+    .be-ava-comment {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+
+    .be-comment-content {
+        margin-left: 80px;
+    }
+
+        .be-comment-content span {
+            display: inline-block;
+            width: 49%;
+            margin-bottom: 15px;
+        }
+
+    .be-comment-name {
+        font-size: 13px;
+        font-family: 'Conv_helveticaneuecyr-bold';
+    }
+
+    .be-comment-content a {
+        color: #383b43;
+    }
+
+    .be-comment-time {
+        text-align: right;
+        font-size: 11px;
+        color: #b4b7c1;
+    }
+
+    .be-comment-text {
+        font-size: 13px;
+        line-height: 18px;
+        color: #7a8192;
+        display: block;
+        background: #f6f6f7;
+        border: 1px solid #edeff2;
+        padding: 15px 20px;
+    }
+
+    .form-block {
+        margin-top: 50px;
+    }
+
+
+    .form-group .form-input {
+        font-size: 22px;
+        line-height: 50px;
+        font-weight: 500;
+        color: #b4b7c1;
+        width: 100%;
+        height: 50px;
+        padding-left: 70px;
+        border: 1px solid #edeff2;
+        border-radius: 0 2px 2px 0;
+    }
+
+    .btn-primary {
+        background-color: #005daa;
+        color: #fff;
+        border-radius: 2px;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+        .btn-primary:hover {
+            background-color: #004d8c;
+        }
+
+</style>
+
+
+<div class="container">
+    <div class="be-comment-block">
+        <div class="comment-box">
+            <h1 class="comments-title">Comments (@Model.Item2.Count)</h1>
+
+                                                
+                @foreach (var item in@*Model*@ Model.Item2)
+                {
+                <div class="be-comment">
+                    <div class="be-img-comment">
+                        @*<img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="be-ava-comment">*@
+                        <i class="fa fa-user-circle" style="font-size:55px;"></i>
+                    </div>
+                    <div class="be-comment-content">
+                        <span class="be-comment-name" style="font-weight:900;">
+                            @item.Name
+                        </span>
+                        <span class="be-comment-time">
+                            <i class="fa fa-clock-o"></i>
+                            @item.data
+                        </span>
+                        <p class="be-comment-text">
+                            @item.Message
+                            @*@item.ShowroomID*@
+                        </p>
+                    </div>
+                </div>
+                }
+        </div>
+            <form class="form-block" method="post" action="@Url.Action("ShowroomReviews", "Home")">
+
+                <div class="row">
+
+                    @{var UserID = User.Identity.GetUserId();}
+                    <input type="hidden" name="UserID" value="@UserID">
+
+                    <input type="hidden" name="ShowroomID" value="@Model.Item3">
+                    <div class="col">
+                        <div class="form-group" >
+                            <textarea  class="form-input" required placeholder="Your Review" name="Message" value="" style="height:100px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center justify-content-center">
+                    <input type="submit" value="Send Review" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>

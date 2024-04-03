@@ -1,0 +1,279 @@
+﻿@model  List<Car_Price_prediction.Models.car_data>
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+
+
+        .show_info{
+            background-color:burlywood;
+           padding:3px;
+            border-radius: 10px;
+            box-shadow: 0 5px 5px rgba(0,0,0,0.4);
+        } 
+
+    
+
+</style>
+<!-- Page Header Start -->
+<div class="container-fluid page-header">
+    <h1 class="display-3 text-uppercase text-white mb-3">SELL YOUR CAR</h1>
+    <div class="d-inline-flex text-white">
+        <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
+        <h6 class="text-body m-0 px-3">/</h6>
+        <h6 class="text-uppercase text-body m-0">SELL YOUR CAR</h6>
+    </div>
+</div>
+<!-- Page Header Start -->
+
+
+@using (Html.BeginForm("save", "Car_finder", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form", id = "Filterform" }))
+{
+
+
+    
+        <div class="container-fluid  pb-5  ">
+
+            <div class="row p-5 sell-form">
+                <div class="col-lg-6 bg-secondary  mr-xl-5 py-1 " style="border-radius: 8px;">
+                    <h2 class=" text-primary p-0"> <i class="fas fa-fill flex-shrink-0 mr-5"></i>Fill in the following data</h2>
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label>Brand : </label>
+                            <input list="Make" name="Make" id="carBrand" oninput="disBrand()" class="form-control px-4" style="height: 40px;">
+                            <datalist id="Make">
+                                @foreach (var item in ViewBag.Make)
+                                {
+                                    <option>@item</option>
+
+                                }
+                            </datalist>
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label>Model : </label>
+                            <input list="Model" name="Model" id="carModel" oninput="disModel()" class="form-control px-4" style="height: 40px;">
+                            <datalist id="Model">
+                                @foreach (var item in ViewBag.Model)
+                                {
+                                    <option>@item</option>
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label>Engine Fuel Type : </label>
+                            <input list="Engine_Fuel_Type" name="Engine_Fuel_Type" id="carEFT" oninput="disEFT()" class="form-control px-4" style="height: 40px;">
+                            <datalist id="Engine_Fuel_Type">
+                                @foreach (var item in ViewBag.Engine_Fuel_Type)
+                                {
+                                    <option>@item</option>
+                                }
+                            </datalist>
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label>Engine HP : </label>
+                            <input list="Engine_HP" name="Engine_HP" id="carEHP" oninput="disEHP()" class="form-control px-4" style="height: 40px;">
+                            <datalist id="Engine_HP">
+                                @foreach (var item in ViewBag.Engine_HP)
+                                {
+                                    <option>@item</option>
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label>Transmission Type : </label>
+                            <input list="Transmission_Type" name="Transmission_Type" id="carTT" oninput="disTT()" class="form-control px-4" style="height: 40px;">
+                            <datalist id="Transmission_Type">
+                                @foreach (var item in ViewBag.Transmission_Type)
+                                {
+                                    <option>@item</option>
+                                }
+                            </datalist>
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label>Driven Wheels : </label>
+                            <input list="Driven_Wheels" name="Driven_Wheels" id="carDW" oninput="disDW()" class="form-control px-4" style="height: 40px;">
+                            <datalist id="Driven_Wheels">
+                                @foreach (var item in ViewBag.Driven_Wheels)
+                                {
+                                    <option>@item</option>
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label>Number of Doors : </label>
+                            <input list="Number_of_Doors" name="Number_of_Doors" id="carNOF" oninput="disNOF()" class="form-control px-4" style="height: 40px;">
+                            <datalist id="Number_of_Doors">
+                                @foreach (var item in ViewBag.Number_of_Doors)
+                                {
+                                    <option>@item</option>
+                                }
+                            </datalist>
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label>Vehicle Size : </label>
+                            <input list="Vehicle_Size" name="Vehicle_Size"id="carVS" oninput="disVS()" class="form-control px-4" style="height: 40px;">
+                            <datalist id="Vehicle_Size">
+                                @foreach (var item in ViewBag.Vehicle_Size)
+                                {
+                                    <option>@item</option>
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label>Price : </label>
+                            <input list="Price" name="Price"id="carPrice" oninput="disPrice()" class="form-control px-4" style="height: 40px;">
+
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label for="floatingSelect">Year : </label>
+                            <input list="Year" name="Year" id="carYear" oninput="disYear()" class="form-control px-4" style="height: 40px;">
+                            <datalist id="Year">
+                                @foreach (var item in ViewBag.Year)
+                                {
+                                    <option>@item</option>
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-6 form-group">
+                            <label>choose imge : </label>
+                            @Html.TextBox("image", "", new { Type = "file", style = "height: 50px;" })
+                        </div>
+                        <div class="col-6 form-group">
+                            <input type="submit" class="btn btn-primary" />
+                        </div>
+                    </div>
+                   
+                </div>
+
+                
+                    <div class="col-lg-5 bg-secondary mr-4 py-1" style="border-radius: 8px; ">
+                        <h2 class=" text-primary mb-4 "><i class='far fa-file-alt flex-shrink-0 mr-5  '></i> INFO Your Car   </h2>
+
+                        <div class="border-bottom border-warning mr-1 py-1">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip"  title="Vehicle title branding is the use of a permanent designation on a vehicle's title">
+                                <span class="fa fa-2x fa-duotone fa-car text-primary flex-shrink-0 mr-3 py-1"></span>
+                                <span class="font-weight-bold text-light"> Brand :  </span>
+                                <span id="carBrandInfo"> <i class="font-weight-bold text-danger mr-3 ">&times;</i> </span>
+                            </span>
+                            <br />
+                        </div>
+                        <div class="border-bottom border-warning mr-1 py-1">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="An automobile model is a particular brand of vehicle sold under a marque by a manufacturer">
+                                <span class="fa fa-2x fas fa-cog text-primary flex-shrink-0 mr-3 py-1"></span>
+                                <span class="font-weight-bold text-light">Model :</span>
+                                <span id="carModelInfo"> <i class="font-weight-bold text-danger mr-3 ">&times;</i></span>
+                               
+                            </span>
+                                <br />
+                        </div>
+
+                        <div class="border-bottom border-warning mr-1 py-1">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="A motor fuel is a fuel that is used to provide power to the motor in motor vehicles. Currently, the majority of motor vehicles worldwide are powered by gasoline or diesel.">
+                                <span class="fa fa-2x fas fa-gas-pump text-primary flex-shrink-0 mr-3 py-1"></span>
+                                <span class="font-weight-bold text-light">Engine Fuel Type :</span>
+                                <span id="carEFTInfo"><i class="font-weight-bold text-danger mr-3 ">&times;</i> </span>
+                                </span>
+                                <br />
+                        </div>
+
+                        <div class="border-bottom border-warning mr-1 py-1">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Horsepower refers to the power an engine produces. It's calculated through the power needed to move 550 pounds one foot in one second or by the power needs to move 33,000 pounds one foot in one minute.">
+                                <span class="fa fa-2x fas fa-tachometer-alt text-primary flex-shrink-0 mr-3 py-1"></span>
+                                <span class="font-weight-bold text-light">Engine HP :</span>
+                                <span id="carEHPInfo"><i class="font-weight-bold text-danger mr-3 ">&times;</i> </span>
+                                </span>
+                                <br />
+                        </div>
+
+                        <div class="border-bottom border-warning mr-1 py-1">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Put simply, a car transmission is a vehicle's gearbox. It's roughly analogous to the gear shifter and chain system that bicycles use.">
+                                <span class="fa fa-2x fas fa-truck-monster text-primary flex-shrink-0 mr-3 py-1"></span>
+                                <span class="font-weight-bold text-light">Transmission Type :</span>
+                                <span id="carTTInfo"> <i class="font-weight-bold text-danger mr-3 ">&times;</i></span>
+                                </span>
+                                <br />
+                        </div>
+
+                        <div class="border-bottom border-warning mr-1 py-1">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="noun. a wheel, esp a gear wheel, that causes other wheels to rotate. any wheel of a vehicle that transforms torque into a tractive force. Slang.">
+                                <span class="fa fa-2x fas fa-meteor text-primary flex-shrink-0 mr-3 py-1"></span>
+                                <span class="font-weight-bold text-light">Driven Wheels : </span>
+                                <span id="carDWInfo"><i class="font-weight-bold text-danger mr-3 ">&times;</i> </span>
+                                </span>
+                                <br />
+                        </div>
+
+                        <div class="border-bottom border-warning mr-1 py-1">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed">
+                                <span class="fa fa-2x fa-duotone fa-car-side text-primary flex-shrink-0 mr-3 py-1"></span>
+                                <span class="font-weight-bold text-light">Number of Doors :</span>
+                                <span id="carNOFInfo"><i class="font-weight-bold text-danger mr-3 ">&times;</i> </span>
+                                </span>
+                                <br />
+                        </div>
+
+                        <div class="border-bottom border-warning mr-1 py-1">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Define Vehicle dimensions. means the dimensions of the vehicle based on its construction, as stated by the manufacturer.">
+                                <span class="fa fa-2x fas fa-shuttle-van text-primary flex-shrink-0 mr-3 py-1"></span>
+                                <span class="font-weight-bold text-light">Vehicle Size :</span>
+                                <span id="carVSInfo"> <i class="font-weight-bold text-danger mr-3 ">&times;</i></span>
+                                </span>
+                                <br />
+                        </div>
+
+                        <div class="border-bottom border-warning mr-1 py-1">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="For the external costs of the automobile, see Externalities of automobiles. The car internal costs are all the costs consumers pay to own and operate a car.">
+                                <span class="fa fa-2x fas fa-comment-dollar text-primary flex-shrink-0 mr-3 py-1"></span>
+                                <span class="font-weight-bold text-light">Price :</span>
+                                <span id="carPriceInfo"><i class="font-weight-bold text-danger mr-3 ">&times;</i> </span>
+                                </span>
+                                <br />
+                        </div>
+
+                        <div class="border-bottom border-warning mr-1 py-1">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="The vehicle year is the term used in the vehicle register to indicate the year in which the car is manufactured, meaning to say the same as the year model.">
+                                <span class="fa fa-2x fa-solid fa-calendar-check text-primary flex-shrink-0 mr-3 py-1"></span>
+                                <span class="font-weight-bold text-light">Year :</span>
+                                <span id="carYearInfo"><i class="font-weight-bold text-danger mr-3 ">&times;</i> </span>
+                                </span>
+                        </div>
+
+
+                        </div>
+
+                    </div>
+
+            </div>
+
+    
+        <!-- Car Booking End -->
+        }

@@ -1,0 +1,201 @@
+﻿@model Car_Price_prediction.view_model.Registration_Vm
+
+@{
+    ViewBag.Title = "Registration";
+    ViewBag.icon = "Registration.png";
+}
+
+<head>
+    <link href="~/Content/log_reg.css" rel="stylesheet" />
+    <style>
+        .form-group span {
+            position: absolute;
+            bottom: 12px;
+            right: 17px;
+            color: red;
+            font-size: 14px;
+        }
+
+        #submit-error {
+            color: red;
+        }
+    </style>
+</head>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <section class="form-02-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="_lk_de">
+                        <div class="form-03-main">
+                            @*<div class="logo wow bounceInDown " data-wow-delay="0.6s">
+
+                                    <img src="~/img/Log_reg/login.gif " />
+                                </div>*@
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.1s">
+                                @Html.Label("User_Name", "User Name")
+                                @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf4ff; " + " Enter User Name"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol", @onkeyup = "validateUserName()" } })
+                                <span id="username-error"></span>
+                                @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.1s">
+                                @Html.Label("Name", "Name")
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf4ff; " + " Enter your Name"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol", @onkeyup = "validateName()" } })
+                                <span id="name-error"></span>
+                                @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group p-0 wow bounceInRight " data-wow-delay="0.2s">
+                                @Html.Label("Password", "Password")
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf084; " + " Enter Password"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol", @onkeyup = "validatePass()" } })
+                                <span id="pass-error" style="font-size:75%"></span>
+
+                            </div>
+
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.3s">
+                                @Html.Label("Confirm_Password", "Password")
+                                @Html.EditorFor(model => model.Confirm_Password, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf084; " + " Confirm Password"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol", @onkeyup = "ConfirmPass()" } })
+                                <span id="Confirm-pass-error"></span>
+                                @Html.ValidationMessageFor(model => model.Confirm_Password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group p-0 wow bounceInRight " data-wow-delay="0.4s">
+                                @Html.Label("Email", "Email")
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf674; " + " Enter Your Email"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol", @onkeyup = "validateEmail()" } })
+                                <span id="email-error"></span>
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.5s">
+                                @Html.Label("phone_num", "Phone Number")
+                                @Html.EditorFor(model => model.phone_num, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf879; " + " Enter phone Number"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol", @onkeyup = "validatePhone()" } })
+                                <span id="phone-error"></span>
+                                @Html.ValidationMessageFor(model => model.phone_num, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-check py-3 wow rotateIn " data-wow-delay="0.6s">
+                                <input class="form-check-input d-flex justify-content-md-start p-3" type="checkbox" value="" id="">
+                                <label class="form-check-label" for="">
+                                    Remember me
+                                </label>
+                            </div>
+
+
+
+                            <div class="form-group p-0 wow wobble " data-wow-delay="0.6s">
+                                <div class="_btn_04">
+                                    <input type="submit" value="Registration" class="btn_log" onclick=" return validateForm()" />
+                                    <span id="submit-error" style=" bottom: -21px;"></span>
+                                </div>
+
+
+                            </div>
+                            <div class="form-group p-0  wow bounceInRight " data-wow-delay="0.6s">
+
+
+                                @Html.ActionLink("Login", "Login", "Account", null, new { @class = " float-start text-info" })
+                                <a href="#" class="float-right text-light">Forgot Password ?</a>
+
+                            </div>
+                            <div class="form-group nm_lk p-0  wow lightSpeedIn " data-wow-delay="0.6s"><p>Or Login With</p></div>
+
+                            <div class="form-group pt-0">
+                                <div class="_social_04">
+                                    <ol>
+                                        <li class="wow hinge " data-wow-delay="0.1s "><i class="fab fa-facebook-f "></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.2s "><i class="fab fa-twitter"></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.3s "><i class="fab fa-google"></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.4s "><i class="fab fa-instagram"></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.5s "><i class="fab fa-linkedin-in"></i></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+
+}
+
+<script src="~/Scripts/registration.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="form-horizontal">
+            <h4>Registration_Vm</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.User_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Confirm_Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Confirm_Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Confirm_Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.phone_num, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.phone_num, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.phone_num, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@

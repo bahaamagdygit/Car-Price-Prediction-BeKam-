@@ -1,0 +1,846 @@
+﻿
+@model Sell_your_car.view_model.SellYourCarViewModel
+
+
+<link href="~/Content/sellCar.css" rel="stylesheet" />
+
+
+
+@{ ViewBag.Title = "SellYourCar";
+    ViewBag.icon = "SellYourCar.png"; }
+
+@if (User.IsInRole("Dealer"))
+{<!-- Carousel Start -->
+    <div class="container-fluid p-0" style="margin-bottom: 30px;">
+        <div id="header-carousel" class="carousel slide" data-ride="carousel">
+            <div id="w-100">
+                <img class="w-100" src="~/img/Delear_background/@Model.CoverImage" alt="@Model.CoverImage" style="height:400px; width:auto;">
+
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3">
+                        <img class="rounded-circle shadow-4-strong m-2" alt="@Model.Logo" src="~/img/Delear_logo/@Model.Logo" style="height:100px; width: auto; " />
+                        <h1 class="text-white text-uppercase mb-md-3">@Model.ShowroomName</h1>
+                        <button type="button" class="btn btn-outline-warning m-2" data-toggle="collapse" data-target="#discription">Discription</button>
+                        <div id="discription" class="collapse">
+                            <h5 class="display-4 text-white mb-md-3" style="font-size:25px">@Model.ShowroomDiscription</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- Carousel End -->
+}
+@using (Html.BeginForm("SellYourCar", "Sells", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="container">
+
+
+        <div class="row ">
+
+            <div class="col-12 ">
+                <div class="_lk_de">
+                    <div class="form-02-main ">
+                        <input id="one" type="radio" name="stage" checked="" />
+                        <input id="two" type="radio" name="stage" />
+                        <input id="three" type="radio" name="stage" />
+                        <div class="stages">
+                            <label for="one">1</label>
+                            <label for="two">2</label>
+                            <label for="three">3</label>
+                        </div>
+
+                        <span class="progresss"><span></span></span>
+
+
+
+                        <section id="div1" style=" display:block;" data-panel="one">
+                            @*------------------------------1---------------------------*@
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                    <div class="form-group @*p-0*@  ">
+                                        @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label text-white " })
+
+                                        @Html.DropDownList("Brand", (MultiSelectList)ViewBag.Brand,
+                                         new { onchange = "getModel(this); getobj(Brand ,Brand,Brand1) ", id = "Brand", @class = "form-control _ge_de_ol" })
+                                        @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger ", id = "" })
+                                        <div class=" m-1 text-center" id="Brand1"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*------------------------------2---------------------------*@
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                    <div class="form-group p-0   ">
+                                        @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label text-white" })
+
+                                        <select class="form-control _ge_de_ol carModels" name="Model" id="Model" onchange="getobj(Model ,Model,Model1)">
+                                            <option value="">select Model</option>
+                                        </select>
+                                        <div class=" m-1 text-center"> @Html.ValidationMessageFor(model => model.Model, "", new { @class = "", id = "Model1" })</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            @*------------------------------3---------------------------*@
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                    <div class="form-group p-0 ">
+                                        @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label  text-white" })
+                                        <select class="form-control _ge_de_ol" name="Year" id="Year" onchange="getobj(Year ,Year,Year1)">
+                                            <option value="">  select year</option>
+                                            @{ for (int i = 1950; i < 2024; i++)
+                                                {
+                                                    <option value="@i">@i</option>
+                                                } }
+                                        </select>
+                                        <div class=" m-1 text-center  ">@Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger", id = "Year1", })</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            @*------------------------------4---------------------------*@
+                            <div class="row justify-content-md-center">
+
+                                <div class="col-sm-12 ">
+                                    <h2 class="text-center text-white "> @Html.LabelFor(model => model.Transmission, htmlAttributes: new { @class = "control-label m-4" })</h2>
+                                </div>
+                            </div>
+                            <div class="row justify-content-md-center">
+
+                                <div class="col-sm-6  ">
+                                    <div class="form-group mb-0">
+                                        <label class="form-control _ge_de_ol radios  " id="Transmission0" name="label" onclick="change_color(this,'Transmission','label')">
+                                            @Html.RadioButtonFor(model => model.Transmission, "MANUAL",
+                                      new { @class = "custom-control-input set_color", @style = " visibility:hidden;", onchange = "getobj(Transmission ,Transmission0,Transmission1)" })
+
+
+                                            <img src="~/img/icon/manual.png" class="radioImg " />
+                                            MANUAL
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-6  ">
+                                    <div class="form-group mb-0 ">
+                                        <label class="form-control _ge_de_ol radios " id="Transmission00" name="label" onclick="change_color(this,'Transmission','label')">
+                                            @Html.RadioButtonFor(model => model.Transmission, "AUTOMATIC",
+                                   new { @class = "custom-control-input set_color", @style = "visibility:hidden ; ", onchange = "getobj(Transmission ,Transmission00,Transmission1)" })
+                                            <img src="~/img/icon/automatic.png" class="radioImg" />
+                                            AUTOMATIC
+
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" m-1 text-center  " id="Transmission1"></div>
+
+
+
+
+
+
+
+
+                            @*------------------------------5---------------------------*@
+
+                            <div class="row">
+
+                                <div class="col-sm-12 ">
+                                    <h2 class="text-center text-white">  @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })</h2>
+                                </div>
+
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-xs-12 col-sm-6 col-md-3 p-2 ">
+                                    <div class="form-group p-0 mb-0 ">
+                                        <label class="form-control _ge_de_ol Bodyradios " id="Body1" Sedan" name="label1" onclick="change_color(this,'Body','label1')">
+                                            @Html.RadioButtonFor(model => model.Body, "Sedan", new
+                                       { @class = "custom-control-input", @style = "visibility: hidden;", onchange = "getobj(Body ,Body1,Body11)" })
+                                            <img src="~/img/icon/sedan.png" class="radioImg1" />
+                                            <span style=" letter-spacing: 5px; font-weight: bold; display: block;">Sedan</span>
+
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                                    <div class="form-group p-0 mb-0 ">
+                                        <label class="form-control _ge_de_ol Bodyradios" id="Body2" name="label1" onclick="change_color(this,'Body','label1')">
+                                            @Html.RadioButtonFor(model => model.Body, "Hatchback", new
+                                       { @class = "custom-control-input", @style = "visibility: hidden;", onchange = "getobj(Body ,Body2,Body11)" })
+                                            <img src="~/img/icon/hatchback.png" class="radioImg1" />
+                                            <span style=" letter-spacing: 3px; font-weight: bold; display: block;">Hatchback</span>
+
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                                    <div class="form-group p-0 mb-0 ">
+                                        <label class="form-control _ge_de_ol Bodyradios" id="Body3" name="label1" onclick="change_color(this,'Body','label1')">
+                                            @Html.RadioButtonFor(model => model.Body, "SUV",
+                                    new { @class = "custom-control-input", @style = "visibility: hidden;", onchange = "getobj(Body ,Body3,Body11)" })
+                                            <img src="~/img/icon/suv.png" class="radioImg1" />
+
+                                            <span style=" letter-spacing: 5px; font-weight: bold; display: block;">SUV</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                                    <div class="form-group p-0 mb-0 ">
+                                        <label class="form-control _ge_de_ol Bodyradios" id="Body4" name="label1" onclick="change_color(this,'Body','label1')">
+                                            @Html.RadioButtonFor(model => model.Body, "Coupe",
+                                      new { @class = "custom-control-input", @style = "visibility: hidden;", onchange = "getobj(Body ,Body4,Body11)" })
+                                            <img src="~/img/icon/coupe.png" class="radioImg1" />
+                                            <span style=" letter-spacing: 5px; font-weight: bold; display: block;">Coupe</span>
+
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row ">
+
+                                <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                                    <div class="form-group  p-0 mb-0 ">
+                                        <label class="form-control _ge_de_ol Bodyradios" id="Body5" name="label1" onclick="change_color(this,'Body','label1')">
+
+                                            @Html.RadioButtonFor(model => model.Body, "Van",
+                                            new { @class = "custom-control-input", @style = "visibility: hidden;", onchange = "getobj(Body ,Body5,Body11)" })
+                                            <img src="~/img/icon/van.png" class="radioImg1" />
+                                            <span style=" letter-spacing: 5px; font-weight: bold; display: block;">Van</span>
+
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                                    <div class="form-group p-0 mb-0 ">
+                                        <label class="form-control _ge_de_ol Bodyradios" id="Body6" name="label1" onclick="change_color(this,'Body','label1')">
+                                            @Html.RadioButtonFor(model => model.Body, "Station",
+                                       new { @class = "custom-control-input", @style = "visibility: hidden;", onchange = "getobj(Body ,Body6,Body11)" })
+                                            <img src="~/img/icon/station.png" class="radioImg1" />
+                                            <span style=" letter-spacing: 5px; font-weight: bold; display: block;">Station</span>
+
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                                    <div class="form-group p-0 mb-0 ">
+                                        <label class="form-control _ge_de_ol Bodyradios" id="Body7" name="label1" onclick="change_color(this,'Body','label1')">
+                                            @Html.RadioButtonFor(model => model.Body, "Cabriolet",
+                                      new { @class = "custom-control-input", @style = "visibility: hidden;", onchange = "getobj(Body ,Body7,Body11)" })
+                                            <img src="~/img/icon/cabriolet.png" class="radioImg1" />
+                                            <span style=" letter-spacing: 5px; font-weight: bold; display: block;">Cabriolet</span>
+
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                                    <div class="form-group p-0 mb-0 ">
+                                        <label class="form-control _ge_de_ol Bodyradios" id="Body8" name="label1" onclick="change_color(this,'Body','label1')">
+                                            @Html.RadioButtonFor(model => model.Body, "Pickup",
+                                       new { @class = "custom-control-input", @style = "visibility: hidden;", onchange = "getobj(Body ,Body8,Body11)" })
+                                            <img src="~/img/icon/pickup.png" class="radioImg1 " />
+
+                                            <span style=" letter-spacing: 5px; font-weight: bold; display: block; display: block;">Pickup</span>
+
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class=" m-1 text-center  " id="Body11"></div>
+
+
+
+
+
+
+
+
+                            @*------------------------------6---------------------------*@
+                            <div class="row">
+
+                                <div class="col-md-4 justify-content-center">
+                                    <div class="form-group p-0  ">
+                                        @Html.LabelFor(model => model.Engine_CC, htmlAttributes: new { @class = "control-label text-white " })
+                                        <select class="form-control _ge_de_ol " name="Engine_CC" id="Engine_Cylinders" onchange="getobj(Engine_CC ,Engine_Cylinders,Engine_Cylinders1)">
+                                            <option value="">
+                                                Select Engine Capacity (cc)
+                                            </option>
+                                            @{ for (int i = 700; i < 6400; i++)
+                                                {
+
+                                                    i = i + 100;
+                                                    if (i != 900 && i != 2100 && i != 2300 && i != 2600 && i != 3100 && i != 4100 && i != 4500 &&
+                                                        i != 4900 && i != 5100 && i != 5200 && i != 5800 && i != 5900 && i != 6100 && i != 6300)
+                                                    {
+                                                        <option value="@i">@i</option>
+                                                    }
+
+                                                    i--;
+                                                } }
+                                        </select>
+                                    </div>
+                                    <div class=" m-1 text-center" id="Engine_Cylinders1"></div>
+                                </div>
+
+
+                                <div class="col-md-4 justify-content-center">
+                                    <div class="form-group p-0  ">
+                                        @Html.LabelFor(model => model.Kilometers_Driven, htmlAttributes: new { @class = "control-label text-white" })
+
+                                        @Html.EditorFor(model => model.Kilometers_Driven, new
+                                        {
+                                            htmlAttributes = new
+                                            {
+                                                @class = "form-control _ge_de_ol",
+                                                id = "kilo_meter_Dr"
+                                       ,
+                                                onchange = "getobj(Kilometers_Driven ,kilo_meter_Dr,kilo_meter_Dr1)"
+                                            }
+                                        })
+                                        @Html.ValidationMessageFor(model => model.Kilometers_Driven, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class=" m-1 text-center" id="kilo_meter_Dr1"></div>
+
+                                </div>
+
+                                <div class="col-md-4  justify-content-center">
+                                    <div class="form-group justify-content-center">
+                                        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label text-white" })
+
+                                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control _ge_de_ol", id = "Price", onchange = "getobj(Price,Price ,Price1)", @Value = "" } })
+                                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class=" m-1 text-center" id="Price1"></div>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+                            @*------------------------------7---------------------------*@
+                            <div class="row">
+                                <div class="col-sm-6 form-group d-flex align-items-center justify-content-end">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Governorate, htmlAttributes: new { @class = "control-label text-white" })
+
+                                        @Html.DropDownList("Governorate", (MultiSelectList)ViewBag.governorates, "Select Governorate",
+                                         new { onchange = "getArea(this); getobj(Governorate ,Governorate,Governorate1)", id = "Governorate", @class = "form-control _ge_de_ol" })
+                                        @Html.ValidationMessageFor(model => model.Governorate, "", new { @class = "text-danger" })
+                                        <div class=" m-1 text-center" id="Governorate1"></div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-sm-6 form-group d-flex align-items-center justify-content-start">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label text-white " })
+
+                                        <select class="form-control _ge_de_ol Areas Areas" name="City" id="Area" onchange=" getobj(City ,Area,Area1)">
+                                            <option value="">select Area</option>
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger " })
+                                        <div class=" m-1 text-center" id="Area1"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="form-group ">
+
+                                @Html.LabelFor(model => model.Discription, htmlAttributes: new { @class = "control-label text-white " })
+
+                                @Html.TextAreaFor(model => model.Discription, new
+                                {
+                                    @class = "form-control py-3 px-4",
+                                    rows = "5",
+                                    placeholder = "Other Information You Would Like To Share With Buyers.",
+                                    id = "Discription",
+
+                           })
+
+                            </div>
+
+                            <div class="form-group p-0 ">
+
+                                <button class="four" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Additional Specs & Info <b>(Optional)</b>
+
+                                </button>
+
+                            </div>
+
+
+
+                            <div class="collapse" id="collapseExample">
+
+
+
+                                @*------------------------------8---------------------------*@
+
+
+
+                                <details>
+                                    <summary>
+                                        CarFeatures
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </summary>
+
+
+                                    <div class="container ">
+
+                                        <div class="row">
+
+
+                                            <div class="details-info ">
+                                                @for (int i = 0; i < Model.CarFeatures.Count; i++)
+                                                {
+                                                    <div class="form-check form-check-inline check  ">
+                                                        @Html.HiddenFor(m => m.CarFeatures[i].FeaturesID)
+                                                        @Html.HiddenFor(m => m.CarFeatures[i].Features)
+                                                        <label class="text-dark">
+                                                            @Html.CheckBoxFor(m => m.CarFeatures[i].ISselected, new { @class = "CheckBox0 " })
+                                                            @Html.DisplayFor(m => m.CarFeatures[i].Features)
+                                                        </label>
+                                                    </div>
+                                                }
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div>
+                                </details>
+
+
+
+
+
+
+                                @*------------------------------------------------------------------*@
+                                <div class="row">
+
+                                    <div class="col-sm-12 ">
+                                        <h2 class="text-center text-white"> @Html.LabelFor(model => model.Fabrica, htmlAttributes: new { @class = "control-label " })</h2>
+                                    </div>
+
+                                    <div class="col-sm-6 form-group d-flex align-items-center justify-content-end">
+
+                                        <div class="form-group">
+
+                                            <label class="form-control _ge_de_ol radios" onclick="change_color(this,'Fabrica','label2')" name="label2">
+                                                @Html.RadioButtonFor(model => model.Fabrica, "True",
+                                          new { @class = " custom-control-input set_color", @style = "visibility:hidden;" })
+
+                                                yes
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 form-group d-flex align-items-center justify-content-start">
+                                        <div class="form-group">
+
+                                            <label class="form-control _ge_de_ol radios" onclick="change_color(this,'Fabrica','label2')" name="label2">
+                                                @Html.RadioButtonFor(model => model.Fabrica, "false",
+                                          new { @class = " custom-control-input set_color", @style = "visibility:hidden ; " })
+
+                                                No
+                                            </label>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                @*-----------------------------------------------------------------------*@
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="form-group p-0">
+                                            <label class="control-label text-white" for="Color">Color</label>
+
+                                            <select class="form-control _ge_de_ol fa " id="Color" name="Color">
+                                                <option value="">Select Color</option>
+                                                @foreach (var item in Model.colors)
+                                                {
+                                                    <option value="@item.Name" class="fa " style="color: @item.Value ; ">&#xf111; @item.Name</option>
+                                                }
+
+                                            </select>
+
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="Brand" data-valmsg-replace="true" id=""></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*------------------------------10---------------------------*@
+
+                                <div class=" row ">
+                                    <div class="col-sm-12 ">
+                                        <h2 class="text-center text-white">  @Html.LabelFor(model => model.Fuel, htmlAttributes: new { @class = "control-label text-white" })</h2>
+                                    </div>
+                                </div>
+                                <div id="VehicleStyle">
+
+                                    <div class=" row ">
+                                        <div class="col-md-4 justify-content-center">
+
+                                            <label class="form-control _ge_de_ol radios1 " name="label11" onclick="change_color(this,'Fuel','label11')">
+                                                @Html.RadioButtonFor(model => model.Fuel, "Diesel", new
+                                     { @class = "custom-control-input", @style = "visibility: hidden;" })
+                                                Diesel
+                                            </label>
+
+                                        </div>
+
+                                        <div class="col-md-4 justify-content-center">
+                                            <label class="form-control _ge_de_ol radios1" name="label11" onclick="change_color(this,'Fuel','label11')">
+                                                @Html.RadioButtonFor(model => model.Fuel, "Gas", new
+                                      { @class = "custom-control-input", @style = "visibility: hidden;" })
+                                                Gas
+                                            </label>
+                                        </div>
+
+                                        <div class="col-md-4 justify-content-center">
+
+
+                                            <label class="form-control _ge_de_ol radios1" name="label11" onclick="change_color(this,'Fuel','label11')">
+                                                @Html.RadioButtonFor(model => model.Fuel, "Natural Gas",
+                                        new { @class = "custom-control-input", @style = "visibility: hidden;" })
+                                                Natural Gas
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                    <div class=" row ">
+                                        <div class="col-md-4 justify-content-center">
+
+                                            <label class="form-control _ge_de_ol radios1" name="label11" onclick="change_color(this,'Fuel','label11')">
+                                                @Html.RadioButtonFor(model => model.Fuel, "Hybrid",
+                                          new { @class = "custom-control-input", @style = "visibility: hidden;" })
+                                                Hybrid
+                                            </label>
+
+                                        </div>
+
+                                        <div class="col-md-4 justify-content-center">
+
+                                            <label class="form-control _ge_de_ol radios1" name="label11" onclick="change_color(this,'Fuel','label11')">
+
+                                                @Html.RadioButtonFor(model => model.Fuel, "Electric",
+                                                new { @class = "custom-control-input", @style = "visibility: hidden;" })
+                                                Electric
+                                            </label>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <button type="button" class="btn btn-info float-right m-3" name="change" value="hide" onclick="validate_div1(); location.href='#';"> Next <i class="fa fa-arrow-circle-right ml-1"></i></button>
+                                </div>
+
+                            </div>
+
+
+
+                        </section>
+
+                        <!--- 22222222222222222222222222222222222222222222222222222222222222222222222222222222222#######-->
+
+                        <section id="div2" style=" display:none;" data-panel="two">
+
+
+
+                            <div id="img">
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-6 ">
+                                        <div class="form-group  ">
+                                            <div class="box rounded">
+                                                <div class="js--image-preview rounded" id="Image10"> <h1> @Html.LabelFor(model => model.Frontimage, "Front Image", htmlAttributes: new { @class = "control-label " })</h1></div>
+                                                <div class="upload-options ">
+                                                    <label>
+                                                        @Html.TextBox("image1", "", new { @class = "image-upload", accept = "image/*", id = "Image1", Type = "file", })
+                                                        <span class="dima dema rounded">Front image</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 ">
+                                        <div class="form-group ">
+                                            <div class="box rounded">
+                                                <div class="js--image-preview rounded"><h1>@Html.LabelFor(model => model.Backimage, "Back Image", htmlAttributes: new { @class = "control-label " })</h1></div>
+                                                <div class="upload-options ">
+                                                    <label>
+                                                        @Html.TextBox("image2", "", new { @class = "image-upload", accept = "image/*", id = "Image2", Type = "file" })
+                                                        <span class="dima dema rounded">Back image</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-6 ">
+                                        <div class="form-group ">
+                                            <div class="box rounded">
+                                                <div class="js--image-preview rounded"><h1> @Html.LabelFor(model => model.RightSideimage, "Right Side Image", htmlAttributes: new { @class = "control-label " })</h1></div>
+                                                <div class="upload-options ">
+                                                    <label>
+                                                        @Html.TextBox("image3", "", new { @class = "image-upload", accept = "image/*", id = "Image3", Type = "file", style = "height: 50px;" })
+                                                        <span class="dima dema rounded">Right side image</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 ">
+                                        <div class="form-group ">
+                                            <div class="box rounded">
+                                                <div class="js--image-preview rounded"><h1> @Html.LabelFor(model => model.LeftSideimage, "Left Side Image", htmlAttributes: new { @class = "control-label " })</h1></div>
+                                                <div class="upload-options ">
+                                                    <label>
+                                                        @Html.TextBox("image4", "", new { @class = "image-upload", accept = "image/*", id = "Image4", Type = "file", style = "height: 50px;" })
+                                                        <span class="dima dema rounded">Left side image</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <p id="Image11"></p>
+
+
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <button type="button" class="btn btn-info float-left" name="change" value="hide" onclick="back()"><i class="fa fa-arrow-circle-left mr-1"></i>Back </button>
+
+                                    <button type="button" class="btn btn-info float-right " name="change" value="hide" onclick="validate_div2(); location.href='#';">Next <i class="fa fa-arrow-circle-right ml-1"></i></button>
+
+                                </div>
+                            </div>
+                        </section>
+                        <section id="div3" style="display: none;">
+                            @if (User.IsInRole("Dealer"))
+                            {
+                                <div class=" row ">
+                                    <div class="col-md-12  justify-content-center">
+                                        <div class="form-group justify-content-center">
+                                            @Html.LabelFor(model => model.ShowroomName, htmlAttributes: new { @class = "control-label text-white" })
+
+                                            @Html.EditorFor(model => model.ShowroomName, new { htmlAttributes = new { @class = "form-control _ge_de_ol", @readonly = "readonly" } })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12  justify-content-center">
+                                        <div class="form-group justify-content-center">
+                                            @Html.LabelFor(model => model.ShowroomEmail, htmlAttributes: new { @class = "control-label text-white" })
+
+                                            @Html.EditorFor(model => model.ShowroomEmail, new { htmlAttributes = new { @class = "form-control _ge_de_ol", @readonly = "readonly" } })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12  justify-content-center">
+                                        <div class="form-group justify-content-center">
+                                            @Html.LabelFor(model => model.ShowroomPhoneNumber0, htmlAttributes: new { @class = "control-label text-white" })
+
+                                            @Html.EditorFor(model => model.ShowroomPhoneNumber0, new { htmlAttributes = new { @class = "form-control _ge_de_ol", @readonly = "readonly" } })
+
+                                        </div>
+                                    </div>
+                                </div> }
+                            else
+                            {
+                                <div class=" row ">
+                                    <div class="col-md-12  justify-content-center">
+                                        <div class="form-group justify-content-center">
+                                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label text-white" })
+
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control _ge_de_ol", @readonly = "readonly" } })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12  justify-content-center">
+                                        <div class="form-group justify-content-center">
+                                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label text-white" })
+
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control _ge_de_ol", @readonly = "readonly" } })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12  justify-content-center">
+                                        <div class="form-group justify-content-center">
+                                            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label text-white" })
+
+                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control _ge_de_ol", @readonly = "readonly" } })
+
+                                        </div>
+                                    </div>
+                                </div>}
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <button type="button" class="btn btn-info float-left " name="change" value="hide" onclick="back1()"><i class="fa fa-arrow-circle-left mr-1"></i>Back </button>
+
+                                    <button class="btn btn-info float-right ">SELL YOUR CAR <i class="fa fa-arrow-circle-right ml-1"></i></button>
+                                </div>
+
+                            </div>
+                        </section>
+                        @*
+                            <section id="div3" style="display: none;">
+
+
+                                <div class=" row ">
+                                    <div class="col-md-12  justify-content-center">
+                                        <div class="form-group justify-content-center">
+                                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label text-white" })
+
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control _ge_de_ol", @readonly = "readonly" } })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12  justify-content-center">
+                                        <div class="form-group justify-content-center">
+                                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label text-white" })
+
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control _ge_de_ol", @readonly = "readonly" } })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12  justify-content-center">
+                                        <div class="form-group justify-content-center">
+                                            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label text-white" })
+                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control _ge_de_ol", @readonly = "readonly" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <button type="button" class="btn btn-info float-left " name="change" value="hide" onclick="back1()"><i class="fa fa-arrow-circle-left mr-1"></i>Back </button>
+
+                                        <button class="btn btn-info float-right ">SELL YOUR CAR <i class="fa fa-arrow-circle-right ml-1"></i></button>
+                                    </div>
+
+                                </div>
+                            </section>*@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+</script>
+
+@section scripts{
+
+    <script src="~/Scripts/sell.js"></script>
+    <script src="~/Scripts/checkForm.js"></script>
+    <script>
+        function getModel(sel) {
+            var make = sel.options[sel.selectedIndex].text;
+
+            $.ajax({
+                type: "Post",
+                async: false,
+                url: "/Sells/ModelSelctionbyAjax",
+                data: { brand: make },
+                success: function (data) {
+                    // console.log(data)
+                    let Items = '';
+                    $.each(data, function (index) {
+
+                        Items += '<option value="' + data[index].Text + '">' + data[index].Text + "</option>";
+                    });
+                   @* console.log(Items);*@
+                    $('.carModels').html(Items);
+                },
+                error: function () { alert("error"); },
+            })
+        }
+
+        function getArea(Gov) {
+            var selection = Gov.options[Gov.selectedIndex].value;
+
+            $.ajax({
+                type: "Post",
+                async: false,
+                url: "/Sells/AreaSelctionbyAjax",
+                data: { Gov: selection },
+                success: function (data) {
+                    // console.log(data)
+                    let Items = '';
+                    $.each(data, function (index) {[]
+
+                        //console.log(data[index].Text )
+                        Items += '<option value="' + data[index].Text + '">' + data[index].Text + "</option>";
+                    });
+
+                    $('.Areas').html(Items);
+                },
+                error: function () { alert("error"); },
+            })
+        }
+
+    </script>
+
+
+}

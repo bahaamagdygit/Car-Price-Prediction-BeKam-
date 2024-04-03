@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Car_Price_PredictionModelStoreContainer" CdmEntityContainer="Car_Price_PredictionEntities1">
+    <EntitySetMapping Name="car_data">
+      <EntityTypeMapping TypeName="Car_Price_PredictionModel.car_data">
+        <MappingFragment StoreEntitySet="car_data">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Engine_Fuel_Type" ColumnName="Engine_Fuel_Type" />
+          <ScalarProperty Name="Engine_HP" ColumnName="Engine_HP" />
+          <ScalarProperty Name="Engine_Cylinders" ColumnName="Engine_Cylinders" />
+          <ScalarProperty Name="Transmission_Type" ColumnName="Transmission_Type" />
+          <ScalarProperty Name="Driven_Wheels" ColumnName="Driven_Wheels" />
+          <ScalarProperty Name="Number_of_Doors" ColumnName="Number_of_Doors" />
+          <ScalarProperty Name="Market_Category" ColumnName="Market_Category" />
+          <ScalarProperty Name="Vehicle_Size" ColumnName="Vehicle_Size" />
+          <ScalarProperty Name="Vehicle_Style" ColumnName="Vehicle_Style" />
+          <ScalarProperty Name="highway_MPG" ColumnName="highway_MPG" />
+          <ScalarProperty Name="city_mpg" ColumnName="city_mpg" />
+          <ScalarProperty Name="Popularity" ColumnName="Popularity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,93 @@
+﻿@*     اي حاجه حتي اللياوت وشكراا <section class="home-section">  <--------- ملحوظه يا -رايق عشان تخلي الصفحه تتزاح علي جمب كدا لما تفتح السايد بار لازم تحط الصفحه كلها جوا الدف دي*@
+<div class="sidebar">
+    <div class="logo-details">
+        <img  class="icon" src="~/img/Logo/Logo.png" style="width:120px; height:40px;" />
+        @*<i class='bx bxs-car icon'></i>*@
+        <div class="logo_name"></div>
+        <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+        @*هنا تابت سيرش لو مش هتربطها عندك فالمشروع او الصفحه تقدر تحذفها*@
+        <li>
+            <i class='bx bx-search'></i>
+            <input type="text" placeholder="Search...">
+            <span class="tooltip">Search</span>
+        </li>
+        @*..........هنا تقدر تضيف اي صفحه بالايكون بتاعتها بنفس الاستايل الي موجود دا وبلاش*@
+
+        <li>
+            <a href="~/Home/Index/">
+                <i class='bx bx-home'></i>
+                <span class="links_name">Home</span>
+            </a>
+            <span class="tooltip">Home</span>
+        </li>
+
+        <li>
+            <a href="~/BusinessAccount/CarAds">
+                <i class='bx bxl-shopify'></i>
+                <span class="links_name">Car Ads</span>
+            </a>
+            <span class="tooltip">Car Ads</span>
+        </li>
+
+        <li>
+            <a href="~/Sells/SellYourCar">
+                <i class='fa fa-plus-square'></i>
+                <span class="links_name">Add New Ad</span>
+            </a>
+            <span class="tooltip">Add New Ad</span>
+        </li>
+
+        <li>
+            <a href="~/BusinessAccount/NewBranche">
+                <i class='fas fa-map-marker-alt'></i>
+                <span class="links_name">Add New Branch</span>
+            </a>
+            <span class="tooltip">Add New Branch</span>
+        </li>
+
+        <li>
+            <a href="~/BusinessAccount/Reviews">
+                <i class='bx bx-chat'></i>
+                <span class="links_name">Reviews</span>
+            </a>
+            <span class="tooltip">Reviews</span>
+        </li>
+
+        <li>
+            <a href="~/BusinessAccount/DealerProfile">
+                <i class='bx bx-user'></i>
+                <span class="links_name">Profile</span>
+            </a>
+            <span class="tooltip">Profile</span>
+        </li>
+
+
+        @*هنا انا ضايفها عشان باذن الله نحط فيها اسم الادمن والاميل بتاعه وصورت*@
+        @{var userName = User.Identity.Name; }
+
+        @{ ApplicationDbcontext _Context = new ApplicationDbcontext();
+
+            var img = _Context.Users.Where(c => c.UserName == userName).Select(c => c.Buss_img).FirstOrDefault();
+        }
+
+
+
+        <li class="profile">
+            <div class="profile-details">
+                <img src="~/img/User_img/@img" />
+                <div class="d_admin">
+
+                    <div class="name">@userName</div>
+                </div>
+            </div>
+            <a href="~/Account/logout">
+                <i class='bx bx-log-out ' id="log_out"></i>
+            </a>
+
+        </li>
+    </ul>
+</div>
+
+<script src="~/Scripts/sidebar.js"></script>

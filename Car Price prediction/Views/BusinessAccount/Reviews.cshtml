@@ -1,0 +1,190 @@
+﻿@model List<Car_Price_prediction.Models.ShowroomReviews>
+
+@{ ViewBag.Title = "Reviews";
+    ViewBag.icon = "Reviews.png"; }
+
+<style type="text/css">
+
+
+    /*    .review:nth-child(n+7) {
+        display: none;
+    }*/
+
+    .card::after {
+        display: block;
+        position: absolute;
+        bottom: -10px;
+        left: 20px;
+        width: calc(100% - 40px);
+        height: 35px;
+        background-color: #fff;
+        -webkit-box-shadow: 0 19px 28px 5px rgba(64, 64, 64, 0.09);
+        box-shadow: 0 19px 28px 5px rgba(64, 64, 64, 0.09);
+        content: '';
+        z-index: -1;
+    }
+
+    a.card {
+        text-decoration: none;
+    }
+
+    .card {
+        position: relative;
+        border: 0;
+        border-radius: 0;
+        background-color: #fff;
+        -webkit-box-shadow: 0 12px 20px 1px rgba(64, 64, 64, 0.09);
+        box-shadow: 0 12px 20px 1px rgba(64, 64, 64, 0.09);
+    }
+
+    .card {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: .25rem;
+    }
+
+    .box-shadow {
+        -webkit-box-shadow: 0 12px 20px 1px rgba(64, 64, 64, 0.09) !important;
+        box-shadow: 0 12px 20px 1px rgba(64, 64, 64, 0.09) !important;
+    }
+
+    .ml-auto,
+    .mx-auto {
+        margin-left: auto !important;
+    }
+
+    .mr-auto,
+    .mx-auto {
+        margin-right: auto !important;
+    }
+
+    .rounded-circle {
+        border-radius: 50% !important;
+    }
+
+    .bg-white {
+        background-color: #fff !important;
+    }
+
+    .ml-auto,
+    .mx-auto {
+        margin-left: auto !important;
+    }
+
+    .mr-auto,
+    .mx-auto {
+        margin-right: auto !important;
+    }
+
+    .d-block {
+        display: block !important;
+    }
+
+    img,
+    figure {
+        max-width: 100%;
+        height: auto;
+        vertical-align: middle;
+    }
+
+    .card-text {
+        padding-top: 12px;
+        color: #8c8c8c;
+    }
+
+    .text-sm {
+        font-size: 12px !important;
+    }
+
+    p,
+    .p {
+        margin: 0 0 16px;
+    }
+
+    .card-title {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        font-size: 18px;
+        font-weight: 900;
+    }
+
+    .pt-1,
+    .py-1 {
+        padding-top: .25rem !important;
+    }
+
+    .head-icon {
+        margin-top: 18px;
+        color: #FF4500
+    }
+</style>
+
+
+
+<section class="container pt-3 mb-3 justify-content-center align-items-center">
+    <h2 class="h3 block-title text-center">Reviews <small>(13)</small></h2>
+    <div class="row pt-5 mt-30">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-sm-6 mb-30 pb-5 review">
+                <a class="card" href="#">
+                    <div class="box-shadow bg-white rounded-circle mx-auto text-center"
+                         style="width: 90px; height: 90px; margin-top: -45px;">
+                        <i class="fa fa-user-circle fa-3x head-icon"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="card-title text-uppercase pt-1">@item.Name</h3>
+                        <h5 class="card-title pt-1">@item.data</h5>
+                        <p class="card-text text-sm">
+                            @item.Message
+                        </p>
+                        <span class="text-sm font-weight-bold">@item.Email</span>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center text-center">
+            <button id="show-more" class="btn btn-primary py-md-3 px-md-5 m-2 col" style="width: 200px">
+                <strong>Show More</strong>
+            </button>
+        </div>
+    </div>
+
+</section>
+
+
+<script>
+    var reviews = document.querySelectorAll('.review');
+    var showMoreBtn = document.querySelector('#show-more');
+    var numVisible = 6;
+
+    function toggleReviews() {
+        for (var i = 0; i < reviews.length; i++) {
+            if (i < numVisible) {
+                reviews[i].style.display = 'block';
+            } else {
+                reviews[i].style.display = 'none';
+            }
+        }
+    }
+
+    showMoreBtn.addEventListener('click', function () {
+        numVisible += 6;
+        toggleReviews();
+    });
+
+    toggleReviews();
+</script>

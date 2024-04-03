@@ -1,0 +1,147 @@
+﻿
+body {
+    background: lightblue url("../brands/Dbahaa.jpg")no-repeat fixed center;
+   
+    width: 100%;
+    padding: 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-attachment: fixed;
+    /* background-image: url("../img/Dbahaa.jpg");
+    background-repeat: no-repeat;
+   /* background-size:1600px;
+    background-position:100%; */
+    /* background-color:  #cacdf0;;
+    float: center;*/
+}
+
+.All_cont {
+    border-radius: .8rem;
+    grid-area: var(--fullGrid);
+    max-width: 100%;
+    height: auto;
+    padding: 0;
+    margin-left: 204px;
+    box-sizing: border-box;
+    width: 550px;
+    height: auto;
+    position: relative;
+    background-color: #3e4881;
+    color: #ffffff;
+    box-shadow: 0px 0px 20px 6px rgb(151, 180, 241);
+    opacity: 0.9;
+    padding: 5px;
+}
+
+.first_line {
+    display: flex;
+    width: 550px;
+}
+
+.first_second_line {
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.m_year_size {
+    width: 180px;
+}
+
+.vehicle_style {
+    width: 210px;
+}
+
+.engine_fuel_type {
+    width: 370px;
+}
+
+.driven_wheels {
+    width: 270px;
+}
+
+.vehicle_size {
+    width: 170px;
+}
+
+.last_line {
+    width: 550px;
+    margin-left: 120px;
+}
+
+.highway_mpg {
+    width: 370px;
+    margin-right: 30px;
+}
+
+/* 
+@media screen and (max-width: 1000px) {
+    .col-25, .col-75, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+  } */
+
+
+
+
+.hea {
+    text-align: center;
+}
+
+    .hea span {
+        font-size: 3.5rem;
+        background: #3e4881;
+        box-shadow: 0px 0px 20px 6px rgb(151, 180, 241);
+        opacity: 0.9;
+        color: lightblue;
+        border-radius: .8rem;
+        padding: .2rem 1rem;
+    }
+
+        .hea span.space {
+            background: none;
+        }
+
+
+
+.bg-light {
+    background-color: none;
+}
+.number_of_doors2 {
+    display: none;
+}
+
+@media screen and (max-width: 720px) {
+
+    body {
+        width: auto;
+    }
+
+
+    .All_cont {
+        margin-left: 0;
+    }
+
+    .first_line {
+        display: flexbox;
+        width: auto;
+    }
+
+    .hea {
+        font-size: 0px;
+        padding: 12px 0px 12px 0px;
+    }
+
+    .number_of_doors1 {
+        display: none;
+    }
+    .number_of_doors2 {
+        display:flex;
+    }
+
+    .vehicle_style {
+        width: 180px;
+    }
+}

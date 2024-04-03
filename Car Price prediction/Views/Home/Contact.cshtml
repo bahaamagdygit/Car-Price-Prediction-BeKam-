@@ -1,0 +1,107 @@
+﻿@model Car_Price_prediction.Models.CustomerMessage
+
+@{
+    ViewBag.Title = "Contact";
+    ViewBag.icon = "Contact.png";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header">
+    <h1 class="display-3 text-uppercase text-white mb-3">Contact Us</h1>
+    <div class="d-inline-flex text-white">
+        <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
+        <h6 class="text-body m-0 px-3">/</h6>
+        <h6 class="text-uppercase text-body m-0">Contact Us</h6>
+    </div>
+</div>
+<!-- Page Header Start -->
+@*@{Html.RenderAction("Login", "account");}*@
+<!-- Contact Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <div class="row">
+            <div class="col-lg-7 mb-2">
+                <h3 style="color: #F77D0A ;text-align:center"> @ViewBag.Message</h3>
+                <div class="contact-form bg-light mb-4" style="padding: 30px;">
+
+                    @using (Html.BeginForm("Contact", "home", FormMethod.Post, new { }))
+                    {
+
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="col-6 form-group">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control p-4", placeholder = "Your Name", required = "required" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-6 form-group">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control p-4", placeholder = "Your Email", required = "required" } })
+
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 form-group">
+                                @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control p-4", placeholder = "Your Phone Number", required = "required" } })
+
+                                @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-6 form-group">
+                                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control p-4", placeholder = "Subject", required = "required" } })
+
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.TextAreaFor(model => model.Message, new { @class = "form-control py-3 px-4", rows = "5", placeholder = "Message", required = "required" })
+
+                            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div>
+                            <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5" />
+
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+            <div class="col-lg-5 mb-2">
+                <div class="bg-secondary d-flex flex-column justify-content-center px-5 mb-4" style="height: 435px;">
+                    <div class="d-flex mb-3">
+                        <i class="fas fa-2x fa-map-marker-alt text-primary flex-shrink-0 mr-3"></i>
+                        <div class="mt-n1">
+                            <h5 class="text-light">Head Office</h5>
+                            <p>Cairo</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <i class="fas fa-2x fa-map-marker-alt text-primary flex-shrink-0 mr-3"></i>
+                        <div class="mt-n1">
+                            <h5 class="text-light">Branch Office</h5>
+                            <p>alex</p>
+                            <p>assuit</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <i class="fa fa-2x fa-envelope-open text-primary flex-shrink-0 mr-3"></i>
+                        <div class="mt-n1">
+                            <h5 class="text-light">Customer Service</h5>
+                            <p>brezgallh@student.eelu.edu.eg</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <i class="fa fa-2x fa-envelope-open text-primary flex-shrink-0 mr-3"></i>
+                        <div class="mt-n1">
+                            <h5 class="text-light">Return & Refund</h5>
+                            <p class="m-0">refund@example.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->

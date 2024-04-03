@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Car_Price_prediction.view_model.Registration_Vm>
+
+@{ ViewBag.Title = "USER_Accounts";
+    ViewBag.icon = "USER_Accounts.png";
+    <link href="~/Content/tableRespons.css" rel="stylesheet" /> }
+
+
+<style>
+    a {
+        color: #0f101a;
+        text-decoration: none;
+        background-color: transparent;
+    }
+</style>
+
+
+<div class="container p-5">
+    <h1>USER Accounts</h1>
+    <table class="rwd-table">
+        <tbody>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.User_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.phone_num)
+                </th>
+                <th>
+
+                </th>
+
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td data-th=" User_Name">
+                        @Html.DisplayFor(modelItem => item.User_Name)
+                    </td>
+                    <td data-th=" Name">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td data-th=" Age">
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td data-th=" Email" style="color:black">
+                        @Html.DisplayFor(modelItem => item.Email, new { @class = "h3.link-colour" })
+                    </td>
+                    <td data-th=" phone_num">
+                        @Html.DisplayFor(modelItem => item.phone_num)
+                    </td>
+                    <td data-th=" Delete">
+                        <form method="post" action="~/admin/delete">
+                            <input type="hidden" id="UserId" name="UserId" value="@item.ID" />
+                            <input type="submit" value="Delete" class="btn btn-outline-info px-3"/>
+                        </form>
+                        
+                    </td>
+                </tr>          
+                }
+
+        </tbody>
+    </table>
+
+</div>

@@ -1,0 +1,93 @@
+﻿
+   @*     اي حاجه حتي اللياوت وشكراا <section class="home-section">  <--------- ملحوظه يا -رايق عشان تخلي الصفحه تتزاح علي جمب كدا لما تفتح السايد بار لازم تحط الصفحه كلها جوا الدف دي*@ 
+    <div class="sidebar">
+        <div class="logo-details">
+            <img class="icon" src="~/img/Logo/Logo.png" style="width:120px; height:40px;" />
+            <div class="logo_name"></div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            @*هنا تابت سيرش لو مش هتربطها عندك فالمشروع او الصفحه تقدر تحذفها*@
+            <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Search...">
+                <span class="tooltip">Search</span>
+            </li>
+            @*..........هنا تقدر تضيف اي صفحه بالايكون بتاعتها بنفس الاستايل الي موجود دا وبلاش*@
+            <li>
+                <a href="~/Home/Index/">
+                    <i class='bx bx-home'></i>
+                    <span class="links_name">Home</span>
+                </a>
+                <span class="tooltip">Home</span>
+            </li>
+            <li>
+                <a href="~/admin/USER_Accounts">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name"> Users Account</span>
+                </a>
+                <span class="tooltip">Users Account</span>
+            </li>
+            <li>
+                <a href="~/admin/User_massage">
+                    <i class='bx bx-chat'></i>
+                    <span class="links_name">Users Messages</span>
+                </a>
+                <span class="tooltip">Users Messages</span>
+            </li>
+            <li>
+                <a href="~/admin/BussnesAccount">
+                    <i class='bx bxs-user-account'></i>
+                    <span class="links_name">Add Bussnes Account</span>
+                </a>
+                <span class="tooltip">Add Bussnes Account</span>
+            </li>
+            <li>
+                <a href="~/role/addrole">
+                    <i class='bx bxs-cog'></i>
+                    <span class="links_name">Add New Role</span>
+                </a>
+                <span class="tooltip">Add New Role</span>
+            </li>
+            <li>
+                <a href="~/admin/SellsCar">
+                    <i class='bx bxl-shopify'></i>
+                    <span class="links_name"> Sells</span>
+                </a>
+                <span class="tooltip">Sells</span>
+            </li>
+            <li>
+                <a href="~/Car_finder/Cars_filter/">
+                    <i class='bx bx-filter-alt'></i>
+                    <span class="links_name">Car Finder</span>
+                </a>
+                <span class="tooltip">car Finder</span>
+            </li>
+
+            @*هنا انا ضايفها عشان باذن الله نحط فيها اسم الادمن والاميل بتاعه وصورت*@
+            @{var userName = User.Identity.Name; }
+
+            @{ ApplicationDbcontext _Context = new ApplicationDbcontext();
+
+                var img = _Context.Users.Where(c => c.UserName == userName).Select(c => c.Buss_img).FirstOrDefault();
+                 }
+
+
+
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="~/img/User_img/@img" />
+                    <div class="d_admin">
+
+                        <div class="name">@userName</div>
+                    </div>
+                </div>
+                <a href="~/Account/logout">
+                    <i class='bx bx-log-out ' id="log_out"></i>
+                </a>
+
+            </li>
+        </ul>
+    </div>
+    
+    <script src="~/Scripts/sidebar.js"></script>

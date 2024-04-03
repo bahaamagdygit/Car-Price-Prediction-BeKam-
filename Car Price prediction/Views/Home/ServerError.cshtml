@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+
+    <title>server Erors</title>
+    <!-- Icon of browser--->
+   
+    <link rel="icon" type="image/png" href="~/img/Logo/404.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
+</head>
+
+<style>
+    body {
+        background-image: url('../../img/4.jpg');
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .mainbox {
+        background-color: black;
+        opacity: 0.9;
+        margin: auto;
+        height: 600px;
+        width: 600px;
+        position: relative;
+    }
+
+    .err {
+        color: crimson;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 11rem;
+        position: absolute;
+        left: 15%;
+        top: 8%;
+    }
+
+    .fad  {
+        position: absolute;
+        font-size: 8.5rem;
+        left: 35%;
+        top: 15%;
+        color: #ff6a00;
+    }
+
+    .err2 {
+        color: crimson;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 8.5rem;
+        position: absolute;
+        left: 63%;
+        top: 15%;
+    }
+
+    .msg {
+        color: #ffffff;
+        text-align: center;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 1.6rem;
+        position: absolute;
+        left: 11%;
+        top: 55%;
+        width: 75%;
+    }
+
+    a {
+        color: #ff6a00;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #ff6a00;
+            text-decoration: underline;
+        }
+</style>
+
+<body>
+    <div class="mainbox">
+        <div class="err">5</div>
+        <i class="fa  fa-solid fa-gear fa-spin fad"></i>
+        <div class="err2 "> <i class="fa  fa-solid fa-gear fa-spin"></i></div>
+        <div class="msg">
+            Sorry, it's me, not you.
+
+            :(<p>Let's go <a href="~/Views/Home/Index.cshtml">home</a> Let me try again!.</p>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

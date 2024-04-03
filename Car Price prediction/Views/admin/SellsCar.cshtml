@@ -1,0 +1,94 @@
+﻿
+@model IEnumerable<Car_Price_prediction.view_model.SellsVM>
+
+@{
+    ViewBag.Title = "SellsCar";
+    ViewBag.icon = "SellYourCar.png";
+    <link href="~/Content/tableRespons.css" rel="stylesheet" />
+}
+<style>
+    a {
+        color: #0f101a;
+        text-decoration: none;
+        background-color: transparent;
+    }
+</style>
+<br />
+<br />
+
+<div class="container">
+    <h1>Sells Car</h1>
+    <table class="rwd-table">
+        <tbody>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Year)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Transmission)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Frontimage)
+                </th>
+                <th>Oner Name</th>
+                <th>Email</th>
+                <th>
+
+                </th>
+
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td data-th=" Make">
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td data-th=" Model">
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td data-th=" Year">
+                        @Html.DisplayNameFor(model => model.Year)
+                    </td>
+                    <td data-th="T_Type">
+                        @Html.DisplayFor(modelItem => item.Transmission)
+                    </td>
+                    <td data-th=" Color">
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td data-th=" Price">
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td data-th=" image">
+                        <img src="~/img/Car_Image/@Html.DisplayFor(modelItem=>item.Frontimage)" alt="@Html.DisplayFor(modelItem => item.Frontimage)" style="width:90px ;" />
+
+                    </td>
+                    <td data-th=" UserName">
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td data-th=" Email">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td data-th=" Delete">
+                       <a class="btn btn-outline-info px-3" href="/admin/Deletecar/@item.ID">Delete</a>
+
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+
+</div>

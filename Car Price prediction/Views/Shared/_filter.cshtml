@@ -1,0 +1,360 @@
+﻿@model Car_Price_prediction.view_model.CarListVM
+
+<style>
+    .bodyf1 {
+        font-size: 8px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        display: block;
+    }
+
+    .radioImg3 {
+        max-width: 30px;
+        height: auto;
+        vertical-align: middle;
+    }
+
+    .Bodyradios {
+        height: 55px;
+        background: white;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<details>
+    <summary>
+        Brand
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+    </summary>
+    <div class="clear_list1">
+        <input type="button" value="clear" class="" onclick="rest_check_box('CheckBox0')" />
+    </div>
+
+    <div class="details-info" id="find">
+
+        @for (int i = 0; i < Model.Selections_FOR_MAKE.Count; i++)
+        {
+
+            <div class="check">
+                <label class="checkbox-inline" >
+                    @Html.HiddenFor(m => m.Selections_FOR_MAKE[i].Brand)
+                    <label @*onclick="getcarslist(this)"*@>
+
+                        @Html.CheckBoxFor(m => m.Selections_FOR_MAKE[i].ISselected, new { @class = "CheckBox0"@*, @onclick= "getcarslist(this)" *@})
+                        @Html.DisplayFor(m => m.Selections_FOR_MAKE[i].Brand, Model.Selections_FOR_MAKE[i].Brand)
+                    </label>
+                </label>
+
+            </div>
+        }
+    </div>
+</details>
+<details>
+    <summary>
+        Select Model Year
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+    </summary>
+
+    <div class="clear_list1">
+        <input type="button" value="clear" class="" onclick="reset_dropdown_year() " />
+    </div>
+
+    <div class="details-info">
+        <div class="row ">
+            <div class="col-md-12 ">
+
+                <div class=" float-left">
+
+                    @Html.Label("From")
+                    @Html.DropDownList("year0", (MultiSelectList)ViewBag.year, "Min year",
+                    new { id = "year", @class = "list-group-item", style = " height:40px; padding: 1px;display:initial; background-color: #e3dfdf;" })
+                </div>
+                <div class="float-right">
+                    @Html.Label("To", new { style = "display: inline" })
+                    @Html.DropDownList("year1", (MultiSelectList)ViewBag.year, "Max year",
+                    new { id = "year1", @class = "list-group-item", style = " height:40px; padding: 1px;display:initial; background-color: #e3dfdf; " })
+                </div>
+            </div>
+        </div>
+    </div>
+</details>
+
+<details>
+    <summary>
+        Select Transmission Type
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+    </summary>
+    <div class="clear_list1">
+        <input type="button" value="clear" class="" onclick="rests_radio_button('Transmission')" />
+    </div>
+    <div class="details-info">
+        <div style="display: inline-block;  margin: auto;">
+
+
+
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+
+                    @Html.RadioButtonFor(x => x.Transmission, "MANUAL", new { @class = "custom-control-input", id = "paypal" })
+
+                    <label class="custom-control-label" for="paypal">MANUAL</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+
+                    @Html.RadioButtonFor(x => x.Transmission, "AUTOMATIC", new { @class = "custom-control-input", id = "paypal1" })
+
+                    <label class="custom-control-label" for="paypal1">AUTOMATIC</label>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</details>
+
+<details>
+    <summary>
+        Select Engine Fuel Type
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+    </summary>
+    <div class="clear_list1">
+        <input type="button" value="clear" class="" onclick="rests_radio_button('Fuel')" />
+    </div>
+    <div class="details-info">
+        <div style="display:inline  ; margin:auto">
+
+
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+                    @Html.RadioButtonFor(x => x.Fuel, "Diesel", new { @class = "custom-control-input ", id = "eng1" })
+                    <label class="custom-control-label" for="eng1">Diesel</label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+                    @Html.RadioButtonFor(x => x.Fuel, "Gas", new { @class = "custom-control-input", id = "eng2" })
+                    <label class="custom-control-label" for="eng2">Gas</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+                    @Html.RadioButtonFor(x => x.Fuel, "Natural Gas", new { @class = "custom-control-input", id = "eng3" })
+                    <label class="custom-control-label" for="eng3">Natural Gas</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+                    @Html.RadioButtonFor(x => x.Fuel, "Hybrid", new { @class = "custom-control-input", id = "eng4" })
+                    <label class="custom-control-label" for="eng4">Hybrid</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+                    @Html.RadioButtonFor(x => x.Fuel, "Electric", new { @class = "custom-control-input", id = "eng5" })
+                    <label class="custom-control-label" for="eng5">Electric</label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</details>
+
+
+<details>
+    <summary>
+        Select Engine Capacity
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+    </summary>
+    <div class="clear_list1">
+        <input type="button" value="clear" class="" onclick="reset_dropdown_hp() " />
+    </div>
+
+    <div class="details-info">
+        <div class="row ">
+            <div class="col-md-12 ">
+                <div class=" float-left">
+                    @Html.Label("From")
+
+                    @Html.DropDownList("Engine_CC0", (MultiSelectList)ViewBag.car_Engine_CC, "Min cc",
+                    new { @class = "list-group-item", id = "hp", style = "height:40px; padding: 1px;display:initial; background-color: #e3dfdf;" })
+                </div>
+                <div class="float-right ">
+                    @Html.Label("To")
+                    @Html.DropDownList("Engine_CC1", (MultiSelectList)ViewBag.car_Engine_CC, "Max cc ",
+                    new { @class = "list-group-item", id = "hp1", style = "height:40px; padding: 1px;display:initial; background-color: #e3dfdf;" })
+                </div>
+            </div>
+        </div>
+    </div>
+</details>
+
+<details>
+    <summary>
+        Select Body
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+    </summary>
+    <div class="clear_list1">
+        <input type="button" value="clear" class="" onclick="restBody(this, 'Body', 'label1'); rests_radio_button('Body')" />
+    </div>
+    <div class="details-info">
+
+        <div class="row ">
+            <div class="col-xs-12 col-sm-6 col-md-3 p-2  ">
+                <div class="form-group p-0 mb-0 ">
+                    <label class="form-control  Bodyradios  rounded-pill Style" id="VehicleStyle1" name="label1" onclick="change_color(this,'Body','label1')">
+                        @Html.RadioButtonFor(model => model.Body, "Sedan", new
+                   { @class = "custom-control-input set_color set_color", @style = "visibility: hidden;" })
+                        <img src="~/img/icon/sedan.png" class="radioImg3" />
+                        <span class="bodyf1">Sedan</span>
+
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                <div class="form-group p-0 mb-0 ">
+                    <label class="form-control rounded-pill Bodyradios Style" id="VehicleStyle2" name="label1" onclick="change_color(this,'Body','label1')">
+                        @Html.RadioButtonFor(model => model.Body, "Hatchback", new
+              { @class = "custom-control-input set_color", @style = "visibility: hidden;" })
+                        <img src="~/img/icon/hatchback.png" class="radioImg3" />
+                        <span class="bodyf1">Hatchback</span>
+
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                <div class="form-group p-0 mb-0 ">
+                    <label class="form-control rounded-pill Bodyradios" id="VehicleStyle3" name="label1" onclick="change_color(this,'Body','label1')">
+                        @Html.RadioButtonFor(model => model.Body, "SUV",
+                new { @class = "custom-control-input set_color", @style = "visibility: hidden;" })
+                        <img src="~/img/icon/suv.png" class="radioImg3" />
+
+                        <span class="bodyf1">SUV</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                <div class="form-group p-0 mb-0 ">
+                    <label class="form-control rounded-pill Bodyradios" id="VehicleStyle4" name="label1" onclick="change_color(this,'Body','label1')">
+                        @Html.RadioButtonFor(model => model.Body, "Coupe",
+                  new { @class = "custom-control-input set_color", @style = "visibility: hidden;" })
+                        <img src="~/img/icon/coupe.png" class="radioImg3" />
+                        <span class="bodyf1">Coupe</span>
+
+                    </label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                <div class="form-group  p-0 mb-0 ">
+                    <label class="form-control rounded-pill Bodyradios" id="VehicleStyle5" name="label1" onclick="change_color(this,'Body','label1')">
+
+                        @Html.RadioButtonFor(model => model.Body, "Van",
+                        new { @class = "custom-control-input set_color", @style = "" })
+                        <img src="~/img/icon/van.png" class="radioImg3" />
+                        <span class="bodyf1">Van</span>
+
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                <div class="form-group p-0 mb-0 ">
+                    <label class="form-control rounded-pill Bodyradios" id="VehicleStyle6" name="label1" onclick="change_color(this,'Body','label1')">
+                        @Html.RadioButtonFor(model => model.Body, "Station",
+                   new { @class = "custom-control-input set_color", @style = "" })
+                        <img src="~/img/icon/station.png" class="radioImg3" />
+                        <span class="bodyf1">Station</span>
+
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                <div class="form-group p-0 mb-0 ">
+                    <label class="form-control rounded-pill Bodyradios" id="VehicleStyle7" name="label1" onclick="change_color(this,'Body','label1')">
+                        @Html.RadioButtonFor(model => model.Body, "Cabriolet",
+                  new { @class = "custom-control-input set_color", @style = "" })
+                        <img src="~/img/icon/cabriolet.png" class="radioImg3" />
+                        <span class="bodyf1">Cabriolet</span>
+
+                    </label>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 p-2">
+                <div class="form-group p-0 mb-0 ">
+                    <label class="form-control rounded-pill Bodyradios" id="VehicleStyle8" name="label1" onclick="change_color(this,'Body','label1')">
+                        @Html.RadioButtonFor(model => model.Body, "Pickup",
+                   new { @class = "custom-control-input set_color", id = "Body07", @style = "" })
+                        <img src="~/img/icon/pickup.png" class="radioImg3 " />
+
+                        <span class="bodyf1">Pickup</span>
+
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class=" m-1 text-center  " id="Body1"></div>
+
+    </div>
+</details>
+<details>
+    <summary>
+        <label for="amount">Price range</label>
+
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+    </summary>
+
+    <p>
+        <center id="slider-range" style="width: 80%; margin-left: 8%; ">
+            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 45.7609%; background-color:blue"></span>
+            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%; background-color:blue "></span>
+        </center>
+
+    </p>
+    <center>
+        <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold; margin-bottom: 10px; background-color: #cfcfcf">
+    </center>
+
+    <input type="hidden" name="Price0" id="Price0" value="@Model.Price0" />
+    <input type="hidden" name="Price1" id="Price1" value="@Model.Price1" />
+
+</details>
+<div style="width:100%">
+    <input class="btn btn-danger text-white" type="button" value="Clear" id="restbtn" onclick="ResetFormWithJS(); restBody(this, 'Body', 'label1');" style="border-radius: 10px;
+                                 height:auto;  width:30%; float: left; background-color: red;" />
+    <input type="submit" name="" value="search" class="btn btn-success" id="submit" style="border-radius: 10px;
+                                   width:30%; float: right; background-color: #2B2E4A;" />
+</div>
+<script src="~/Scripts/sell.js"></script>

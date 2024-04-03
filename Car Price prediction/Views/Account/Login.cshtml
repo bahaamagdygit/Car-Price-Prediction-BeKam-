@@ -1,0 +1,90 @@
+﻿@model Car_Price_prediction.view_model.Login_Vm
+
+@{
+    ViewBag.Title = "Login";
+    ViewBag.icon = "Login.png";
+}
+<head>
+    <link href="~/Content/log_reg.css" rel="stylesheet" />
+
+</head>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <section class="form-02-main ">
+        <div class="container">
+            <div class="row ">
+
+                <div class="col-md-12 ">
+                    <div class="_lk_de">
+                        <div class="form-03-main">
+                            @*<div class="logo wow bounceInDown " data-wow-delay="0.6s">
+                                 <img src="~/img/Log_reg/login.gif" />
+                              </div>*@
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.1s">
+                                @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf4ff; " + " Enter User Name"), @class = "fas font-family: 'FontAwesome'  form-control _ge_de_ol" } })
+                                @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group p-0 wow bounceInRight " data-wow-delay="0.2s">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf084; " + " Enter Password"), @class = "fas font-family: 'FontAwesome'   form-control _ge_de_ol" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+
+
+                            <div class="form-check py-3 wow rotateIn " data-wow-delay="0.6s">
+                                <input class="form-check-input d-flex justify-content-md-start p-3" type="checkbox" value="" id="">
+                                <label class="form-check-label" for="">
+                                    Remember me
+                                </label>
+                            </div>
+
+
+
+                            <div class="form-group p-0 wow wobble " data-wow-delay="0.6s">
+                                <div class="_btn_04">
+                                    <input type="submit" value="Login" class="btn_log" />
+                                </div>
+
+
+                            </div>
+                            <div class="form-group p-0  wow bounceInRight " data-wow-delay="0.6s">
+
+
+                                @Html.ActionLink("Registration", "Registration", "Account", null, new { @class = " float-start text-info" })
+                                <a href="#" class="float-right text-light">Forgot Password ?</a>
+
+                            </div>
+
+                            <div class="form-group nm_lk wow lightSpeedIn " data-wow-delay="0.6s"><p>Or Login With</p></div>
+
+                            <div class="form-group p-0">
+                                <div class="_social_04">
+                                    <ol>
+                                        <li class="wow hinge " data-wow-delay="0.1s"><i class="fab fa-facebook-f "></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.2s"><i class="fab fa-twitter "></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.3s"><i class="fab fa-google"></i></li>
+                                        @*<li class="wow hinge " data-wow-delay="0.4s"><i class="fab fa-instagram "></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.5s"><i class="fab fa-linkedin-in"></i></li>*@
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                 
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+
+}

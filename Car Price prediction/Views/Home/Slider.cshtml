@@ -1,0 +1,107 @@
+﻿@model Car_Price_prediction.view_model.CarListVM
+@{ Layout = null;
+    var ID = Model.Dealars.Select(c => c.ID).ToList(); }
+
+
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- ===== Link Swiper's CSS ===== -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- ===== Fontawesome CDN Link ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- ===== CSS ===== -->
+    <link href="~/Content/banner.css" rel="stylesheet" />
+
+
+</head>
+
+<section>
+    <div class="swiper mySwiper container">
+        <div class="swiper-wrapper content">
+
+            @foreach (var item in Model.Dealars)
+            {
+            <div class="swiper-slide card">
+                <div class="card-content">
+                    <div class="image">
+                        <div class=" p-4">
+                            <center>
+                                <a href="">
+                                    <img src="~/img/Delear_logo/@item.Logo" class="img1"/>
+                                    @item.TraderName
+                                </a>
+                            </center>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            }
+
+        </div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</section>
+
+
+<!-- Swiper JS -->
+<script src="~/Scripts/swiper-bundle.min.js"></script>
+<script>
+
+    if (window.innerWidth < 576) {
+       
+        var swiper = new Swiper(".mySwiper", {
+            speed: 1500,
+            autoplay: {
+                /*delay: _is_speed,*/
+                waitForTransition: true,
+                disableOnInteraction: false,
+            },
+            slidesPerView: 3,
+            spaceBetween: 10,
+            slidesPerGroup: 2,
+            loop: true,
+            loopFillGroupWithBlank: true,
+
+        });
+
+    }
+
+    else {
+        var swiper = new Swiper(".mySwiper", {
+            speed: 1500,
+            autoplay: {
+                waitForTransition: true,
+                disableOnInteraction: false,
+            },
+            slidesPerView: 4,
+            spaceBetween: 8,
+            slidesPerGroup: 1,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+
+        });
+
+    }
+
+
+</script>
+

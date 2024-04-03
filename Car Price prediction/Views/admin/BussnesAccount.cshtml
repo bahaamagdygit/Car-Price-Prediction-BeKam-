@@ -1,0 +1,131 @@
+﻿@model Car_Price_prediction.view_model.Registration_Vm
+
+
+@{
+    ViewBag.Title = "BussnesAccount";
+    ViewBag.icon = "BussnesAccount.png";
+}
+
+<head>
+    <link href="~/Content/log_reg.css" rel="stylesheet" />
+</head>
+
+@using (Html.BeginForm("BussnesAccount", "admin",FormMethod.Post, new { enctype = "multipart/form-data", @class = "form", id = "Filterform" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    <section class="form-02-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="_lk_de">
+
+                        <div style="text-align:center">
+                            <h2>ADD Account to Business Role </h2>
+                        </div>
+                        <div class="form-03-main">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.1s">
+                                @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf4ff; " + " Enter User Name"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol" } })
+                                @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.1s">
+                                @Html.EditorFor(model => model.Name, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @placeholder = HttpUtility.HtmlDecode("&#xf4ff; " + " Enter your Name"),
+                               @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol"
+                                    }
+                                })
+
+                                @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.1s">
+
+                                @Html.DropDownList("RoleName", (MultiSelectList)ViewBag.Roles, "Select Bussnes Role", new
+                                {
+                               @class = "bx bxs-user-account  fas font-family: 'FontAwesome' form-control _ge_de_ol",
+                                    style = ""
+                                })
+                            </div>
+                            <div class="form-group p-0 wow bounceInRight " data-wow-delay="0.2s">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf084; " + " Enter Password"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.3s">
+                                @Html.EditorFor(model => model.Confirm_Password, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf084; " + " Confirm Password"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol" } })
+                                @Html.ValidationMessageFor(model => model.Confirm_Password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group p-0 wow bounceInRight " data-wow-delay="0.4s">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf674; " + " Enter Your Email"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.5s">
+                                @Html.EditorFor(model => model.phone_num, new { htmlAttributes = new { @placeholder = HttpUtility.HtmlDecode("&#xf879; " + " Enter phone Number"), @class = "fas font-family: 'FontAwesome' form-control _ge_de_ol" } })
+                                @Html.ValidationMessageFor(model => model.phone_num, "", new { @class = "text-danger" })
+                            </div> 
+                            <div class="form-group p-0 wow bounceInLeft " data-wow-delay="0.5s">
+                                <label>choose imge : </label>
+                                @Html.TextBox("image", "", new { Type = "file", style = "height: 50px;" })
+                            </div>
+
+                            <div class="form-check py-3 wow rotateIn " data-wow-delay="0.6s">
+                                <input class="form-check-input d-flex justify-content-md-start p-3" type="checkbox" value="" id="">
+                                <label class="form-check-label" for="">
+                                    Remember me
+                                </label>
+                            </div>
+
+
+
+                            <div class="form-group p-0 wow wobble " data-wow-delay="0.6s">
+                                <div class="_btn_04">
+                                    <input type="submit" value="ADD Account" class="btn_log" />
+                                </div>
+
+
+                            </div>
+                            <div class="form-group p-0  wow bounceInRight " data-wow-delay="0.6s">
+
+
+                                @Html.ActionLink("Login", "Login", "Account", null, new { @class = " float-start text-info" })
+                                <a href="#" class="float-right text-light">Forgot Password ?</a>
+
+                            </div>
+                            <div class="form-group nm_lk p-0  wow lightSpeedIn " data-wow-delay="0.6s"><p>Or Login With</p></div>
+
+                            <div class="form-group pt-0">
+                                <div class="_social_04">
+                                    <ol>
+                                        <li class="wow hinge " data-wow-delay="0.1s "><i class="fab fa-facebook-f "></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.2s "><i class="fab fa-twitter"></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.3s "><i class="fab fa-google"></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.4s "><i class="fab fa-instagram"></i></li>
+                                        <li class="wow hinge " data-wow-delay="0.5s "><i class="fab fa-linkedin-in"></i></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+}
+
+
+
+
+
+
+

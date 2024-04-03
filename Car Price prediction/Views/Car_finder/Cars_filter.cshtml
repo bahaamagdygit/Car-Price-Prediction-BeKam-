@@ -1,0 +1,319 @@
+﻿@model Car_Price_prediction.view_model.CarListVM
+@{
+    ViewBag.Title = "Cars_filter";
+    ViewBag.icon = "Cars_filter.png";
+}
+<style>
+    
+
+    .ribbon-2 {
+        --f: 10px; /* control the folded part*/
+        --r: 15px; /* control the ribbon shape */
+        --t: 10px; /* the top offset */
+
+        position: absolute;
+        inset: var(--t) calc(-1*var(--f)) auto auto;
+        padding: 0 10px var(--f) calc(10px + var(--r));
+        clip-path: polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%, calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)), var(--r) calc(50% - var(--f)/2));
+        background: #BD1550;
+        box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+    }
+
+
+    .box {
+        width: 305px;
+        height: 300px;
+        margin: 50px auto 0;
+        /* background: lightblue;*/
+        position: relative;
+    }
+
+
+</style>
+<link href="~/Content/popupFilter.css" rel="stylesheet" />
+<!-- Carousel Start -->
+<div class="container-fluid p-0" style="margin-bottom: 30px;">
+    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" id="w-100">
+                <img class="w-100" src="~/img/hed1.jpg" alt="Image">
+
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase mb-md-3">Car Finder</h4>
+                        <h4 class="display-4 text-white mb-md-3">Find your car easily &#129300;</h4>
+                        <a href="#find" class="btn btn-primary py-md-3 px-md-5 mt-2">Find Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" id="w-100">
+                <img class="w-100" src="~/img/hed2.jpg" alt="Image">
+
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase mb-md-3">Car Finder</h4>
+                        <h4 class="display-4 text-white mb-md-3">Choose your car specifications and you will find them &#129488;</h4>
+                        <a href="#find" class="btn btn-primary py-md-3 px-md-5 mt-2">Find Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-prev-icon mb-n2"></span>
+            </div>
+        </a>
+        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-next-icon mb-n2"></span>
+            </div>
+        </a>
+    </div>
+</div>
+<!-- Carousel End -->
+@*<div class="triggers">
+
+        <label class=" w-100 text-center" for="popup-2"><i class="fa fa-filter text-center"></i></label>
+    </div>*@
+
+
+@using (Html.BeginForm("Cars_filter", "Car_finder", FormMethod.Post, new { @class = "form", id = "Filterform" }))
+{
+
+
+
+
+
+
+    <main class="row m-0">
+        <aside class="col-md-3 m-3">
+
+            <input type="checkbox" class="vcms__popup-check" name="popup-2" id="popup-2">
+            <div class="vcms__popup">
+                <div class="inner">
+                    <div class="header">
+                        <i class="fa fa-filter"></i>
+                        Filter..
+                        <label class="close" for="popup-2">X</label>
+                    </div>
+                    <div class="txt">
+                        @Html.Partial("_filter")
+                    </div>
+                    <div class="footer">
+
+                        <label class="close" for="popup-2">Close Filter!</label>
+                    </div>
+                </div>
+            </div>
+
+
+
+            @{
+                var first = true;
+            }
+
+           
+
+        <div id="myCarousel" class="carousel slide pt-3 paner_hide" data-bs-ride="carousel">
+
+            <div class="box bg-dark rounded">
+                <div class="carousel-inner justify-content-center">
+                    @foreach (var item in Model.Cars.Where(c => c.UserID != null))
+                    {
+                        foreach (var item1 in Model.Dealars)
+                        {
+
+                            if (item1.UserID.Contains(item.UserID))
+                            {
+
+                                <div class="carousel-item @(first?Html.Raw("active"):Html.Raw(""))" data-bs-interval="5000">
+
+                                    <div class="ribbon-2 text-light">هنا اسم المعرض </div>
+                                    <img src="~/img/Car_Image/@item.image" class="rounded-top" alt="Alternate Text" style="width:305px ; height :200px;  " />
+
+                                    <h1 class=" text-light  " style="text-align:center;">@item.Brand</h1>
+                                    <h3 class=" text-primary   " style="text-align:center;">@item.PriceRange LE</h3>
+
+
+
+                                </div>
+                                first = false;
+
+                            }
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Main content -->
+        <div class="col-md-8">
+
+
+
+            <div class="row" id="tdata">
+
+                @if (Model.Cars.Count() == 0)
+                {<!-- Error Page -->
+
+                    <div class="d-flex align-items-center justify-content-center vh-100">
+                        <div class="text-center row">
+                            <div class=" col-md-6">
+
+                                <img src="~/img/Error.gif" class="img-fluid" style="width:300px" />
+                            </div>
+                            <div class=" col-md-6 mt-5">
+                                <p class="fs-3">  <span class="text-danger">Opps!</span> Your car  not available now.!!&#128517;</p>
+                                <p class="lead">
+                                    You can choose specifications closer than these &#128522
+                                </p>
+                                <a href="~/Home/Index/" class="btn btn-outline-primary">Go Home</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
+
+                @foreach (var item in Model.Paginatedcar_data())
+                {
+                    <div class="col-lg-4 col-md-6 col-md-12 wow bounceInUp mb-4" data-wow-delay="0.3s">
+                        <div class="rent-item ">
+                            <img class="img-fluid mb-4" src="~/img/Car_Image/@item.image" alt="@item.image">
+
+                            <h4 class="text-uppercase ">@Html.DisplayFor(modelItem => item.Brand)</h4>
+                            <h5 class="text-uppercase text-primary ">  @Html.DisplayFor(modelItem => item.PriceRange) EGP</h5>
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="px-2">
+                                    <i class="fa fa-car text-primary mr-1"></i>
+                                    <span>@Html.DisplayFor(modelItem => item.yearRange)</span>
+                                </div>
+                                <div class="px-2 border-left border-right">
+                                    <i class="fa fa-cogs text-primary mr-1"></i>
+                                    <span> @Html.DisplayFor(modelItem => item.Transmission)</span>
+                                </div>
+                                <div class="px-2">
+                                    <i class="fa fa-road text-primary mr-1"></i>
+                                    <span>  @Html.DisplayFor(modelItem => item.yearRange)</span>
+                                </div>
+                            </div>
+
+                            <a class="btn btn-outline-info px-3" href="/Car_finder/Detalis/@item.ID">Detalis</a>
+
+                        </div>
+
+                    </div>
+
+                }
+
+            </div>
+            <ul class="pagination" style="justify-content:center">
+                @*<a class="page-link" href="@Url.Action("Cars_filter", new { page = Model.Previous()})"> << Previous </a>*@
+                <li style="margin-right: 10px;">
+
+                    <button type="submit" name="" style=" border-radius: 25px; width:50px; height:50px" value="" formaction=@Url.Action("Cars_filter", new { page = Model.Previous() }) formmethod="post" class="fas fa-fast-backward page-link" />
+                </li>
+
+                @if (Model.pagestart() > 2)
+                {
+                    <li class="@(1 == Model.CurrentPage ? "page-item active" : "page-item")">
+                        <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="1" formaction=@Url.Action("Cars_filter", new { page =1
+                        }) formmethod="post" class="page-link" />
+                    </li>
+                    <li>
+                        <div class="btn btn-dark rounded-circle page-link font-weight-bold" style=" border-radius: 25px; width: 50px; height: 50px;">
+                            ...
+                        </div>
+                    </li>
+                }
+                @{ int ii;}
+                @for (ii = Model.pagestart(); ii <= Model.PageCount(); ii++)
+                {
+                    if (ii < 4)
+                    {
+
+                        <li class="@(ii == Model.CurrentPage ? "page-item active" : "page-item")">
+                            <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@ii" formaction=@Url.Action("Cars_filter", new
+                                { page = ii}) formmethod="post" class="page-link" />
+                        </li>
+                    }
+                    else
+                    {
+                        if (ii == Model.CurrentPage && ii > 3)
+                        {
+                            for (int u = Model.pagestart1(); u <= Model.CurrentPage; u++)
+                            {
+                                <li class="@(u == Model.CurrentPage  ? "page-item active" : "page-item")">
+                                    <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@u" formaction=@Url.Action("Cars_filter", new
+                                      {page = u}) formmethod="post" class="page-link" />
+                                </li>
+
+                            }
+
+                        }
+                    }
+                }
+
+                @if (ii > Model.PageCount() && ii > 4 && Model.PageCount() != Model.CurrentPage)
+                {
+                    ii--;
+                    <li>
+                        <div class="btn btn-dark rounded-circle page-link font-weight-bold" style=" border-radius: 25px; width: 50px; height: 50px;">
+                            . . .
+                        </div>
+                    </li>
+                    <li class="@(ii == Model.CurrentPage ? "page-item active" : "page-item")">
+                        <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@ii" formaction=@Url.Action("Cars_filter", new { page =ii
+                        }) formmethod="post" class="page-link" />
+                    </li>
+                }
+
+                @*<a class="page-link" href="@Url.Action("Cars_filter", new { page =Model.Next()})"> >> Next </a>*@
+                <li style="margin-left: 10px;">
+                    <button type="submit" name="" style=" border-radius: 25px; width: 50px; height: 50px" value="" formaction=@Url.Action("Cars_filter", new { page =Model.Next()} ) formmethod="post" class="fas fa-fast-forward page-link" />
+                </li>
+            </ul>
+
+        </div>
+    </main>
+
+
+
+
+
+}
+
+
+@section scripts{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="~/Scripts/filter_Prange.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+}
+<script>
+        var price0_js =@Model.Price0;
+        var price1_js =@Model.Price1;
+</script>
+

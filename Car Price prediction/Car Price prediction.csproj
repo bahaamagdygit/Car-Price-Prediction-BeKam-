@@ -1,0 +1,1525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CF4215E8-1D08-422D-8A4B-91D6DDB1101E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Car_Price_prediction</RootNamespace>
+    <AssemblyName>Car Price prediction</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Cookies, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Cookies.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Core.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.KeyDerivation.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.DataProtection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.DataProtection.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.DataProtection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.DataProtection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.DataProtection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.DataProtection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Configuration, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Identity.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Identity.Core.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.2.2.0\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.WebEncoders, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.WebEncoders.2.2.0\lib\netstandard2.0\Microsoft.Extensions.WebEncoders.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=20.3460.0.47, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.20.3.0.47\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.4.5.0\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\Authconfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\adminController.cs" />
+    <Compile Include="Controllers\BusinessAccountController.cs" />
+    <Compile Include="Controllers\Car_finderController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SellsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306231250160_step1.cs" />
+    <Compile Include="Migrations\202306231250160_step1.designer.cs">
+      <DependentUpon>202306231250160_step1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\brands_models.cs" />
+    <Compile Include="Models\CarFeatures.cs" />
+    <Compile Include="Models\CarImages.cs" />
+    <Compile Include="Models\Cars.cs" />
+    <Compile Include="Models\city.cs" />
+    <Compile Include="Models\CustomerMessage.cs" />
+    <Compile Include="Models\Features.cs" />
+    <Compile Include="Models\Governorate.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\ShowroomReviews.cs" />
+    <Compile Include="Models\ShowroomsForTrader.cs" />
+    <Compile Include="Models\user_cars.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountConstraints.cs" />
+    <Compile Include="Startup1.cs" />
+    <Compile Include="view model\AccountVM.cs" />
+    <Compile Include="view model\CarListVM.cs" />
+    <Compile Include="view model\CarWithOner_vm.cs" />
+    <Compile Include="view model\car_detials_vm.cs" />
+    <Compile Include="view model\Colors.cs" />
+    <Compile Include="view model\DealerVM.cs" />
+    <Compile Include="view model\FeatureSelection.cs" />
+    <Compile Include="view model\locations_vm.cs" />
+    <Compile Include="view model\MakerSelection.cs" />
+    <Compile Include="view model\SellsVM.cs" />
+    <Compile Include="view model\SellYourCarViewModel.cs" />
+    <Compile Include="view model\ShowroomsWithLocation.cs" />
+    <Compile Include="view model\ShowroomsWM.cs" />
+    <Compile Include="view model\UserProfile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\banner.css" />
+    <Content Include="Content\css\profile.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\dealer.css" />
+    <Content Include="Content\errors.css" />
+    <Content Include="Content\log_reg.css" />
+    <Content Include="Content\popupFilter.css" />
+    <Content Include="Content\sellCar.css" />
+    <Content Include="Content\sidebar.css" />
+    <Content Include="Content\static\android.PNG" />
+    <Content Include="Content\static\desktop.PNG" />
+    <Content Include="Content\static\iphone.PNG" />
+    <Content Include="Content\static\tablet.PNG" />
+    <Content Include="Content\tableRespons.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ej2\bootstrap-dark.css" />
+    <Content Include="Content\ej2\bootstrap.css" />
+    <Content Include="Content\ej2\bootstrap4.css" />
+    <Content Include="Content\ej2\bootstrap5-dark.css" />
+    <Content Include="Content\ej2\bootstrap5.css" />
+    <Content Include="Content\ej2\compatibility\bootstrap.css" />
+    <Content Include="Content\ej2\compatibility\bootstrap4.css" />
+    <Content Include="Content\ej2\compatibility\fabric.css" />
+    <Content Include="Content\ej2\compatibility\highcontrast.css" />
+    <Content Include="Content\ej2\compatibility\material.css" />
+    <Content Include="Content\ej2\fabric-dark.css" />
+    <Content Include="Content\ej2\fabric.css" />
+    <Content Include="Content\ej2\fluent-dark.css" />
+    <Content Include="Content\ej2\fluent.css" />
+    <Content Include="Content\ej2\highcontrast.css" />
+    <Content Include="Content\ej2\material-dark.css" />
+    <Content Include="Content\ej2\material.css" />
+    <Content Include="Content\ej2\tailwind-dark.css" />
+    <Content Include="Content\ej2\tailwind.css" />
+    <Content Include="Content\MyCSS_Min.css" />
+    <Content Include="Content\predictStyle.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="img\2.jpg" />
+    <Content Include="img\3.jpg" />
+    <Content Include="img\4.jpg" />
+    <Content Include="img\addcar.png" />
+    <Content Include="img\bg.jpg" />
+    <Content Include="img\blueCar.jpg" />
+    <Content Include="img\brands\1-bmw.png" />
+    <Content Include="img\brands\1-ferrari.png" />
+    <Content Include="img\brands\3-jeep.png" />
+    <Content Include="img\brands\4-lamborghini.png" />
+    <Content Include="img\brands\5-mercedes.png" />
+    <Content Include="img\brands\6-peugeot.png" />
+    <Content Include="img\brands\7-tesla.png" />
+    <Content Include="img\brands\8-toyota.png" />
+    <Content Include="img\Car_Image\2015-Subaru-XV-Crosstrek-front_10206_032_1854x866_D4S_cropped-transformed.png" />
+    <Content Include="img\Car_Image\5be224ab-f907-4d70-8bc9-8df779fe4950.jpg" />
+    <Content Include="img\Car_Image\acura cl 2002.png" />
+    <Content Include="img\Car_Image\Acura ILX 2016.png" />
+    <Content Include="img\Car_Image\Acura MDX 2015.png" />
+    <Content Include="img\Car_Image\Acura MDX 2016.png" />
+    <Content Include="img\Car_Image\Acura RL 2012.png" />
+    <Content Include="img\Car_Image\Acura RSX 2006.png" />
+    <Content Include="img\Car_Image\Acura TL 2013.png" />
+    <Content Include="img\Car_Image\Acura TSX 2014.png" />
+    <Content Include="img\Car_Image\Aston Martin Rapide 2012.png" />
+    <Content Include="img\Car_Image\Aston Martin V12 Vantage 2012.png" />
+    <Content Include="img\Car_Image\Aston Martin Vanquish 2015.png" />
+    <Content Include="img\Car_Image\Audi A3 2016.png" />
+    <Content Include="img\Car_Image\Audi A3 2017.png" />
+    <Content Include="img\Car_Image\audi a4 2013.png" />
+    <Content Include="img\Car_Image\Audi A4 2017.png" />
+    <Content Include="img\Car_Image\Audi A6 2016.png" />
+    <Content Include="img\Car_Image\Audi A6 2017.png" />
+    <Content Include="img\Car_Image\Audi allroad quattro 2003.png" />
+    <Content Include="img\Car_Image\audi q3 2022.png" />
+    <Content Include="img\Car_Image\Audi S5 2017.png" />
+    <Content Include="img\Car_Image\Audi S6 2016.png" />
+    <Content Include="img\Car_Image\Audi TTS 2015.png" />
+    <Content Include="img\Car_Image\Audi V8 1992.png" />
+    <Content Include="img\Car_Image\Bentley Arnage 2009.png" />
+    <Content Include="img\Car_Image\Bentley Continental 2003.png" />
+    <Content Include="img\Car_Image\Bentley Continental Flying Spur Speed 2013.png" />
+    <Content Include="img\Car_Image\Bentley Continental GT Speed 2010.png" />
+    <Content Include="img\Car_Image\Bentley Continental GTC 2014.png" />
+    <Content Include="img\Car_Image\BMW 2 Series 2016.png" />
+    <Content Include="img\Car_Image\BMW 3 Series Gran Turismo 2016.png" />
+    <Content Include="img\Car_Image\BMW 3 Series Gran Turismo 2017.png" />
+    <Content Include="img\Car_Image\bmw 318 2018.png" />
+    <Content Include="img\Car_Image\bmw 318 2019.png" />
+    <Content Include="img\Car_Image\bmw 320 2020.png" />
+    <Content Include="img\Car_Image\BMW 4 Series Gran Coupe 2015.png" />
+    <Content Include="img\Car_Image\BMW 4 Series Gran Coupe 2017.png" />
+    <Content Include="img\Car_Image\bmw 418 2017.png" />
+    <Content Include="img\Car_Image\BMW 5 Series 2016.png" />
+    <Content Include="img\Car_Image\BMW 5 Series Gran Turismo 2015.png" />
+    <Content Include="img\Car_Image\bmw 518 1993.png" />
+    <Content Include="img\Car_Image\bmw 520 2014.png" />
+    <Content Include="img\Car_Image\bmw 520 2019.png" />
+    <Content Include="img\Car_Image\bmw 523 2012.png" />
+    <Content Include="img\Car_Image\bmw 535 2013.png" />
+    <Content Include="img\Car_Image\BMW 6 Series 2015.png" />
+    <Content Include="img\Car_Image\BMW 6 Series 2016.png" />
+    <Content Include="img\Car_Image\BMW ALPINA B6 Gran Coupe 2015.png" />
+    <Content Include="img\Car_Image\BMW M6 2016.png" />
+    <Content Include="img\Car_Image\bmw x1 2014.png" />
+    <Content Include="img\Car_Image\bmw x5 2020.png" />
+    <Content Include="img\Car_Image\BMW Z4 M 2007.png" />
+    <Content Include="img\Car_Image\brilliance fsv 2010.png" />
+    <Content Include="img\Car_Image\brilliance v5 2015.png" />
+    <Content Include="img\Car_Image\Buick Encore 2015.png" />
+    <Content Include="img\Car_Image\Buick Encore 2016.png" />
+    <Content Include="img\Car_Image\Buick LeSabre 2003.png" />
+    <Content Include="img\Car_Image\Buick Skylark 1997.png" />
+    <Content Include="img\Car_Image\Buick Terraza 2006.png" />
+    <Content Include="img\Car_Image\byd f3 2011.png" />
+    <Content Include="img\Car_Image\byd f3 2016.png" />
+    <Content Include="img\Car_Image\byd f3 2018.png" />
+    <Content Include="img\Car_Image\byd f3 2020.png" />
+    <Content Include="img\Car_Image\byd f3 2021.png" />
+    <Content Include="img\Car_Image\byd f3 2023.png" />
+    <Content Include="img\Car_Image\byd l3 2016.png" />
+    <Content Include="img\Car_Image\Cadillac ATS Coupe 2016.png" />
+    <Content Include="img\Car_Image\Cadillac CTS 2015.png" />
+    <Content Include="img\Car_Image\Cadillac CTS 2017.png" />
+    <Content Include="img\Car_Image\Cadillac CTS Coupe 2012.png" />
+    <Content Include="img\Car_Image\Cadillac DTS 2009.png" />
+    <Content Include="img\Car_Image\Cadillac Escalade EXT 2011.png" />
+    <Content Include="img\Car_Image\Cadillac Escalade EXT 2012.png" />
+    <Content Include="img\Car_Image\Cadillac Escalade Hybrid 2013.png" />
+    <Content Include="img\Car_Image\Cadillac SRX 2016.png" />
+    <Content Include="img\Car_Image\Cadillac XLR-V 2008.png" />
+    <Content Include="img\Car_Image\chana new star 2015.png" />
+    <Content Include="img\Car_Image\chery arrizo 5 2021.png" />
+    <Content Include="img\Car_Image\chery arrizo 5 2022.png" />
+    <Content Include="img\Car_Image\chery envy 2017.png" />
+    <Content Include="img\Car_Image\chery tiggo 3 2019.png" />
+    <Content Include="img\Car_Image\chery tiggo 7 2021.png" />
+    <Content Include="img\Car_Image\chery tiggo 7 pro 2023.png" />
+    <Content Include="img\Car_Image\chery tiggo 8 2021.png" />
+    <Content Include="img\Car_Image\chevrolet aveo 2009.png" />
+    <Content Include="img\Car_Image\chevrolet aveo 2011.png" />
+    <Content Include="img\Car_Image\chevrolet aveo 2012.png" />
+    <Content Include="img\Car_Image\chevrolet aveo 2013.png" />
+    <Content Include="img\Car_Image\chevrolet aveo 2014.png" />
+    <Content Include="img\Car_Image\chevrolet aveo 2020.png" />
+    <Content Include="img\Car_Image\Chevrolet C-K 1500 Series 1997.png" />
+    <Content Include="img\Car_Image\Chevrolet C-K 1500 Series 1998.png" />
+    <Content Include="img\Car_Image\Chevrolet Camaro 2016%281%29.png" />
+    <Content Include="img\Car_Image\chevrolet camaro 2016.png" />
+    <Content Include="img\Car_Image\Chevrolet Captiva Sport 2015.png" />
+    <Content Include="img\Car_Image\Chevrolet CK 1500 Series 1997.png" />
+    <Content Include="img\Car_Image\Chevrolet CK 1500 Series 1998.png" />
+    <Content Include="img\Car_Image\Chevrolet Colorado 2012.png" />
+    <Content Include="img\Car_Image\Chevrolet Colorado 2015.png" />
+    <Content Include="img\Car_Image\Chevrolet Colorado 2016.png" />
+    <Content Include="img\Car_Image\Chevrolet Corvette 2015.png" />
+    <Content Include="img\Car_Image\Chevrolet Corvette 2016.png" />
+    <Content Include="img\Car_Image\Chevrolet Corvette 2017.png" />
+    <Content Include="img\Car_Image\chevrolet cruze 2011.png" />
+    <Content Include="img\Car_Image\Chevrolet Cruze 2016.png" />
+    <Content Include="img\Car_Image\Chevrolet Cruze 2017%281%29.png" />
+    <Content Include="img\Car_Image\Chevrolet Cruze 2017.png" />
+    <Content Include="img\Car_Image\Chevrolet Cruze Limited 2016.png" />
+    <Content Include="img\Car_Image\chevrolet equinox 2019.png" />
+    <Content Include="img\Car_Image\chevrolet lanos 2010.png" />
+    <Content Include="img\Car_Image\chevrolet lanos 2013.png" />
+    <Content Include="img\Car_Image\chevrolet lanos 2014.png" />
+    <Content Include="img\Car_Image\chevrolet lanos 2016.png" />
+    <Content Include="img\Car_Image\chevrolet lanos 2017.png" />
+    <Content Include="img\Car_Image\Chevrolet Malibu Hybrid 2009.png" />
+    <Content Include="img\Car_Image\chevrolet optra 2008.png" />
+    <Content Include="img\Car_Image\chevrolet optra 2011.png" />
+    <Content Include="img\Car_Image\chevrolet optra 2015.png" />
+    <Content Include="img\Car_Image\chevrolet optra 2016.png" />
+    <Content Include="img\Car_Image\chevrolet optra 2018.png" />
+    <Content Include="img\Car_Image\chevrolet optra 2019.png" />
+    <Content Include="img\Car_Image\chevrolet optra 2021.png" />
+    <Content Include="img\Car_Image\Chevrolet S-10 2002.png" />
+    <Content Include="img\Car_Image\Chevrolet Silverado 1500 2015.png" />
+    <Content Include="img\Car_Image\Chevrolet Silverado 1500 2016.png" />
+    <Content Include="img\Car_Image\Chevrolet Silverado 1500 Classic 2007.png" />
+    <Content Include="img\Car_Image\Chevrolet Silverado 1500 Hybrid 2011.png" />
+    <Content Include="img\Car_Image\Chevrolet Sonic 2015.png" />
+    <Content Include="img\Car_Image\Chevrolet Sonic 2016.png" />
+    <Content Include="img\Car_Image\Chevrolet Spark 2015.png" />
+    <Content Include="img\Car_Image\Chevrolet Spark 2016.png" />
+    <Content Include="img\Car_Image\Chevrolet Sportvan 1994.png" />
+    <Content Include="img\Car_Image\Chevrolet Suburban 2016.png" />
+    <Content Include="img\Car_Image\chevrolet t-series 2014.png" />
+    <Content Include="img\Car_Image\Chevrolet TrailBlazer 2008.png" />
+    <Content Include="img\Car_Image\Chevrolet TrailBlazer 2009.png" />
+    <Content Include="img\Car_Image\Chevrolet TrailBlazer EXT 2006.png" />
+    <Content Include="img\Car_Image\Chrysler 200 2017.png" />
+    <Content Include="img\Car_Image\Chrysler 300 2015.png" />
+    <Content Include="img\Car_Image\Chrysler 300 2016.png" />
+    <Content Include="img\Car_Image\Chrysler 300M 2002.png" />
+    <Content Include="img\Car_Image\Chrysler Concorde 2004.png" />
+    <Content Include="img\Car_Image\Chrysler Pacifica 2017.png" />
+    <Content Include="img\Car_Image\Chrysler Prowler 2001.png" />
+    <Content Include="img\Car_Image\citroën c elysee 2021.png" />
+    <Content Include="img\Car_Image\citroën c4 2022.png" />
+    <Content Include="img\Car_Image\citroën c5 aircross 2022.png" />
+    <Content Include="img\Car_Image\daewoo lanos 1979.png" />
+    <Content Include="img\Car_Image\daewoo lanos 1996.png" />
+    <Content Include="img\Car_Image\daewoo lanos 2 2007.png" />
+    <Content Include="img\Car_Image\daewoo nubira 1 1997.png" />
+    <Content Include="img\Car_Image\daewoo nubira 2 1999.png" />
+    <Content Include="img\Car_Image\daewoo nubira 2 2002.png" />
+    <Content Include="img\Car_Image\daewoo nubira 2 2005.png" />
+    <Content Include="img\Car_Image\daihatsu terios 2015.png" />
+    <Content Include="img\Car_Image\Demiana.jpg" />
+    <Content Include="img\Car_Image\dfsk glory 330 2021.png" />
+    <Content Include="img\Car_Image\Dodge Caliber 2010.png" />
+    <Content Include="img\Car_Image\Dodge Caravan 2005.png" />
+    <Content Include="img\Car_Image\Dodge Caravan 2006.png" />
+    <Content Include="img\Car_Image\Dodge Challenger 2017.png" />
+    <Content Include="img\Car_Image\Dodge Charger 2016.png" />
+    <Content Include="img\Car_Image\Dodge Charger 2017.png" />
+    <Content Include="img\Car_Image\Dodge Colt 1992.png" />
+    <Content Include="img\Car_Image\Dodge Dakota 2009.png" />
+    <Content Include="img\Car_Image\Dodge Dart 2014.png" />
+    <Content Include="img\Car_Image\Dodge Daytona 1993.png" />
+    <Content Include="img\Car_Image\Dodge Durango 2016.png" />
+    <Content Include="img\Car_Image\Dodge Journey 2016.png" />
+    <Content Include="img\Car_Image\Dodge Magnum 2006.png" />
+    <Content Include="img\Car_Image\Dodge Magnum 2007.png" />
+    <Content Include="img\Car_Image\Dodge Magnum 2008.png" />
+    <Content Include="img\Car_Image\Dodge Monaco 1992.jfif" />
+    <Content Include="img\Car_Image\Dodge Monaco 1992.png" />
+    <Content Include="img\Car_Image\Dodge Neon 2003.png" />
+    <Content Include="img\Car_Image\Dodge Neon 2005.png" />
+    <Content Include="img\Car_Image\Dodge RAM 150 1992.png" />
+    <Content Include="img\Car_Image\Dodge RAM 250 1991.png" />
+    <Content Include="img\Car_Image\Dodge Ram 50 Pickup 1992.png" />
+    <Content Include="img\Car_Image\Dodge Ram Pickup 1500 2008.png" />
+    <Content Include="img\Car_Image\Dodge Ram Pickup 1500 2009.png" />
+    <Content Include="img\Car_Image\Dodge Ram Pickup 1500 2010.png" />
+    <Content Include="img\Car_Image\Dodge Ram Van 1998.png" />
+    <Content Include="img\Car_Image\Dodge Ram Wagon 2000.png" />
+    <Content Include="img\Car_Image\Dodge Shadow 1992.png" />
+    <Content Include="img\Car_Image\Dodge Stealth 1994.png" />
+    <Content Include="img\Car_Image\dodge stratus 2005.png" />
+    <Content Include="img\Car_Image\download.jpg" />
+    <Content Include="img\Car_Image\Ferrari 360 2003.png" />
+    <Content Include="img\Car_Image\Ferrari 456M 2002.png" />
+    <Content Include="img\Car_Image\Ferrari 550 2001.png" />
+    <Content Include="img\Car_Image\Ferrari 599 2009.png" />
+    <Content Include="img\Car_Image\Ferrari_456M_2002.png" />
+    <Content Include="img\Car_Image\FIAT 124 Spider 2017.png" />
+    <Content Include="img\Car_Image\fiat 128 1978.png" />
+    <Content Include="img\Car_Image\fiat 128 1982.png" />
+    <Content Include="img\Car_Image\fiat doblo 2019.png" />
+    <Content Include="img\Car_Image\fiat punto 2003.png" />
+    <Content Include="img\Car_Image\fiat punto 2007.png" />
+    <Content Include="img\Car_Image\fiat punto 2008.png" />
+    <Content Include="img\Car_Image\fiat shahin 2004.png" />
+    <Content Include="img\Car_Image\fiat tempra 1990.png" />
+    <Content Include="img\Car_Image\fiat tipo 1991.png" />
+    <Content Include="img\Car_Image\fiat tipo 2018.png" />
+    <Content Include="img\Car_Image\fiat tipo 2019.png" />
+    <Content Include="img\Car_Image\fiat tipo 2020.png" />
+    <Content Include="img\Car_Image\Fiat Tipo 2021 2.jfif" />
+    <Content Include="img\Car_Image\fiat tipo 2021.png" />
+    <Content Include="img\Car_Image\fiat tipo 2022.png" />
+    <Content Include="img\Car_Image\Ford Aerostar 1997.png" />
+    <Content Include="img\Car_Image\Ford E-Series Van 2012.png" />
+    <Content Include="img\Car_Image\Ford E-Series Van 2013.png" />
+    <Content Include="img\Car_Image\ford expedition 2003.png" />
+    <Content Include="img\Car_Image\Ford Expedition 2016.png" />
+    <Content Include="img\Car_Image\Ford Explorer 2015.png" />
+    <Content Include="img\Car_Image\Ford Explorer 2017.png" />
+    <Content Include="img\Car_Image\Ford Explorer Sport 2002.png" />
+    <Content Include="img\Car_Image\Ford Explorer Sport 2003.png" />
+    <Content Include="img\Car_Image\Ford F-150 2016.png" />
+    <Content Include="img\Car_Image\Ford F-150 2017.png" />
+    <Content Include="img\Car_Image\Ford F-150 Heritage 2004.png" />
+    <Content Include="img\Car_Image\Ford F-250 1998.png" />
+    <Content Include="img\Car_Image\Ford Five Hundred 2006.png" />
+    <Content Include="img\Car_Image\Ford Five Hundred 2007.png" />
+    <Content Include="img\Car_Image\Ford Flex 2016.png" />
+    <Content Include="img\Car_Image\Ford Freestyle 2006.png" />
+    <Content Include="img\Car_Image\Ford Fusion Hybrid 2015.png" />
+    <Content Include="img\Car_Image\ford mondeo 1998.png" />
+    <Content Include="img\Car_Image\Ford Ranger 2011.png" />
+    <Content Include="img\Car_Image\Ford Taurus 2017.png" />
+    <Content Include="img\Car_Image\Ford Thunderbird 2003.png" />
+    <Content Include="img\Car_Image\Ford Transit Connect 2015.png" />
+    <Content Include="img\Car_Image\Ford Transit Connect 2016.png" />
+    <Content Include="img\Car_Image\Ford Transit Wagon 2017.png" />
+    <Content Include="img\Car_Image\geely ck2 2010.png" />
+    <Content Include="img\Car_Image\geely emgrand 2014.png" />
+    <Content Include="img\Car_Image\geely emgrand 7 2015.png" />
+    <Content Include="img\Car_Image\geely emgrand 7 2017.png" />
+    <Content Include="img\Car_Image\geely emgrand 7 2018.png" />
+    <Content Include="img\Car_Image\geely emgrand x7 2019.png" />
+    <Content Include="img\Car_Image\geely imperial 2019.png" />
+    <Content Include="img\Car_Image\GMC Canyon 2016.png" />
+    <Content Include="img\Car_Image\GMC Envoy XL 2005.png" />
+    <Content Include="img\Car_Image\GMC Sierra 1500 2015.png" />
+    <Content Include="img\Car_Image\GMC Sierra 1500 Hybrid 2011.png" />
+    <Content Include="img\Car_Image\GMC Sierra Classic 1500 1999.png" />
+    <Content Include="img\Car_Image\GMC Yukon XL 2015.png" />
+    <Content Include="img\Car_Image\GMC Yukon XL 2017.png" />
+    <Content Include="img\Car_Image\great wall wingle 5 2021.png" />
+    <Content Include="img\Car_Image\haval jolion 2022.png" />
+    <Content Include="img\Car_Image\Honda Accord 2015.png" />
+    <Content Include="img\Car_Image\Honda Accord 2017.png" />
+    <Content Include="img\Car_Image\honda city 2004.png" />
+    <Content Include="img\Car_Image\honda city 2009.png" />
+    <Content Include="img\Car_Image\honda civic 1993.png" />
+    <Content Include="img\Car_Image\honda civic 2009.png" />
+    <Content Include="img\Car_Image\honda civic 2010.png" />
+    <Content Include="img\Car_Image\honda civic 2013.png" />
+    <Content Include="img\Car_Image\Honda Civic 2015.png" />
+    <Content Include="img\Car_Image\Honda Civic 2016.png" />
+    <Content Include="img\Car_Image\Honda Civic 2017.png" />
+    <Content Include="img\Car_Image\Honda Civic CRX 1991.png" />
+    <Content Include="img\Car_Image\Honda CR-V 2015.png" />
+    <Content Include="img\Car_Image\Honda Element 2009.png" />
+    <Content Include="img\Car_Image\Honda HR-V 2017.png" />
+    <Content Include="img\Car_Image\Honda Insight 2012.png" />
+    <Content Include="img\Car_Image\Honda Insight 2014.png" />
+    <Content Include="img\Car_Image\Honda Odyssey 2015.png" />
+    <Content Include="img\Car_Image\Honda Pilot 2017.png" />
+    <Content Include="img\Car_Image\Honda Ridgeline 2013.png" />
+    <Content Include="img\Car_Image\Honda S2000 2007.png" />
+    <Content Include="img\Car_Image\Honda S2000 2009.png" />
+    <Content Include="img\Car_Image\HUMMER H3T 2009.jpg" />
+    <Content Include="img\Car_Image\hummer h3t 2009.png" />
+    <Content Include="img\Car_Image\hyundai accent 2005.png" />
+    <Content Include="img\Car_Image\hyundai accent 2006.png" />
+    <Content Include="img\Car_Image\Hyundai Accent 2015.png" />
+    <Content Include="img\Car_Image\Hyundai Accent 2016.png" />
+    <Content Include="img\Car_Image\hyundai accent rb 2017.png" />
+    <Content Include="img\Car_Image\hyundai atos 2011.png" />
+    <Content Include="img\Car_Image\hyundai avante 2003.png" />
+    <Content Include="img\Car_Image\hyundai creta 2016.png" />
+    <Content Include="img\Car_Image\hyundai elantra 2004.png" />
+    <Content Include="img\Car_Image\hyundai elantra 2007.png" />
+    <Content Include="img\Car_Image\Hyundai Elantra 2017.png" />
+    <Content Include="img\Car_Image\hyundai elantra ad 2019.png" />
+    <Content Include="img\Car_Image\hyundai elantra cn7 2021.png" />
+    <Content Include="img\Car_Image\hyundai elantra cn7 2022.png" />
+    <Content Include="img\Car_Image\Hyundai Elantra Coupe 2013.png" />
+    <Content Include="img\Car_Image\Hyundai Elantra GT 201.png" />
+    <Content Include="img\Car_Image\hyundai elantra gt 2017.png" />
+    <Content Include="img\Car_Image\hyundai elantra hd 2010.png" />
+    <Content Include="img\Car_Image\hyundai elantra hd 2017.png" />
+    <Content Include="img\Car_Image\hyundai elantra hd 2020.png" />
+    <Content Include="img\Car_Image\hyundai elantra hd 2021.png" />
+    <Content Include="img\Car_Image\hyundai elantra md 2015.png" />
+    <Content Include="img\Car_Image\Hyundai Elantra Touring 2010.jfif" />
+    <Content Include="img\Car_Image\hyundai elantra touring 2010.png" />
+    <Content Include="img\Car_Image\Hyundai Excel 1992.png" />
+    <Content Include="img\Car_Image\Hyundai Excel 1994.png" />
+    <Content Include="img\Car_Image\hyundai getz 2008.png" />
+    <Content Include="img\Car_Image\hyundai i10 2009.png" />
+    <Content Include="img\Car_Image\hyundai ix 35 2016.png" />
+    <Content Include="img\Car_Image\hyundai matrix 2008.png" />
+    <Content Include="img\Car_Image\Hyundai Santa Fe 2017.png" />
+    <Content Include="img\Car_Image\hyundai sonata 2011.png" />
+    <Content Include="img\Car_Image\Hyundai Sonata 2015.png" />
+    <Content Include="img\Car_Image\Hyundai Tiburon 2007.png" />
+    <Content Include="img\Car_Image\Hyundai Tucson 2016.png" />
+    <Content Include="img\Car_Image\Hyundai Tucson 2017.png" />
+    <Content Include="img\Car_Image\hyundai tucson 2019.png" />
+    <Content Include="img\Car_Image\hyundai tucson 2020.png" />
+    <Content Include="img\Car_Image\hyundai tucson 2021.png" />
+    <Content Include="img\Car_Image\hyundai tucson 2022.png" />
+    <Content Include="img\Car_Image\hyundai tucson gdi 2017.png" />
+    <Content Include="img\Car_Image\Hyundai Veloster 2014.png" />
+    <Content Include="img\Car_Image\Hyundai Veracruz 2012.png" />
+    <Content Include="img\Car_Image\hyundai verna 2006.png" />
+    <Content Include="img\Car_Image\hyundai verna 2011.png" />
+    <Content Include="img\Car_Image\hyundai verna 2016.png" />
+    <Content Include="img\Car_Image\hyundai verna 2018.png" />
+    <Content Include="img\Car_Image\images.jpg" />
+    <Content Include="img\Car_Image\images1.jpg" />
+    <Content Include="img\Car_Image\Infiniti EX 2011.png" />
+    <Content Include="img\Car_Image\Infiniti EX35 2009.png" />
+    <Content Include="img\Car_Image\Infiniti EX35 2010.png" />
+    <Content Include="img\Car_Image\Infiniti G Convertible 2011.png" />
+    <Content Include="img\Car_Image\Infiniti G Sedan 2012.png" />
+    <Content Include="img\Car_Image\Infiniti G Sedan 2013.png" />
+    <Content Include="img\Car_Image\Infiniti G20 2001.png" />
+    <Content Include="img\Car_Image\Infiniti I30 2000.png" />
+    <Content Include="img\Car_Image\Infiniti JX 2013.png" />
+    <Content Include="img\Car_Image\Infiniti M 2012.png" />
+    <Content Include="img\Car_Image\Infiniti M45 2010.png" />
+    <Content Include="img\Car_Image\Infiniti Q50 2016.png" />
+    <Content Include="img\Car_Image\Infiniti Q50 2017.png" />
+    <Content Include="img\Car_Image\Infiniti Q70 2014.png" />
+    <Content Include="img\Car_Image\Infiniti Q70 2016.png" />
+    <Content Include="img\Car_Image\infiniti qx 2007.png" />
+    <Content Include="img\Car_Image\Infiniti QX70 2015.png" />
+    <Content Include="img\Car_Image\Infiniti QX70 2016.png" />
+    <Content Include="img\Car_Image\isuzu d max 2015.png" />
+    <Content Include="img\Car_Image\jeep cherokee 2013.png" />
+    <Content Include="img\Car_Image\jeep grand cherokee 1993.png" />
+    <Content Include="img\Car_Image\jeep grand cherokee 2010.png" />
+    <Content Include="img\Car_Image\jeep wrangler 1984.png" />
+    <Content Include="img\Car_Image\kia carens 2010.png" />
+    <Content Include="img\Car_Image\kia carens 2011.png" />
+    <Content Include="img\Car_Image\kia carens 2012.png" />
+    <Content Include="img\Car_Image\kia carens 2013.png" />
+    <Content Include="img\Car_Image\kia carens 2015.png" />
+    <Content Include="img\Car_Image\kia cerato 2010.png" />
+    <Content Include="img\Car_Image\kia cerato 2011.png" />
+    <Content Include="img\Car_Image\kia cerato 2013.png" />
+    <Content Include="img\Car_Image\kia cerato 2016.png" />
+    <Content Include="img\Car_Image\kia cerato 2017.png" />
+    <Content Include="img\Car_Image\kia cerato 2018.png" />
+    <Content Include="img\Car_Image\kia cerato 2022.png" />
+    <Content Include="img\Car_Image\Kia Forte 2015.png" />
+    <Content Include="img\Car_Image\kia grand cerato 2020.png" />
+    <Content Include="img\Car_Image\kia grand cerato 2021.png" />
+    <Content Include="img\Car_Image\kia picanto 2011.png" />
+    <Content Include="img\Car_Image\kia picanto 2013.png" />
+    <Content Include="img\Car_Image\kia rio 2013.png" />
+    <Content Include="img\Car_Image\Kia Rondo 2008.png" />
+    <Content Include="img\Car_Image\Kia Sedona 2015.png" />
+    <Content Include="img\Car_Image\Kia Sedona 2016.png" />
+    <Content Include="img\Car_Image\kia sephia 1999.png" />
+    <Content Include="img\Car_Image\Kia Sephia 2001.png" />
+    <Content Include="img\Car_Image\Kia Sorento 2015.png" />
+    <Content Include="img\Car_Image\kia soul 2012.png" />
+    <Content Include="img\Car_Image\Kia Soul 2015.png" />
+    <Content Include="img\Car_Image\kia soul 2016.png" />
+    <Content Include="img\Car_Image\kia soul 2018.png" />
+    <Content Include="img\Car_Image\Kia Spectra 2009.png" />
+    <Content Include="img\Car_Image\kia sportage 2017.png" />
+    <Content Include="img\Car_Image\kia sportage 2019.png" />
+    <Content Include="img\Car_Image\kia sportage 2020.png" />
+    <Content Include="img\Car_Image\kia sportage 2021.png" />
+    <Content Include="img\Car_Image\kia sportage 2023.png" />
+    <Content Include="img\Car_Image\kia xceed 2022.png" />
+    <Content Include="img\Car_Image\lada 2107 2007.png" />
+    <Content Include="img\Car_Image\lada 2107 2008.png" />
+    <Content Include="img\Car_Image\lada 2110 2007.png" />
+    <Content Include="img\Car_Image\lada granta 2020.png" />
+    <Content Include="img\Car_Image\lada granta 2021.png" />
+    <Content Include="img\Car_Image\lamborghini gallardo 2012.png" />
+    <Content Include="img\Car_Image\Lamborghini Murcielago 2009.png" />
+    <Content Include="img\Car_Image\Lamborghini Murcielago 2010.png" />
+    <Content Include="img\Car_Image\lancia dedra 1993.png" />
+    <Content Include="img\Car_Image\Land Rover Discovery 2004.png" />
+    <Content Include="img\Car_Image\Land Rover Discovery Sport 2015.png" />
+    <Content Include="img\Car_Image\Land Rover LR2 2013.png" />
+    <Content Include="img\Car_Image\Land Rover LR2 2014.png" />
+    <Content Include="img\Car_Image\Land Rover Range Rover 2015.png" />
+    <Content Include="img\Car_Image\Land Rover Range Rover Evoque 2015.png" />
+    <Content Include="img\Car_Image\Land Rover Range Rover Sport 2016.png" />
+    <Content Include="img\Car_Image\land rover velar 2020.png" />
+    <Content Include="img\Car_Image\Lexus CT 200h 2015.png" />
+    <Content Include="img\Car_Image\Lexus ES 250 1990.png" />
+    <Content Include="img\Car_Image\Lexus GS 200t 2016.png" />
+    <Content Include="img\Car_Image\Lexus GX 460 2017.png" />
+    <Content Include="img\Car_Image\Lexus IS 250 2014.png" />
+    <Content Include="img\Car_Image\Lexus IS 350 2015.png" />
+    <Content Include="img\Car_Image\Lexus IS 350 2016.png" />
+    <Content Include="img\Car_Image\Lexus RC 350 2015.png" />
+    <Content Include="img\Car_Image\Lexus RX 350 2015.png" />
+    <Content Include="img\Car_Image\Lexus RX 400h 2007.png" />
+    <Content Include="img\Car_Image\Lincoln Aviator 2004.png" />
+    <Content Include="img\Car_Image\Lincoln Mark VIII 1996.png" />
+    <Content Include="img\Car_Image\Lincoln MKC 2016.png" />
+    <Content Include="img\Car_Image\Lincoln MKC 2017.png" />
+    <Content Include="img\Car_Image\Lincoln MKX 2016.png" />
+    <Content Include="img\Car_Image\Lincoln MKX 2017.png" />
+    <Content Include="img\Car_Image\Lincoln Town Car 2009.png" />
+    <Content Include="img\Car_Image\Lotus Elise 2011.png" />
+    <Content Include="img\Car_Image\lotus evora 2014.png" />
+    <Content Include="img\Car_Image\maserati ghibli 2013.png" />
+    <Content Include="img\Car_Image\Maserati Ghibli 2015.png" />
+    <Content Include="img\Car_Image\Maybach 57 2011.png" />
+    <Content Include="img\Car_Image\mazda 121 1997.png" />
+    <Content Include="img\Car_Image\mazda 3 2017 1.jfif" />
+    <Content Include="img\Car_Image\mazda 323 1982.png" />
+    <Content Include="img\Car_Image\Mazda 626 2000.png" />
+    <Content Include="img\Car_Image\Mazda B-Series Pickup 2000.png" />
+    <Content Include="img\Car_Image\Mazda CX-3 2017.png" />
+    <Content Include="img\Car_Image\Mazda CX-5 2015.png" />
+    <Content Include="img\Car_Image\Mazda CX-7 2012.png" />
+    <Content Include="img\Car_Image\mazda mazda 3 2010.png" />
+    <Content Include="img\Car_Image\mazda mazda 3 2015.png" />
+    <Content Include="img\Car_Image\mazda mazda 3 2016.png" />
+    <Content Include="img\Car_Image\mazda mazda 3 2017.png" />
+    <Content Include="img\Car_Image\mazda mazda 3 2019.png" />
+    <Content Include="img\Car_Image\Mazda MPV 2004.png" />
+    <Content Include="img\Car_Image\Mazda MPV 2006.png" />
+    <Content Include="img\Car_Image\Mazda MX-5 Miata 2014.png" />
+    <Content Include="img\Car_Image\Mazda MX-5 Miata 2015.png" />
+    <Content Include="img\Car_Image\Mazda MX-5 Miata 2016.png" />
+    <Content Include="img\Car_Image\Mazda Tribute 2010.png" />
+    <Content Include="img\Car_Image\mercedes-benz 200 1976.png" />
+    <Content Include="img\Car_Image\mercedes-benz 200 1984.png" />
+    <Content Include="img\Car_Image\Mercedes-Benz 300-Class 1991.png" />
+    <Content Include="img\Car_Image\Mercedes-Benz 300-Class 1992.png" />
+    <Content Include="img\Car_Image\Mercedes-Benz 300-Class 1993.png" />
+    <Content Include="img\Car_Image\mercedes-benz 350 2017.png" />
+    <Content Include="img\Car_Image\Mercedes-Benz 350-Class 1991.png" />
+    <Content Include="img\Car_Image\mercedes-benz a 200 2021.png" />
+    <Content Include="img\Car_Image\mercedes-benz c 180 1994.png" />
+    <Content Include="img\Car_Image\mercedes-benz c 180 2009.png" />
+    <Content Include="img\Car_Image\mercedes-benz c 180 2012.png" />
+    <Content Include="img\Car_Image\mercedes-benz c 180 2013.png" />
+    <Content Include="img\Car_Image\mercedes-benz c 180 2019.png" />
+    <Content Include="img\Car_Image\mercedes-benz c 180 2020.png" />
+    <Content Include="img\Car_Image\mercedes-benz c 200 2008.png" />
+    <Content Include="img\Car_Image\mercedes-benz c 200 2013.png" />
+    <Content Include="img\Car_Image\mercedes-benz c 200 2019.png" />
+    <Content Include="img\Car_Image\mercedes-benz c 200 amg 2020.png" />
+    <Content Include="img\Car_Image\Mercedes-Benz C-Class 2017.png" />
+    <Content Include="img\Car_Image\mercedes-benz cla 200 2021.png" />
+    <Content Include="img\Car_Image\mercedes-benz e 200 2013.png" />
+    <Content Include="img\Car_Image\mercedes-benz e 200 2021.png" />
+    <Content Include="img\Car_Image\mercedes-benz e 200 2022.png" />
+    <Content Include="img\Car_Image\mercedes-benz e 200 amg 2022.png" />
+    <Content Include="img\Car_Image\mercedes-benz e 240 2003.png" />
+    <Content Include="img\Car_Image\mercedes-benz e 250 2011.png" />
+    <Content Include="img\Car_Image\mercedes-benz e 250 2014.png" />
+    <Content Include="img\Car_Image\mercedes-benz e 300 2021.png" />
+    <Content Include="img\Car_Image\Mercedes-Benz E-Class 2017.png" />
+    <Content Include="img\Car_Image\Mercedes-Benz G-Class 2016.png" />
+    <Content Include="img\Car_Image\mercedes-benz gla 2022.png" />
+    <Content Include="img\Car_Image\Mercedes-Benz GLA-Class 2016.png" />
+    <Content Include="img\Car_Image\mercedes-benz glc 200 2015.png" />
+    <Content Include="img\Car_Image\mercedes-benz s 500 2007.png" />
+    <Content Include="img\Car_Image\Mercedes-Benz SLK-Class 2016.png" />
+    <Content Include="img\Car_Image\mg 5 2020.png" />
+    <Content Include="img\Car_Image\mg 5 2021.png" />
+    <Content Include="img\Car_Image\mg 5 2022.png" />
+    <Content Include="img\Car_Image\mg 6 2020.png" />
+    <Content Include="img\Car_Image\mg 6 2021.png" />
+    <Content Include="img\Car_Image\mg 6 2022.png" />
+    <Content Include="img\Car_Image\mg zs 2019.png" />
+    <Content Include="img\Car_Image\mg zs 2020.png" />
+    <Content Include="img\Car_Image\mg zs 2021.png" />
+    <Content Include="img\Car_Image\mg zs 2022.png" />
+    <Content Include="img\Car_Image\mini cooper hatch 2009.png" />
+    <Content Include="img\Car_Image\mini mini cooper s 2008.png" />
+    <Content Include="img\Car_Image\mitsubishi attrage 2015.png" />
+    <Content Include="img\Car_Image\Mitsubishi Diamante 2003.png" />
+    <Content Include="img\Car_Image\Mitsubishi Endeavor 2008.png" />
+    <Content Include="img\Car_Image\mitsubishi expo 1993.png" />
+    <Content Include="img\Car_Image\Mitsubishi Expo 1995.png" />
+    <Content Include="img\Car_Image\Mitsubishi Expo1993.png" />
+    <Content Include="img\Car_Image\Mitsubishi Lancer 2016.png" />
+    <Content Include="img\Car_Image\mitsubishi lancer crystala 1998.png" />
+    <Content Include="img\Car_Image\mitsubishi lancer crystala 1999.png" />
+    <Content Include="img\Car_Image\mitsubishi lancer ex shark 2016.png" />
+    <Content Include="img\Car_Image\mitsubishi lancer ex shark 2018.png" />
+    <Content Include="img\Car_Image\mitsubishi lancer puma 2007.png" />
+    <Content Include="img\Car_Image\mitsubishi lancer puma 2008.png" />
+    <Content Include="img\Car_Image\mitsubishi lancer puma 2010.png" />
+    <Content Include="img\Car_Image\mitsubishi lancer puma 2011.png" />
+    <Content Include="img\Car_Image\Mitsubishi Lancer Sportback 2012.png" />
+    <Content Include="img\Car_Image\Mitsubishi Lancer Sportback 2014.png" />
+    <Content Include="img\Car_Image\Mitsubishi Mighty Max Pickup 1994.png" />
+    <Content Include="img\Car_Image\Mitsubishi Mighty Max Pickup 994.png" />
+    <Content Include="img\Car_Image\Mitsubishi Montero 2004.png" />
+    <Content Include="img\Car_Image\Mitsubishi Montero Sport 2002.png" />
+    <Content Include="img\Car_Image\Mitsubishi Outlander 2015.png" />
+    <Content Include="img\Car_Image\Mitsubishi Outlander 2016.png" />
+    <Content Include="img\Car_Image\mitsubishi pajero 1984.png" />
+    <Content Include="img\Car_Image\mitsubishi pajero 2014.png" />
+    <Content Include="img\Car_Image\Mitsubishi Precis 1992.png" />
+    <Content Include="img\Car_Image\Mitsubishi Vanwagon 1990.png" />
+    <Content Include="img\Car_Image\nissan 240sx 1997.png" />
+    <Content Include="img\Car_Image\nissan 300zx 1994.png" />
+    <Content Include="img\Car_Image\Nissan 350Z 2009.png" />
+    <Content Include="img\Car_Image\Nissan 370Z 2016.png" />
+    <Content Include="img\Car_Image\Nissan Altima 2015.png" />
+    <Content Include="img\Car_Image\Nissan Altima Hybrid 2010.png" />
+    <Content Include="img\Car_Image\Nissan Armada 2015.png" />
+    <Content Include="img\Car_Image\Nissan Axxess 1990.png" />
+    <Content Include="img\Car_Image\Nissan Frontier 2015.png" />
+    <Content Include="img\Car_Image\Nissan Frontier 2016.png" />
+    <Content Include="img\Car_Image\Nissan Frontier 2017.png" />
+    <Content Include="img\Car_Image\nissan juke 2012.png" />
+    <Content Include="img\Car_Image\Nissan Juke 2016.png" />
+    <Content Include="img\Car_Image\Nissan Murano 2015.png" />
+    <Content Include="img\Car_Image\Nissan Murano 2017.png" />
+    <Content Include="img\Car_Image\Nissan NV200 2016.png" />
+    <Content Include="img\Car_Image\Nissan Pathfinder 2015.png" />
+    <Content Include="img\Car_Image\Nissan Pathfinder 2017.png" />
+    <Content Include="img\Car_Image\nissan qashqai 2016.png" />
+    <Content Include="img\Car_Image\nissan qashqai 2018.png" />
+    <Content Include="img\Car_Image\nissan qashqai 2019.png" />
+    <Content Include="img\Car_Image\Nissan Qashqai 2022 2.jpg" />
+    <Content Include="img\Car_Image\Nissan Qashqai 2022.jpg" />
+    <Content Include="img\Car_Image\Nissan Rogue 2015.png" />
+    <Content Include="img\Car_Image\nissan sentra 2015.png" />
+    <Content Include="img\Car_Image\Nissan Sentra 2017.png" />
+    <Content Include="img\Car_Image\nissan sentra 2018.png" />
+    <Content Include="img\Car_Image\nissan sunny 2008.png" />
+    <Content Include="img\Car_Image\nissan sunny 2011.png" />
+    <Content Include="img\Car_Image\nissan sunny 2013.png" />
+    <Content Include="img\Car_Image\nissan sunny 2014.png" />
+    <Content Include="img\Car_Image\nissan sunny 2015.png" />
+    <Content Include="img\Car_Image\nissan sunny 2016.png" />
+    <Content Include="img\Car_Image\nissan sunny 2017.png" />
+    <Content Include="img\Car_Image\nissan sunny 2019.png" />
+    <Content Include="img\Car_Image\nissan sunny 2021.png" />
+    <Content Include="img\Car_Image\nissan sunny 2022.png" />
+    <Content Include="img\Car_Image\nissan sunny 2023.png" />
+    <Content Include="img\Car_Image\Nissan Titan 2017.png" />
+    <Content Include="img\Car_Image\Nissan Truck 1996.png" />
+    <Content Include="img\Car_Image\Nissan Van 1990.png" />
+    <Content Include="img\Car_Image\Nissan Versa Note 2017.png" />
+    <Content Include="img\Car_Image\Nissan Xterra 2013.png" />
+    <Content Include="img\Car_Image\Nissan Xterra 2014.png" />
+    <Content Include="img\Car_Image\Oldsmobile Alero 2002.png" />
+    <Content Include="img\Car_Image\Oldsmobile Alero 2003.png" />
+    <Content Include="img\Car_Image\Oldsmobile Alero 2004.png" />
+    <Content Include="img\Car_Image\Oldsmobile Bravada 2002.png" />
+    <Content Include="img\Car_Image\Oldsmobile Cutlass 1999.png" />
+    <Content Include="img\Car_Image\Oldsmobile Cutlass Calais 1990.png" />
+    <Content Include="img\Car_Image\Oldsmobile Cutlass Calais 1991.png" />
+    <Content Include="img\Car_Image\Oldsmobile Eighty-Eight Royale 1994.png" />
+    <Content Include="img\Car_Image\Oldsmobile Silhouette 2002.png" />
+    <Content Include="img\Car_Image\Oldsmobile Silhouette 2003.png" />
+    <Content Include="img\Car_Image\opel astra 2000.png" />
+    <Content Include="img\Car_Image\opel astra 2013.png" />
+    <Content Include="img\Car_Image\opel astra 2014.png" />
+    <Content Include="img\Car_Image\opel astra 2016.png" />
+    <Content Include="img\Car_Image\opel astra 2017.png" />
+    <Content Include="img\Car_Image\opel astra 2018.png" />
+    <Content Include="img\Car_Image\opel astra 2019.png" />
+    <Content Include="img\Car_Image\opel corsa 1994.png" />
+    <Content Include="img\Car_Image\opel corsa 2007.png" />
+    <Content Include="img\Car_Image\opel grandland 2018.png" />
+    <Content Include="img\Car_Image\opel insignia 2014.png" />
+    <Content Include="img\Car_Image\opel insignia 2017.png" />
+    <Content Include="img\Car_Image\opel vectra 1994.png" />
+    <Content Include="img\Car_Image\org_057d4ca8-f665-4478-a6a4-b37e61a0ed53.jpeg" />
+    <Content Include="img\Car_Image\org_1966bedb-e82d-48a4-9699-cb03d49dee5a.jpeg" />
+    <Content Include="img\Car_Image\org_57e843e9-5b4b-4f4d-9cb0-c710056be4fa.jpg" />
+    <Content Include="img\Car_Image\org_58907565-76b8-4a5e-bc15-011ad19ccb9a.jpeg" />
+    <Content Include="img\Car_Image\org_6abca929-b660-499c-b5f5-2477c0da8b66.jpg" />
+    <Content Include="img\Car_Image\org_705f1591-bde5-49fc-8bc6-066c94ed5530.jpg" />
+    <Content Include="img\Car_Image\org_72503d40-4766-4e74-814e-1f7ddc036a2e.jpeg" />
+    <Content Include="img\Car_Image\org_82252ce5-6699-45e1-920f-67f6c5746cca.jpeg" />
+    <Content Include="img\Car_Image\org_97e91fbe-fb25-4471-b0f3-3667b9af3487.jpeg" />
+    <Content Include="img\Car_Image\org_ab7d2a23-f8ed-4e77-814a-7ab6e760f338.jpeg" />
+    <Content Include="img\Car_Image\org_c56e1603-52bb-4623-a599-887848d15279.jpg" />
+    <Content Include="img\Car_Image\org_cf336a51-4832-439d-9f1f-cc6608749bca.jpg" />
+    <Content Include="img\Car_Image\org_e2e759eb-30d5-4450-b1cd-995c88ee4288.jpeg" />
+    <Content Include="img\Car_Image\org_efa07258-e28c-469c-92f5-2fdf51acb938.jpg" />
+    <Content Include="img\Car_Image\org_f5259aec-3fd6-488d-8dd7-1719e6cd658e.jpeg" />
+    <Content Include="img\Car_Image\peugeot 206 2003.png" />
+    <Content Include="img\Car_Image\peugeot 3008 2022.png" />
+    <Content Include="img\Car_Image\peugeot 301 2019.png" />
+    <Content Include="img\Car_Image\peugeot 405 1994.png" />
+    <Content Include="img\Car_Image\peugeot 405 1996.png" />
+    <Content Include="img\Car_Image\peugeot 406 2003.png" />
+    <Content Include="img\Car_Image\peugeot 505 1984.png" />
+    <Content Include="img\Car_Image\peugeot 508 2013.png" />
+    <Content Include="img\Car_Image\peugeot 508 2014.png" />
+    <Content Include="img\Car_Image\peugeot 508 2018.png" />
+    <Content Include="img\Car_Image\peugeot 508 2019.png" />
+    <Content Include="img\Car_Image\peugeot 508 2020.png" />
+    <Content Include="img\Car_Image\peugeot 508 2022.png" />
+    <Content Include="img\Car_Image\Plymouth Colt 1992.png" />
+    <Content Include="img\Car_Image\Plymouth Grand Voyager 1999.png" />
+    <Content Include="img\Car_Image\Plymouth Horizon 1990.png" />
+    <Content Include="img\Car_Image\Plymouth Voyager 1999.png" />
+    <Content Include="img\Car_Image\png-transparent-2010-volkswagen-gti-2013-volkswagen-gtiVolkswagen GTI 2012.png" />
+    <Content Include="img\Car_Image\Pontiac Bonneville 2004..png" />
+    <Content Include="img\Car_Image\pontiac bonneville 2004.png" />
+    <Content Include="img\Car_Image\Pontiac Firebird 2000.png" />
+    <Content Include="img\Car_Image\Pontiac G6 2009.png" />
+    <Content Include="img\Car_Image\Pontiac Grand Am 2003.png" />
+    <Content Include="img\Car_Image\Pontiac Grand Am 2004.png" />
+    <Content Include="img\Car_Image\Pontiac Le Mans 1992.png" />
+    <Content Include="img\Car_Image\Pontiac Sunbird 1992.png" />
+    <Content Include="img\Car_Image\Pontiac Sunbird 1994.png" />
+    <Content Include="img\Car_Image\Pontiac Torrent 2009.png" />
+    <Content Include="img\Car_Image\Pontiac Vibe 2009.png" />
+    <Content Include="img\Car_Image\Porsche 911 2017.png" />
+    <Content Include="img\Car_Image\porsche boxster 2002.png" />
+    <Content Include="img\Car_Image\porsche cayenne 2016.png" />
+    <Content Include="img\Car_Image\porsche cayenne s 2006.png" />
+    <Content Include="img\Car_Image\Porsche Macan 2017.png" />
+    <Content Include="img\Car_Image\proton persona 2016.png" />
+    <Content Include="img\Car_Image\renault clio 2003.png" />
+    <Content Include="img\Car_Image\renault duster 2019.png" />
+    <Content Include="img\Car_Image\renault fluence 2015.png" />
+    <Content Include="img\Car_Image\renault logan 2010.png" />
+    <Content Include="img\Car_Image\renault logan 2013.png" />
+    <Content Include="img\Car_Image\renault logan 2015.png" />
+    <Content Include="img\Car_Image\renault logan 2017.png" />
+    <Content Include="img\Car_Image\renault logan 2018.png" />
+    <Content Include="img\Car_Image\renault logan 2020.png" />
+    <Content Include="img\Car_Image\renault logan 2021.png" />
+    <Content Include="img\Car_Image\renault megane 2005.png" />
+    <Content Include="img\Car_Image\renault megane 2018.png" />
+    <Content Include="img\Car_Image\renault megane 2020.png" />
+    <Content Include="img\Car_Image\renault symbol 2010.png" />
+    <Content Include="img\Car_Image\Rolls-Royce Phantom Drophead Coupe 2016.png" />
+    <Content Include="img\Car_Image\Saab 9-2X 2006.png" />
+    <Content Include="img\Car_Image\Saab 9-3 2009.png" />
+    <Content Include="img\Car_Image\Saab 9-3 Griffin 2012.png" />
+    <Content Include="img\Car_Image\Saab 9-4X 2011.png" />
+    <Content Include="img\Car_Image\Saab 900 1996.png" />
+    <Content Include="img\Car_Image\scion xd 2014.png" />
+    <Content Include="img\Car_Image\seat arona 2022.png" />
+    <Content Include="img\Car_Image\seat ibiza 1994.png" />
+    <Content Include="img\Car_Image\seat ibiza 1998.png" />
+    <Content Include="img\Car_Image\seat toledo 1996.png" />
+    <Content Include="img\Car_Image\seat toledo 2001.png" />
+    <Content Include="img\Car_Image\seat toledo 2019.png" />
+    <Content Include="img\Car_Image\senova x25 2017.png" />
+    <Content Include="img\Car_Image\skoda fantasia 2011.png" />
+    <Content Include="img\Car_Image\skoda octavia a4 2000.png" />
+    <Content Include="img\Car_Image\skoda octavia a4 2002.png" />
+    <Content Include="img\Car_Image\skoda octavia a7 2015.png" />
+    <Content Include="img\Car_Image\skoda octavia a7 2016.png" />
+    <Content Include="img\Car_Image\skoda octavia a8 2021.png" />
+    <Content Include="img\Car_Image\soueast crystala 2015.png" />
+    <Content Include="img\Car_Image\speranza a113 2010.png" />
+    <Content Include="img\Car_Image\speranza a113 2011.png" />
+    <Content Include="img\Car_Image\speranza a113 2013.png" />
+    <Content Include="img\Car_Image\speranza a213 2008.png" />
+    <Content Include="img\Car_Image\speranza a213 2009.png" />
+    <Content Include="img\Car_Image\speranza a516 2007.png" />
+    <Content Include="img\Car_Image\speranza tiggo 2009.png" />
+    <Content Include="img\Car_Image\speranza tiggo 2017.png" />
+    <Content Include="img\Car_Image\Subaru B9 Tribeca 2006.png" />
+    <Content Include="img\Car_Image\Subaru Baja 2004.png" />
+    <Content Include="img\Car_Image\Subaru Crosstrek 2017.png" />
+    <Content Include="img\Car_Image\Subaru WRX 2017.png" />
+    <Content Include="img\Car_Image\Subaru XV Crosstrek 2013.png" />
+    <Content Include="img\Car_Image\Subaru XV Crosstrek 2015.png" />
+    <Content Include="img\Car_Image\Suzuki Aerio 2005.png" />
+    <Content Include="img\Car_Image\suzuki ciaz 2016.png" />
+    <Content Include="img\Car_Image\suzuki ciaz 2022.png" />
+    <Content Include="img\Car_Image\Suzuki Equator 2010.png" />
+    <Content Include="img\Car_Image\suzuki ertiga 2019.png" />
+    <Content Include="img\Car_Image\Suzuki Esteem 2000.png" />
+    <Content Include="img\Car_Image\Suzuki Esteem 2002.png" />
+    <Content Include="img\Car_Image\Suzuki Forenza 2006.png" />
+    <Content Include="img\Car_Image\Suzuki Forenza 2007.png" />
+    <Content Include="img\Car_Image\Suzuki Grand Vitara 2011.png" />
+    <Content Include="img\Car_Image\Suzuki Grand Vitara 2012.png" />
+    <Content Include="img\Car_Image\Suzuki Kizashi 2011.png" />
+    <Content Include="img\Car_Image\Suzuki Sidekick 1997.png" />
+    <Content Include="img\Car_Image\Suzuki SX4 2011.png" />
+    <Content Include="img\Car_Image\suzuki vitara 2003.png" />
+    <Content Include="img\Car_Image\Suzuki X-90 1997.png" />
+    <Content Include="img\Car_Image\Suzuki XL-7 2004.png" />
+    <Content Include="img\Car_Image\Suzuki XL-7 2005.png" />
+    <Content Include="img\Car_Image\Suzuki XL7 2007.png" />
+    <Content Include="img\Car_Image\suzuki-esteem-2002-1.png" />
+    <Content Include="img\Car_Image\Toyota 4Runner 2015.png" />
+    <Content Include="img\Car_Image\Toyota 4Runner 2016.png" />
+    <Content Include="img\Car_Image\Toyota Camry Solara 2008.png" />
+    <Content Include="img\Car_Image\toyota corolla 1997.png" />
+    <Content Include="img\Car_Image\toyota corolla 1998.png" />
+    <Content Include="img\Car_Image\toyota corolla 2002.png" />
+    <Content Include="img\Car_Image\toyota corolla 2005.png" />
+    <Content Include="img\Car_Image\toyota corolla 2007.png" />
+    <Content Include="img\Car_Image\toyota corolla 2012.png" />
+    <Content Include="img\Car_Image\toyota corolla 2013.png" />
+    <Content Include="img\Car_Image\toyota corolla 2014.png" />
+    <Content Include="img\Car_Image\Toyota Corolla 2015.png" />
+    <Content Include="img\Car_Image\Toyota Corolla 2016.png" />
+    <Content Include="img\Car_Image\toyota corolla 2017.png" />
+    <Content Include="img\Car_Image\toyota corolla 2019.png" />
+    <Content Include="img\Car_Image\toyota corolla 2020.png" />
+    <Content Include="img\Car_Image\toyota corolla 2021.png" />
+    <Content Include="img\Car_Image\toyota corolla 2022.png" />
+    <Content Include="img\Car_Image\Toyota Corolla iM 2017.png" />
+    <Content Include="img\Car_Image\Toyota ECHO 2005.png" />
+    <Content Include="img\Car_Image\Toyota FJ Cruiser 2014.png" />
+    <Content Include="img\Car_Image\toyota fortuner 2013.png" />
+    <Content Include="img\Car_Image\Toyota Highlander 2015.png" />
+    <Content Include="img\Car_Image\Toyota Highlander Hybrid 2016.png" />
+    <Content Include="img\Car_Image\toyota hilux 1984.png" />
+    <Content Include="img\Car_Image\toyota hilux 1984.png.jpg" />
+    <Content Include="img\Car_Image\Toyota Matrix 2013.png" />
+    <Content Include="img\Car_Image\Toyota Previa 1996.png" />
+    <Content Include="img\Car_Image\Toyota Previa 1997.png" />
+    <Content Include="img\Car_Image\Toyota Prius 2015.png" />
+    <Content Include="img\Car_Image\Toyota Prius c 2016.png" />
+    <Content Include="img\Car_Image\toyota rav 4 2014.png" />
+    <Content Include="img\Car_Image\Toyota RAV4 2016.png" />
+    <Content Include="img\Car_Image\toyota rush 2020.png" />
+    <Content Include="img\Car_Image\Toyota Sequoia 2015.png" />
+    <Content Include="img\Car_Image\Toyota Sienna 2015.png" />
+    <Content Include="img\Car_Image\Toyota Tacoma 2015.png" />
+    <Content Include="img\Car_Image\Toyota Tercel 1996.png" />
+    <Content Include="img\Car_Image\Toyota Tundra 2016.png" />
+    <Content Include="img\Car_Image\Toyota Tundra 2017.png" />
+    <Content Include="img\Car_Image\toyota venza 2014.png" />
+    <Content Include="img\Car_Image\toyota yaris 2007.png" />
+    <Content Include="img\Car_Image\toyota yaris 2015.png" />
+    <Content Include="img\Car_Image\Toyota Yaris 2016.png" />
+    <Content Include="img\Car_Image\volkswagen beetle 1975.png" />
+    <Content Include="img\Car_Image\Volkswagen Beetle 2015.png" />
+    <Content Include="img\Car_Image\Volkswagen Beetle 2016.png" />
+    <Content Include="img\Car_Image\Volkswagen Beetle Convertible 2014.png" />
+    <Content Include="img\Car_Image\Volkswagen Cabrio 2000.png" />
+    <Content Include="img\Car_Image\Volkswagen CC 2016.png" />
+    <Content Include="img\Car_Image\Volkswagen Fox 1992.png" />
+    <Content Include="img\Car_Image\Volkswagen GLI 2008.png" />
+    <Content Include="img\Car_Image\Volkswagen GLI 2012.png" />
+    <Content Include="img\Car_Image\Volkswagen Golf GTI 2016.png" />
+    <Content Include="img\Car_Image\Volkswagen Golf SportWagen 2015.png" />
+    <Content Include="img\Car_Image\volkswagen gti 2012.png" />
+    <Content Include="img\Car_Image\Volkswagen GTI 2013.png" />
+    <Content Include="img\Car_Image\Volkswagen Jetta 2015.png" />
+    <Content Include="img\Car_Image\Volkswagen Jetta 2016.png" />
+    <Content Include="img\Car_Image\Volkswagen Jetta 2017.png" />
+    <Content Include="img\Car_Image\Volkswagen Jetta Hybrid 2014.png" />
+    <Content Include="img\Car_Image\Volkswagen Jetta SportWagen 2013.png" />
+    <Content Include="img\Car_Image\Volkswagen New Beetle 2008.png" />
+    <Content Include="img\Car_Image\Volkswagen New Beetle 2009.png" />
+    <Content Include="img\Car_Image\volkswagen passat 1999.png" />
+    <Content Include="img\Car_Image\volkswagen passat 2006.png" />
+    <Content Include="img\Car_Image\volkswagen passat 2011.png" />
+    <Content Include="img\Car_Image\Volkswagen Passat 2016.png" />
+    <Content Include="img\Car_Image\Volkswagen Rabbit 2007.png" />
+    <Content Include="img\Car_Image\Volkswagen Tiguan 2016.png" />
+    <Content Include="img\Car_Image\volkswagen tiguan 2020.png" />
+    <Content Include="img\Car_Image\Volkswagen Touareg 2 2008.png" />
+    <Content Include="img\Car_Image\Volkswagen Touareg 2015.png" />
+    <Content Include="img\Car_Image\Volkswagen Vanagon 1990%281%29.png" />
+    <Content Include="img\Car_Image\volkswagen vanagon 1990.png" />
+    <Content Include="img\Car_Image\volvo 240 1986.png" />
+    <Content Include="img\Car_Image\Volvo 50 1995.png" />
+    <Content Include="img\Car_Image\Volvo 740 1990.png" />
+    <Content Include="img\Car_Image\Volvo 740 1991.png" />
+    <Content Include="img\Car_Image\Volvo 740 1992.png" />
+    <Content Include="img\Car_Image\Volvo 850 1995.png" />
+    <Content Include="img\Car_Image\Volvo S70 2000.png" />
+    <Content Include="img\Car_Image\Volvo S80 2014.png" />
+    <Content Include="img\Car_Image\Volvo S80 2016.png" />
+    <Content Include="img\Car_Image\Volvo V50 2010.png" />
+    <Content Include="img\Car_Image\Volvo XC70 2014.png" />
+    <Content Include="img\Car_Image\Volvo XC70 2016.png" />
+    <Content Include="img\Delear_background\audi q3 2022.png" />
+    <Content Include="img\Delear_background\cover image 300px.png" />
+    <Content Include="img\Delear_background\cover image 400px.png" />
+    <Content Include="img\Delear_background\coverimage400.png" />
+    <Content Include="img\Delear_background\Nissan Qashqai 2022.jpg" />
+    <Content Include="img\Delear_background\profile-cover.jpg" />
+    <Content Include="img\Delear_logo\add-photo.png" />
+    <Content Include="img\Delear_logo\cover image 400px.png" />
+    <Content Include="img\Delear_logo\logo.png" />
+    <Content Include="img\Delear_logo\T AUTO_Logo.jpg" />
+    <Content Include="img\Error.gif" />
+    <Content Include="img\Footer\gallery-1.jpg" />
+    <Content Include="img\Footer\gallery-2.jpg" />
+    <Content Include="img\Footer\gallery-3.jpg" />
+    <Content Include="img\Footer\gallery-4.jpg" />
+    <Content Include="img\Footer\gallery-5.jpg" />
+    <Content Include="img\Footer\gallery-6.jpg" />
+    <Content Include="img\hed1.jpg" />
+    <Content Include="img\hed2.jpg" />
+    <Content Include="img\heeed.jpg" />
+    <Content Include="img\icon\automatic.png" />
+    <Content Include="img\icon\cabriolet.png" />
+    <Content Include="img\icon\coupe.png" />
+    <Content Include="img\icon\hatchback.png" />
+    <Content Include="img\icon\manual.png" />
+    <Content Include="img\icon\pickup.png" />
+    <Content Include="img\icon\sedan.png" />
+    <Content Include="img\icon\station.png" />
+    <Content Include="img\icon\suv.png" />
+    <Content Include="img\icon\van.png" />
+    <Content Include="img\index.png" />
+    <Content Include="img\Log%28in-up%29\login.png" />
+    <Content Include="img\Log%28in-up%29\reg.png" />
+    <Content Include="img\Logo\404.png" />
+    <Content Include="img\Logo\About.png" />
+    <Content Include="img\Logo\addRole.png" />
+    <Content Include="img\Logo\Add_Role.png" />
+    <Content Include="img\Logo\BussnesAccount.png" />
+    <Content Include="img\Logo\Cars_filter.png" />
+    <Content Include="img\Logo\Car_For_Sell.png" />
+    <Content Include="img\Logo\Contact.png" />
+    <Content Include="img\Logo\Create.png" />
+    <Content Include="img\Logo\DealerProfile.png" />
+    <Content Include="img\Logo\Detalis.png" />
+    <Content Include="img\Logo\Home.png" />
+    <Content Include="img\Logo\image.jpg" />
+    <Content Include="img\Logo\Login.png" />
+    <Content Include="img\Logo\Logo.png" />
+    <Content Include="img\Logo\logo1.png" />
+    <Content Include="img\Logo\NewBranchedd.png" />
+    <Content Include="img\Logo\Registration.png" />
+    <Content Include="img\Logo\Reviews.png" />
+    <Content Include="img\Logo\SellYourCar.png" />
+    <Content Include="img\Logo\Useer_massage.png" />
+    <Content Include="img\Logo\USER_Accounts.png" />
+    <Content Include="img\Log_reg\bg_log.jpg" />
+    <Content Include="img\PngItem.png" />
+    <Content Include="img\UserCarForSell\177486.jpg" />
+    <Content Include="img\UserCarForSell\28f8af43-6731-4726-9a33-e68d1b63f8d5.jpg" />
+    <Content Include="img\UserCarForSell\5be224ab-f907-4d70-8bc9-8df779fe4950.jpg" />
+    <Content Include="img\UserCarForSell\bb.jpg" />
+    <Content Include="img\UserCarForSell\bbb.avif" />
+    <Content Include="img\UserCarForSell\blueCar.jpg" />
+    <Content Include="img\UserCarForSell\org_705f1591-bde5-49fc-8bc6-066c94ed5530.jpg" />
+    <Content Include="img\UserCarForSell\org_c56e1603-52bb-4623-a599-887848d15279.jpg" />
+    <Content Include="img\UserCarForSell\org_efa07258-e28c-469c-92f5-2fdf51acb938.jpg" />
+    <Content Include="img\User\logo1.png" />
+    <Content Include="img\User_img\cf07772b-9cb6-485a-a905-c2137dc9388a.jpg" />
+    <Content Include="img\User_img\IMG_2387.JPG" />
+    <Content Include="img\User_img\me.JPG" />
+    <Content Include="img\User_img\mody.png" />
+    <Content Include="img\User_img\remone.jpg" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\checkForm.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\filter_Prange.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\ej2\compatibility\material.scss" />
+    <Content Include="Content\ej2\compatibility\highcontrast.scss" />
+    <Content Include="Content\ej2\compatibility\fabric.scss" />
+    <Content Include="Content\ej2\compatibility\bootstrap4.scss" />
+    <Content Include="Content\ej2\compatibility\bootstrap.scss" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lib\animate\animate.css" />
+    <Content Include="Scripts\lib\animate\animate.min.css" />
+    <Content Include="Scripts\lib\counterup\counterup.min.js" />
+    <Content Include="Scripts\lib\easing\easing.js" />
+    <Content Include="Scripts\lib\easing\easing.min.js" />
+    <Content Include="Scripts\lib\owlcarousel\assets\ajax-loader.gif" />
+    <Content Include="Scripts\lib\owlcarousel\assets\owl.carousel.css" />
+    <Content Include="Scripts\lib\owlcarousel\assets\owl.carousel.min.css" />
+    <Content Include="Scripts\lib\owlcarousel\assets\owl.theme.default.css" />
+    <Content Include="Scripts\lib\owlcarousel\assets\owl.theme.default.min.css" />
+    <Content Include="Scripts\lib\owlcarousel\assets\owl.theme.green.css" />
+    <Content Include="Scripts\lib\owlcarousel\assets\owl.theme.green.min.css" />
+    <Content Include="Scripts\lib\owlcarousel\assets\owl.video.play.png" />
+    <Content Include="Scripts\lib\owlcarousel\owl.carousel.js" />
+    <Content Include="Scripts\lib\owlcarousel\owl.carousel.min.js" />
+    <Content Include="Scripts\lib\tempusdominus\css\tempusdominus-bootstrap-4.css" />
+    <Content Include="Scripts\lib\tempusdominus\css\tempusdominus-bootstrap-4.min.css" />
+    <Content Include="Scripts\lib\tempusdominus\js\moment-timezone.min.js" />
+    <Content Include="Scripts\lib\tempusdominus\js\moment.min.js" />
+    <Content Include="Scripts\lib\tempusdominus\js\tempusdominus-bootstrap-4.js" />
+    <Content Include="Scripts\lib\tempusdominus\js\tempusdominus-bootstrap-4.min.js" />
+    <Content Include="Scripts\lib\waypoints\waypoints.min.js" />
+    <Content Include="Scripts\lib\wow\wow.js" />
+    <Content Include="Scripts\lib\wow\wow.min.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\registration.js" />
+    <Content Include="Scripts\sell.js" />
+    <Content Include="Scripts\sidebar.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\swiper-bundle.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\lib\owlcarousel\LICENSE" />
+    <Content Include="Scripts\lib\waypoints\links.php" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Car_finder\Cars_filter.cshtml" />
+    <Content Include="Views\Car_finder\Detalis.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Sells\SellYourCar.cshtml" />
+    <Content Include="Views\Shared\_Account.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Role\addRole.cshtml" />
+    <Content Include="Views\Shared\_sidebar.cshtml" />
+    <Content Include="Views\admin\USER_Accounts.cshtml" />
+    <Content Include="Views\admin\User_massage.cshtml" />
+    <Content Include="Views\admin\SellsCar.cshtml" />
+    <Content Include="Views\admin\BussnesAccount.cshtml" />
+    <Content Include="Views\Sells\Car_For_Sell.cshtml" />
+    <Content Include="Views\Sells\Detalis.cshtml" />
+    <Content Include="Views\Car_finder\Carpricepredict.cshtml" />
+    <Content Include="Views\Shared\_filter.cshtml" />
+    <Content Include="Views\Sells\SellCar.cshtml" />
+    <Content Include="Views\BusinessAccount\DealerProfile.cshtml" />
+    <Content Include="Views\Shared\_DealerSidebar.cshtml" />
+    <Content Include="Views\CarAds.cshtml" />
+    <Content Include="Views\BusinessAccount\CarAds.cshtml" />
+    <Content Include="Views\BusinessAccount\Edit.cshtml" />
+    <Content Include="Views\BusinessAccount\NewBranche.cshtml" />
+    <Content Include="Views\Home\Showroom.cshtml" />
+    <Content Include="Views\Home\ShowroomDetalis.cshtml" />
+    <Content Include="Views\Home\ShowroomReviews.cshtml" />
+    <Content Include="Views\BusinessAccount\Reviews.cshtml" />
+    <Content Include="Views\Home\Slider.cshtml" />
+    <Content Include="Views\Shared\notFound.cshtml" />
+    <Content Include="Views\Home\notFound.cshtml" />
+    <Content Include="Views\Account\UserProfile.cshtml" />
+    <Content Include="Views\Home\ServerError.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Default\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202306231250160_step1.resx">
+      <DependentUpon>202306231250160_step1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50550</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50550/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

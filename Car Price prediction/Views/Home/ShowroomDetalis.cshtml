@@ -1,0 +1,357 @@
+﻿@model Car_Price_prediction.view_model.DealerVM
+
+@{
+    ViewBag.Title = "Car Ads";
+    //ViewBag.icon = "Cars_filter.png";
+}
+<style>
+    .card {
+        background: #fff;
+        margin-bottom: 30px;
+        transition: .5s;
+        border: 0;
+        border-radius: .1875rem;
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        box-shadow: none;
+    }
+
+        .card .body {
+            font-size: 14px;
+            color: #424242;
+            padding: 20px;
+            font-weight: 400;
+        }
+
+    .profile-page .profile-header {
+        position: relative
+    }
+
+        .profile-page .profile-header .profile-image i {
+            border-radius: 50%;
+            font-size: 150px;
+            width: 140px;
+            border: 3px solid #fff;
+        }
+
+        .profile-page .profile-header .social-icon a {
+            margin: 0 5px
+        }
+
+    .profile-page .profile-sub-header {
+        min-height: 60px;
+        width: 100%
+    }
+
+        .profile-page .profile-sub-header ul.box-list {
+            display: inline-table;
+            table-layout: fixed;
+            width: 100%;
+            background: #eee
+        }
+
+            .profile-page .profile-sub-header ul.box-list li {
+                border-right: 1px solid #e0e0e0;
+                display: table-cell;
+                list-style: none
+            }
+
+                .profile-page .profile-sub-header ul.box-list li:last-child {
+                    border-right: none
+                }
+
+                .profile-page .profile-sub-header ul.box-list li a {
+                    display: block;
+                    padding: 15px 0;
+                    color: #424242
+                }
+</style>
+
+<!-- Carousel Start -->
+<div class="container-fluid p-0" style="margin-bottom: 30px;">
+    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+        <img class="w-100" src="~/img/Delear_background/@Model.CoverImage" alt="@Model.CoverImage" style="height:400px; width:auto;">
+
+        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+            <div class="p-3">
+                <img class="rounded-circle shadow-4-strong m-2" alt="@Model.Logo" src="~/img/Delear_logo/@Model.Logo" style="height:100px; width: auto; " />
+                <h1 class="text-white text-uppercase mb-md-3">@Model.ShowroomName</h1>
+                <button type="button" class="btn btn-outline-warning m-2" data-toggle="collapse" data-target="#discription">Discription</button>
+                <div id="discription" class="row collapse">
+                    <h5 class="display-4 text-white mb-md-3" style="font-size:25px">@Model.Discription</h5>
+                </div>
+
+
+            </div>
+            <div class="row justify-content-center align-items-center">
+                <a href="#find" class="btn btn-primary py-md-3 px-md-5  m-2 col" style="width : 190px" onclick="branches()"><strong>@Model.Branches.Count</strong> Branches</a>
+                <a href="#find" class="btn btn-primary py-md-3 px-md-5  m-2 col" style="width : 190px" onclick="cars()"><strong>@Model.Cars.Count</strong> Cars</a>
+                <a href="/Home/ShowroomReviews/@Model.ShowroomID" class="btn btn-primary py-md-3 px-md-5  m-2 col" style="width : 190px">Reviews</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginForm("ShowroomDetalis", "Home", FormMethod.Post, new { @class = "form", id = "ShowroomDetalis" }))
+{
+
+    <div class="row justify-content-center align-items-center" id="cars">
+
+        <!-- Main content -->
+
+        @if (Model.ID == 0)
+        {
+            <div class="col-md-8 ">
+                <div class="row" id="tdata">
+                    @foreach (var item in Model.Paginatedcar_data())
+                    {
+
+                        <div class="container h-150 ">
+                            <div class="row d-flex justify-content-center align-items-center ">
+                                <div class="col ">
+                                    <div class="card mb-4 rounded">
+                                        <div>
+                                            <div class="card-body p-4 border border-black">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-4 d-flex justify-content-center align-items-center ">
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <a target="_blank" href="~/img/Car_Image/@item.Frontimage">
+                                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@item.Frontimage" alt="@item.Frontimage" style="width:300px; height:auto;">
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="col text-center">
+                                                                <a target="_blank" href="~/img/Car_Image/@item.Backimage">
+                                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@item.Backimage" alt="@item.Backimage" style="width:70px; height:auto;">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <a target="_blank" href="~/img/Car_Image/@item.RightSideimage">
+                                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@item.RightSideimage" alt="@item.RightSideimage" style="width:70px; height:auto;">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <a target="_blank" href="~/img/Car_Image/@item.LeftSideimage">
+                                                                    <img class="img-fluid mb-1 " src="~/img/Car_Image/@item.LeftSideimage" alt="@item.LeftSideimage" style="width:70px; height:auto;">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 text-center">
+
+                                                        <div class="row ">
+                                                            <div class="col-md-12 text-center">
+                                                                <h4 class="text-uppercase mb-4 d-flex justify-content-center">@Html.DisplayFor(modelItem => item.Brand) @Html.DisplayFor(modelItem => item.Model)  @Html.DisplayFor(modelItem => item.yearRange)  </h4>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <h6 class="text-uppercase mb-4 d-flex justify-content-center">@Html.DisplayFor(modelItem => item.UserName) <span class="text-warning">||</span> <span class="text-danger">@Html.DisplayFor(modelItem => item.Phone_Namber)  </span>  </h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <h6 class="text-uppercase mb-4 d-flex justify-content-center">@Html.DisplayFor(modelItem => item.Governorate) <span class="text-warning">||</span> <span class="text-danger">@Html.DisplayFor(modelItem => item.City)  </span>  </h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2 text-center ">
+
+
+                                                        <h4>
+                                                            <i class="far fa-calendar-alt " data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.yearRange)" style="font-size:25px"></i>
+
+                                                            <i class="fa fa-cogs  " data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.Transmission)" style="font-size:25px"></i>
+
+                                                            <i class="	far fa-address-card " data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.UserName)" style="font-size:25px"></i>
+
+
+                                                        </h4>
+
+                                                        <h6 class="mr-3 text-primary text-center " data-toggle="tooltip" title="Car Price is : @Html.DisplayFor(modelItem => item.PriceRange) EGP"> @Html.DisplayFor(modelItem => item.PriceRange) EGP </h6>
+                                                    </div>
+
+                                                    <div class="col-md-2 justify-content-center">
+                                                        <div class="row m-2 justify-content-center w-100">
+                                                            <a class="btn btn-outline-secondary px-3 rounded animate-down-2 " href="/Sells/Detalis/@item.ID">Detalis</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+
+                </div>
+                <ul class="pagination" style="justify-content:center">
+                    @*<a class="page-link" href="@Url.Action("Cars_filter", new { page = Model.Previous()})"> << Previous </a>*@
+                    <li style="margin-right: 10px;">
+
+                        <button type="submit" name="" style=" border-radius: 25px; width:50px; height:50px" value="" formaction=@Url.Action("ShowroomDetalis", new { page = Model.Previous() }) formmethod="post" class="fas fa-fast-backward page-link" />
+                    </li>
+
+                    @if (Model.pagestart() > 2)
+                    {
+                        <li class="@(1 == Model.CurrentPage ? "page-item active" : "page-item")">
+                            <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="1" formaction=@Url.Action("ShowroomDetalis", new { page = 1
+                                                                                                                                 }) formmethod="post" class="page-link" />
+                        </li>
+                        <li>
+                            <div class="btn btn-dark rounded-circle page-link font-weight-bold" style=" border-radius: 25px; width: 50px; height: 50px;">
+                                . . .
+                            </div>
+                        </li>
+                    }
+                    @{ int ii;}
+                    @for (ii = Model.pagestart(); ii <= Model.PageCount(); ii++)
+                    {
+                        if (ii < 9)
+                        {
+
+                            <li class="@(ii == Model.CurrentPage ? "page-item active" : "page-item")">
+                                <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@ii" formaction=@Url.Action("ShowroomDetalis", new
+                                                                                                                                       { page = ii }) formmethod="post" class="page-link" />
+                            </li>
+                        }
+                        else
+                        {
+                            if (ii == Model.CurrentPage && ii > 8)
+                            {
+                                for (int u = Model.pagestart1(); u <= Model.CurrentPage; u++)
+                                {
+                                    <li class="@(u == Model.CurrentPage ? "page-item active" : "page-item")">
+                                        <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@u" formaction=@Url.Action("ShowroomDetalis", new
+                                                                                                                                              { page = u }) formmethod="post" class="page-link" />
+                                    </li>
+
+                                }
+
+                            }
+                        }
+                    }
+
+                    @if (ii > Model.PageCount() && ii > 9 && Model.PageCount() != Model.CurrentPage)
+                    {
+                        ii--;
+                        <li>
+                            <div class="btn btn-dark rounded-circle page-link font-weight-bold" style=" border-radius: 25px; width: 50px; height: 50px;">
+                                . . .
+                            </div>
+                        </li>
+                        <li class="@(ii == Model.CurrentPage ? "page-item active" : "page-item")">
+                            <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@ii" formaction=@Url.Action("ShowroomDetalis", new { page = ii
+                                                                                                                                   }) formmethod="post" class="page-link" />
+                        </li>
+                    }
+
+                    @*<a class="page-link" href="@Url.Action("Cars_filter", new { page =Model.Next()})"> >> Next </a>*@
+                    <li style="margin-left: 10px;">
+                        <button type="submit" name="" style=" border-radius: 25px; width: 50px; height: 50px" value="" formaction=@Url.Action("ShowroomDetalis", new { page = Model.Next() }) formmethod="post" class="fas fa-fast-forward page-link" />
+                    </li>
+                </ul>
+
+            </div>
+
+
+
+
+        }
+
+    </div>
+    <div class="container profile-page" id="branches" style="display:none">
+        <div class="row">
+            @{ int index = 1; }
+            @foreach (var item in Model.Branches)
+            {
+                <div class="col-xl-6 col-lg-7 col-md-12">
+                    <div class="card profile-header border border-black">
+                        <div class="body">
+                            <div class="row align-items-center">
+                                <div class="col-lg-4 col-md-4 col-12 text-center mb-3 mb-md-0">
+                                    <div class="profile-image">
+                                        <i class='fas fa-map-marker-alt' style="font-weight: 800; color: #424242;"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-12 text-center text-md-left">
+                                    <h4 class="m-t-0 m-b-0"><strong>@Model.ShowroomName</strong> Branch <strong>@index</strong></h4>
+                                    <h5><strong>@item.Governorate</strong> - <strong>@item.City</strong></h5>
+                                    <h5><strong>Street</strong>: <strong>@item.Street</strong></h5>
+                                    <h5><strong>Neighborhood</strong>: <strong>@item.Neighborhood</strong></h5>
+                                    <div class="text-center">
+                                        <button class="btn btn-success btn-round"><i class="fa fa-phone-volume"></i> @Model.PhoneNumber0</button>
+                                        <button class="btn btn-success btn-round"><i class="fa fa-phone-volume"></i> @Model.PhoneNumber1</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                index++;
+            }
+        </div>
+    </div>
+
+}
+<script>
+    var checkboxes = document.getElementsByName('brands');
+    console.log(checkboxes);
+
+
+    var branche = document.getElementById("branches");
+    var car = document.getElementById("cars");
+    function branches() {
+        if (branche.style.display === "none") {
+            branche.style.display = "block";
+            car.style.display = "none";
+        }
+    }
+    function cars() {
+        if (branche.style.display === "block") {
+            branche.style.display = "none"
+            car.style.display = "flex";
+
+        }
+    }
+
+    function getCheckedBoxes() {
+        var checkboxes = document.getElementsByName('brands');
+        var checkboxesChecked = [];
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                checkboxesChecked.push(checkboxes[i].value);
+
+            }
+        }
+        console.log(checkboxesChecked);
+        $.ajax({
+            type: "Post",
+            async: false,
+            url: "/BusinessAccount/ShowroomDetalis",
+            data: { brand: checkboxesChecked },
+            success: function (data) {
+                console.log(data)
+                let Items = '';
+
+                $('.carModels').html(Items);
+            },
+            error: function () { /*alert("error");*/ },
+        })
+    }
+
+</script>
+@section scripts{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+}
+
+

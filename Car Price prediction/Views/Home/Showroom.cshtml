@@ -1,0 +1,242 @@
+﻿@model Car_Price_prediction.view_model.ShowroomsWM
+
+@{
+    ViewBag.Title = "Showroom";
+    ViewBag.icon = "Showroom.png";
+}
+<style>
+    .user-profile-2 {
+        text-align: center;
+        position: relative;
+        margin-top: 10px;
+        /**/
+    }
+
+    .box-info {
+        height: 420px;
+        max-width: 500px;
+        position: relative;
+        padding: 15px;
+        background: #fff;
+        color: #5b5b5b;
+        margin-bottom: 20px;
+        border: 3px solid #DDDDDD;
+    }
+
+    .user-profile-2 .header-cover {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 155px;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .user-profile-2 .user-profile-inner {
+        z-index: 2;
+        position: relative;
+        margin-top: 81px;
+        /**/
+    }
+
+        .user-profile-2 .user-profile-inner h4.white {
+            color: #fff;
+        }
+
+        .user-profile-2 .user-profile-inner img.profile-avatar {
+            box-shadow: 0 0 0 5px rgba(255, 255, 255, 1);
+            -moz-box-shadow: 0 0 0 5px rgba(255, 255, 255, 1);
+            -webkit-box-shadow: 0 0 0 5px rgba(255, 255, 255, 1);
+            border: none;
+            width: auto;
+            height: 100px;
+        }
+
+    .user-button {
+        margin: 15px 0;
+    }
+
+    /* Responsive styling */
+    @@media screen and (max-width: 768px) {
+        .box-info {
+            max-width: 100%;
+        }
+    }
+
+    @@media screen and (max-width: 480px) {
+        .header-cover {
+            height: 100px;
+        }
+
+        .user-profile-inner {
+            margin-top: 50px;
+        }
+
+            .user-profile-inner img.profile-avatar {
+                height: 80px;
+            }
+    }
+</style>
+
+
+<!-- Carousel Start -->
+<div class="container-fluid p-0" style="margin-bottom: 30px;">
+    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" id="w-50">
+                <img class="w-100" src="~/img/hed1.jpg" alt="Image">
+
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase mb-md-3">Car Finder</h4>
+                        <h4 class="display-4 text-white mb-md-3">Find your car easily &#129300;</h4>
+                        <a href="#find" class="btn btn-primary py-md-3 px-md-5 mt-2">Find Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" id="w-50">
+                <img class="w-100" src="~/img/hed2.jpg" alt="Image">
+
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase mb-md-3">Car Finder</h4>
+                        <h4 class="display-4 text-white mb-md-3">Choose your car specifications and you will find them &#129488;</h4>
+                        <a href="#find" class="btn btn-primary py-md-3 px-md-5 mt-2">Find Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-prev-icon mb-n2"></span>
+            </div>
+        </a>
+        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-next-icon mb-n2"></span>
+            </div>
+        </a>
+    </div>
+</div>
+<!-- Carousel End -->
+
+
+@using (Html.BeginForm("Showrooms", "Home", FormMethod.Post, new { @class = "form", id = "Showroom" }))
+{
+    <div class="row justify-content-center align-items-center">
+        @if (Model.ID == 0)
+        {
+            <div class="col-md-8 ">
+
+                <div class="container profile-page">
+                    <div class="row">
+                        @foreach (var item in Model.PaginatedShowroom_Data())
+                        {
+                            <div class="col-xl-6 col-lg-7 col-md-12">
+
+                                <div class="box-info text-center user-profile-2">
+                                    <div class="header-cover">
+                                        <img src="~/img/Delear_background/@item.CoverImage" alt="User cover">
+                                    </div>
+                                    <div class="user-profile-inner ">
+                                        <img src="~/img/Delear_logo/@item.Logo" class="img-circle profile-avatar" alt="User avatar">
+                                        <h3>@item.ShowroomName</h3>
+                                        <p style="height: 20px;">@item.Discription</p>
+                                        <div class="row  justify-content-center align-items-center">
+                                            <a href="/Home/ShowroomDetalis/@item.ID" class="btn btn-primary py-md-3 px-md-5  m-2 col " style=" width: 250px; font-weight: bolder; top: 51px;"> Details </a>
+                                            <a href="/Home/ShowroomReviews/@item.ID" class="btn btn-primary py-md-3 px-md-5  m-2 col " style=" width: 250px; font-weight: bolder; top: 51px;"> Reviews </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        }
+                    </div>
+                </div>
+                <ul class="pagination" style="justify-content:center">
+                    @*<a class="page-link" href="@Url.Action("Cars_filter", new { page = Model.Previous()})"> << Previous </a>*@
+                    <li style="margin-right: 10px;">
+
+                        <button type="submit" name="" style=" border-radius: 25px; width:50px; height:50px" value="" formaction=@Url.Action("Showroom", new { page = Model.Previous() }) formmethod="post" class="fas fa-fast-backward page-link" />
+                    </li>
+
+                    @if (Model.pagestart() > 2)
+                    {
+                        <li class="@(1 == Model.CurrentPage ? "page-item active" : "page-item")">
+                            <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="1" formaction=@Url.Action("Showroom", new { page = 1
+                                                                                                                                 }) formmethod="post" class="page-link" />
+                        </li>
+                        <li>
+                            <div class="btn btn-dark rounded-circle page-link font-weight-bold" style=" border-radius: 25px; width: 50px; height: 50px;">
+                                . . .
+                            </div>
+                        </li>
+                    }
+                    @{ int ii;}
+                    @for (ii = Model.pagestart(); ii <= Model.PageCount(); ii++)
+                    {
+                        if (ii < 9)
+                        {
+
+                            <li class="@(ii == Model.CurrentPage ? "page-item active" : "page-item")">
+                                <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@ii" formaction=@Url.Action("Showroom", new
+                                                                                                                                       { page = ii }) formmethod="post" class="page-link" />
+                            </li>
+                        }
+                        else
+                        {
+                            if (ii == Model.CurrentPage && ii > 8)
+                            {
+                                for (int u = Model.pagestart1(); u <= Model.CurrentPage; u++)
+                                {
+                                    <li class="@(u == Model.CurrentPage ? "page-item active" : "page-item")">
+                                        <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@u" formaction=@Url.Action("Showroom", new
+                                                                                                                                              { page = u }) formmethod="post" class="page-link" />
+                                    </li>
+
+                                }
+
+                            }
+                        }
+                    }
+
+                    @if (ii > Model.PageCount() && ii > 9 && Model.PageCount() != Model.CurrentPage)
+                    {
+                        ii--;
+                        <li>
+                            <div class="btn btn-dark rounded-circle page-link font-weight-bold" style=" border-radius: 25px; width: 50px; height: 50px;">
+                                . . .
+                            </div>
+                        </li>
+                        <li class="@(ii == Model.CurrentPage ? "page-item active" : "page-item")">
+                            <input type="submit" style=" border-radius: 25px; width: 50px; height: 50px" name="" value="@ii" formaction=@Url.Action("Showroom", new { page = ii
+                                                                                                                                   }) formmethod="post" class="page-link" />
+                        </li>
+                    }
+
+                    @*<a class="page-link" href="@Url.Action("Cars_filter", new { page =Model.Next()})"> >> Next </a>*@
+                    <li style="margin-left: 10px;">
+                        <button type="submit" name="" style=" border-radius: 25px; width: 50px; height: 50px" value="" formaction=@Url.Action("Showroom", new { page = Model.Next() }) formmethod="post" class="fas fa-fast-forward page-link" />
+                    </li>
+                </ul>
+
+            </div>
+
+
+
+
+        }
+
+    </div>
+
+
+}
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+

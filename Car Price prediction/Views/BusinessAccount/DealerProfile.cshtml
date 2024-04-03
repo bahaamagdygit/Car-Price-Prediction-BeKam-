@@ -1,0 +1,313 @@
+﻿@model Car_Price_prediction.view_model.ShowroomsWithLocation
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="~/Content/dealer.css" rel="stylesheet" />
+
+@{ ViewBag.Title = "DealerProfile";
+    ViewBag.icon = "DealerProfile.png"; }
+
+
+
+@using (Html.BeginForm("DealerProfile", "BusinessAccount", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="main-content">
+        <!-- Top navbar -->
+        <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+            <div class="container-fluid">
+                <!-- Brand -->
+                <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="#" target="_blank">Business Account</a>
+                <!-- Form -->
+                <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+                    <div class="form-group mb-0">
+                        <div class="input-group input-group-alternative">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            </div>
+                            <input class="form-control" placeholder="Search" type="text">
+                        </div>
+                    </div>
+                </form>
+                <!--User-->
+                <ul class="navbar-nav align-items-center d-none d-md-flex">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="media align-items-center">
+                                <span class="avatar avatar-sm rounded-circle">
+                                    @* <img alt="Image placeholder" src="~/img/Delear_logo/@Model.Logo">*@
+                                    <img alt="Image placeholder" src="~/img/User_img/@Model.Userimage">
+                                </span>
+                                <div class="media-body ml-2 d-none d-lg-block">
+                                    <span class="mb-0 text-sm  font-weight-bold">@Model.TraderName</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome!</h6>
+                            </div>
+                            <a href="../examples/profile.html" class="dropdown-item">
+                                <i class="ni ni-single-02"></i>
+                                <span>My profile</span>
+                            </a>
+                            <a href="../examples/profile.html" class="dropdown-item">
+                                <i class="ni ni-settings-gear-65"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a href="../examples/profile.html" class="dropdown-item">
+                                <i class="ni ni-calendar-grid-58"></i>
+                                <span>Activity</span>
+                            </a>
+                            <a href="../examples/profile.html" class="dropdown-item">
+                                <i class="ni ni-support-16"></i>
+                                <span>Support</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#!" class="dropdown-item">
+                                <i class="ni ni-user-run"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+        <!-- Header -->
+        <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(/img/Delear_background/@Model.CoverImage); background-size: cover; background-position: center top;">
+
+            <img id="uploadedImage" src="#" alt="Uploaded Image" accept="image/png, image/jpeg" style=" display:none; position:absolute; height: 600px; width:100%; ">
+            <!-- Mask -->
+            <span class="mask bg-gradient-default opacity-8"></span>
+            <!-- Header container -->
+            <div class="container-fluid d-flex align-items-center">
+                <div class="row">
+                    <div class="col-lg-7 col-md-10">
+                        <h2 class="display-2 text-white">Hello @Model.Acc_name</h2>
+                        <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+                        @* <a href="#!" class="btn btn-info"></a>*@
+                        <input type="submit" class="btn btn-info" value="Edit profile" />
+                    </div>
+                </div>
+            </div>
+            <label class="btn btn-sm btn-info mr-4" style="float:right">
+                change Cover Image
+                <input type="file" value="@Model.CoverImage" name="CoverImage" hidden id="readUrl">
+                <input type="text" value="@Model.CoverImage" name="CoverImage" hidden id="readUrl">
+            </label>
+
+        </div>
+
+        <!-- Page content -->
+        <div class="container-fluid mt--7">
+            <div class="row">
+                <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                    <div class="card card-profile shadow">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image">
+                                    <label>
+
+                                        <input type="file" name="Logo" value="@Model.Logo" hidden id="readUrl1">
+                                        <input type="text" name="Logo" value="@Model.Logo" hidden id="readUrl1">
+                                        @*     @Html.TextBox("image1", "", new { @class = "image-upload", accept = "image/*", id = "Image1", Type = "file", })*@
+                                        <img src="~/img/Delear_logo/@Model.Logo" class="rounded-circle" id="output" style="width:150px; height:150px;">
+                                        <img id="uploadedImage1" class="rounded-circle" src="#" alt="Uploaded Image" accept="image/png, image/jpeg" style=" display: none; width: 150px; height: 150px;">
+
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0 pt-md-4">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                        <div>
+                                            <span class="heading">22</span>
+                                            <span class="description">Locations</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">10</span>
+                                            <span class="description">ADDS</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">89</span>
+                                            <span class="description"> Reviews</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h3>
+                                    @Model.ShowroomName<span class="font-weight-light">, 27</span>
+                                </h3>
+                                <div class="h5 font-weight-300">
+                                    <i class="ni location_pin mr-2"></i>@Model.TraderName
+                                </div>
+                                <div class="h5 mt-4">
+                                    <i class="ni business_briefcase-24 mr-2"></i>@Model.PhoneNumber0 - @Model.PhoneNumber1
+                                </div>
+                                <div>
+                                    <i class="ni education_hat mr-2"></i>@Model.Email
+                                </div>
+                                <hr class="my-4">
+                                <p>@Model.Discription</p>
+
+                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Show Location
+                                </a>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="h5 mt-4">
+                                        <i class="ni business_briefcase-24 mr-2"></i>@Model.Governorate - @Model.City - @Model.Street
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8 order-xl-1">
+
+
+                    <div class="card bg-secondary shadow">
+                        <div class="card-header bg-white border-0">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">My Showroom</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <section>
+                                <h6 class="heading-small text-muted mb-4">Showroom information</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-username">Showroom Name</label>
+                                                <input type="text" id="ShowroomName" name="ShowroomName" class="form-control form-control-alternative" placeholder="Juant" value="@Model.ShowroomName">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">Email Address</label>
+                                                <input type="email" id="Email" name="Email" class="form-control form-control-alternative" value="@Model.Email" placeholder="Ahmad@example.com">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-first-name">Trader Name </label>
+                                                <input type="text" id="TraderName" name="TraderName" class="form-control form-control-alternative" placeholder="HOSSAM Ali" value="@Model.TraderName">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">Trader Nike Name [optional]</label>
+                                                <input type="text" id="TraderNikeName" name="TraderNikeName" class="form-control form-control-alternative" placeholder="Last name" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-first-name">Phone Nummber (1) </label>
+                                                <input type="text" id="PhoneNumber0" name="PhoneNumber0" class="form-control form-control-alternative" placeholder="01200000000" value="@Model.PhoneNumber0">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">Phone Nummber (2) [optional]</label>
+                                                <input type="text" id="PhoneNumber1" name="PhoneNumber1" class="form-control form-control-alternative" placeholder="01200000000" value="@Model.PhoneNumber1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <!-- Address -->
+                                <h6 class="heading-small text-muted mb-4">Contact information for the base showroom</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-address">Neighborhood Address</label>
+                                                <input id="Neighborhood" name="Neighborhood" class="form-control form-control-alternative" placeholder="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" value="@Model.Neighborhood" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-city">City</label>
+                                                <input type="text" id="City" name="City" class="form-control form-control-alternative" placeholder="City" value="@Model.City">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-country">Governorate</label>
+                                                <input type="text" id="Governorate" name="Governorate" class="form-control form-control-alternative" placeholder="Governorate" value="@Model.Governorate">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-country">Street</label>
+                                                <input type="text" id="Street" name="Street" class="form-control form-control-alternative" placeholder="Street" value="@Model.Street">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <!-- Description -->
+                                <h6 class="heading-small text-muted mb-4">About Showroom</h6>
+                                <div class="pl-lg-4">
+                                    <div class="form-group focused">
+                                        <label>About Showroom</label>
+                                        <textarea rows="4" id="Discription" name="Discription" class="form-control form-control-alternative" placeholder="A few words about your ShowroomShowroom ..."> @Model.Discription</textarea>
+                                    </div>
+                                </div>
+
+                            </section>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
+<script>
+    document.getElementById('readUrl').addEventListener('change', function () {
+        if (this.files[0]) {
+            var picture = new FileReader();
+            picture.readAsDataURL(this.files[0]);
+            picture.addEventListener('load', function (event) {
+                document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+                document.getElementById('uploadedImage').style.display = 'block';
+
+            });
+        }
+    });
+
+
+    document.getElementById('readUrl1').addEventListener('change', function () {
+        if (this.files[0]) {
+            var picture = new FileReader();
+            picture.readAsDataURL(this.files[0]);
+            picture.addEventListener('load', function (event) {
+
+                document.getElementById('uploadedImage1').setAttribute('src', event.target.result);
+                document.getElementById('uploadedImage1').style.display = 'block';
+            });
+        }
+    });
+</script>

@@ -1,0 +1,122 @@
+﻿@model Car_Price_prediction.view_model.locations_vm
+
+@{ ViewBag.Title = "ADD new NewBranchedd";
+    ViewBag.icon = "NewBranchedd.png"; }
+
+<link href="~/Content/sellCar.css" rel="stylesheet" />
+
+<!-- Carousel Start -->
+<div class="container-fluid p-0" style="margin-bottom: 30px;">
+    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+        <div id="w-100">
+            <img class="w-100" src="~/img/Delear_background/@Model.CoverImage" alt="@Model.CoverImage" style="height:400px; width:auto;">
+
+            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                <div class="p-3">
+                    <img class="rounded-circle shadow-4-strong m-2" alt="@Model.Logo" src="~/img/Delear_logo/@Model.Logo" style="height:100px; width: auto; " />
+                    <h1 class="text-white text-uppercase mb-md-3">@Model.ShowroomName</h1>
+                    <button type="button" class="btn btn-outline-warning m-2" data-toggle="collapse" data-target="#discription">Discription</button>
+                    <div id="discription" class="collapse">
+                        <h5 class="display-4 text-white mb-md-3" style="font-size:25px">@Model.ShowroomDiscription</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- Carousel End -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <div class="container">
+
+
+        <div class="row ">
+
+            <div class="col-12 ">
+                <div class="_lk_de">
+                    <div class="form-02-main ">
+
+                        <section>
+
+                            <div class=" form-group d-flex align-items-center justify-content-center">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Governorate, htmlAttributes: new { @class = "control-label text-white" })
+
+                                    @Html.DropDownList("Governorate", (MultiSelectList)ViewBag.governorates, "Select Governorate",
+                                     new { onchange = "getArea(this); getobj(Governorate ,Governorate,Governorate1)", @class = "form-control _ge_de_ol" })
+                                    @Html.ValidationMessageFor(model => model.Governorate, "", new { @class = "text-danger" })
+                                    <div class=" m-1 text-center" id="Governorate1"></div>
+                                </div>
+
+
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-center">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label text-white " })
+
+                                    <select class="form-control _ge_de_ol Areas Areas" name="City" id="Area" onchange=" getobj(City ,Area,Area1)">
+                                        <option value="">select Area</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger " })
+                                    <div class=" m-1 text-center" id="Area1"></div>
+                                </div>
+
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-center">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label text-white " })
+                                    <input class="form-control _ge_de_ol " type="text" name="Street" value="" />
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger " })
+                                    <div class=" m-1 text-center" id="Area1"></div>
+                                </div>
+
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-center">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Neighborhood, htmlAttributes: new { @class = "control-label text-white " })
+                                    <input class="form-control _ge_de_ol  " type="text" name="Neighborhood" value="" />
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger " })
+                                    <div class=" m-1 text-center" id="Area1"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-info float-right ">ADD NEW Branch  <i class="fa fa-arrow-circle-right ml-1"></i></button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script>
+    function getArea(Gov) {
+        var selection = Gov.options[Gov.selectedIndex].value;
+
+        $.ajax({
+            type: "Post",
+            async: false,
+            url: "/Sells/AreaSelctionbyAjax",
+            data: { Gov: selection },
+            success: function (data) {
+                // console.log(data)
+                let Items = '';
+                $.each(data, function (index) {
+                    []
+
+                    //console.log(data[index].Text )
+                    Items += '<option value="' + data[index].Text + '">' + data[index].Text + "</option>";
+                });
+
+                $('.Areas').html(Items);
+            },
+            error: function () { alert("error"); },
+        })
+    }
+
+</script>
